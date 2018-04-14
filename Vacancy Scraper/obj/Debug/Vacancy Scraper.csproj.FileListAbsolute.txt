@@ -1,0 +1,10 @@
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.exe.config
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.exe
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.pdb
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csprojResolveAssemblyReference.cache
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.MainForm.resources
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.Properties.Resources.resources
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csproj.GenerateResource.cache
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csproj.CoreCompileInputs.cache
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.exe
+C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.pdb
