@@ -97,6 +97,7 @@
             this.cmdSettingsBrowseResourceFolder.TabIndex = 7;
             this.cmdSettingsBrowseResourceFolder.Text = "Browse...";
             this.cmdSettingsBrowseResourceFolder.UseVisualStyleBackColor = true;
+            this.cmdSettingsBrowseResourceFolder.Click += new System.EventHandler(this.CmdSettingsBrowseResourceFolder_Click);
             // 
             // txtSettingsResourcesPath
             // 
@@ -148,6 +149,7 @@
             this.cmdSettingsBrowseWebDriversPath.TabIndex = 2;
             this.cmdSettingsBrowseWebDriversPath.Text = "Browse...";
             this.cmdSettingsBrowseWebDriversPath.UseVisualStyleBackColor = true;
+            this.cmdSettingsBrowseWebDriversPath.Click += new System.EventHandler(this.CmdSettingsBrowseWebDriversPath_Click);
             // 
             // txtSettingsWebDriversPath
             // 
@@ -177,6 +179,7 @@
             this.cmdSettingsCancel.TabIndex = 5;
             this.cmdSettingsCancel.Text = "Cancel";
             this.cmdSettingsCancel.UseVisualStyleBackColor = true;
+            this.cmdSettingsCancel.Click += new System.EventHandler(this.CmdSettingsCancel_Click);
             // 
             // cmdSettingsApply
             // 
@@ -188,6 +191,7 @@
             this.cmdSettingsApply.TabIndex = 4;
             this.cmdSettingsApply.Text = "Apply";
             this.cmdSettingsApply.UseVisualStyleBackColor = true;
+            this.cmdSettingsApply.Click += new System.EventHandler(this.CmdSettingsApply_Click);
             // 
             // Settings
             // 
