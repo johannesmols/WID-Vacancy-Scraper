@@ -8,3 +8,20 @@ C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Va
 C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csproj.CoreCompileInputs.cache
 C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.exe
 C:\Users\Johannes Mols\source\repos\Vacancy Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.pdb
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.exe.config
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.exe
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\bin\Debug\Vacancy Scraper.pdb
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csprojResolveAssemblyReference.cache
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.MainForm.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.Properties.Resources.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csproj.GenerateResource.cache
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.csproj.CoreCompileInputs.cache
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.exe
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy Scraper.pdb
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Dashboard.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Scrape.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Vacancies.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Blacklist.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Done.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Companies.resources
+F:\User\Documents\VisualStudioProjects\WID-Vacancy-Scraper\Vacancy Scraper\obj\Debug\Vacancy_Scraper.UserControls.Settings.resources
