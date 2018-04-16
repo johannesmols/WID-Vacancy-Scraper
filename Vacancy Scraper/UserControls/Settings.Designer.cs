@@ -81,7 +81,7 @@
             // 
             this.lblSettingsResourcesStatus.AutoSize = true;
             this.lblSettingsResourcesStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSettingsResourcesStatus.Location = new System.Drawing.Point(81, 88);
+            this.lblSettingsResourcesStatus.Location = new System.Drawing.Point(81, 84);
             this.lblSettingsResourcesStatus.Name = "lblSettingsResourcesStatus";
             this.lblSettingsResourcesStatus.Size = new System.Drawing.Size(40, 13);
             this.lblSettingsResourcesStatus.TabIndex = 8;
@@ -106,6 +106,7 @@
             this.txtSettingsResourcesPath.Name = "txtSettingsResourcesPath";
             this.txtSettingsResourcesPath.Size = new System.Drawing.Size(508, 20);
             this.txtSettingsResourcesPath.TabIndex = 6;
+            this.txtSettingsResourcesPath.TextChanged += new System.EventHandler(this.TxtSettingsResourcesPath_TextChanged);
             // 
             // lblSettingsResources
             // 
@@ -122,7 +123,7 @@
             this.linkLblSettingsWebDriversPath.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.linkLblSettingsWebDriversPath.AutoSize = true;
             this.linkLblSettingsWebDriversPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.linkLblSettingsWebDriversPath.Location = new System.Drawing.Point(595, 39);
+            this.linkLblSettingsWebDriversPath.Location = new System.Drawing.Point(595, 36);
             this.linkLblSettingsWebDriversPath.Name = "linkLblSettingsWebDriversPath";
             this.linkLblSettingsWebDriversPath.Size = new System.Drawing.Size(10, 13);
             this.linkLblSettingsWebDriversPath.TabIndex = 4;
@@ -133,7 +134,7 @@
             // 
             this.lblSettingsWebDriversPathStatus.AutoSize = true;
             this.lblSettingsWebDriversPathStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSettingsWebDriversPathStatus.Location = new System.Drawing.Point(81, 40);
+            this.lblSettingsWebDriversPathStatus.Location = new System.Drawing.Point(81, 36);
             this.lblSettingsWebDriversPathStatus.Name = "lblSettingsWebDriversPathStatus";
             this.lblSettingsWebDriversPathStatus.Size = new System.Drawing.Size(40, 13);
             this.lblSettingsWebDriversPathStatus.TabIndex = 3;
@@ -158,6 +159,7 @@
             this.txtSettingsWebDriversPath.Name = "txtSettingsWebDriversPath";
             this.txtSettingsWebDriversPath.Size = new System.Drawing.Size(508, 20);
             this.txtSettingsWebDriversPath.TabIndex = 1;
+            this.txtSettingsWebDriversPath.TextChanged += new System.EventHandler(this.TxtSettingsWebDriversPath_TextChanged);
             // 
             // lblSettingsWebDrivers
             // 
@@ -173,7 +175,7 @@
             // 
             this.cmdSettingsCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSettingsCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmdSettingsCancel.Location = new System.Drawing.Point(510, 357);
+            this.cmdSettingsCancel.Location = new System.Drawing.Point(514, 357);
             this.cmdSettingsCancel.Name = "cmdSettingsCancel";
             this.cmdSettingsCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdSettingsCancel.TabIndex = 5;
@@ -185,7 +187,7 @@
             // 
             this.cmdSettingsApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSettingsApply.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmdSettingsApply.Location = new System.Drawing.Point(591, 357);
+            this.cmdSettingsApply.Location = new System.Drawing.Point(595, 357);
             this.cmdSettingsApply.Name = "cmdSettingsApply";
             this.cmdSettingsApply.Size = new System.Drawing.Size(75, 23);
             this.cmdSettingsApply.TabIndex = 4;

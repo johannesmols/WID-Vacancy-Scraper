@@ -30,6 +30,18 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
+        /// Gets called when the active tab in the tab control is changed
+        /// This is to notify the user controls of the change and make adjustments based on the change
+        /// </summary>
+        public void NotifyTabChanged(MainForm.Tabs oldTab, MainForm.Tabs newTab)
+        {
+            if (newTab == MainForm.Tabs.Dashboard)
+            {
+                ReloadContent();
+            }
+        }
+
+        /// <summary>
         /// Reloads the content of the user control
         /// </summary>
         public void ReloadContent()

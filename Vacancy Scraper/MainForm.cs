@@ -20,7 +20,7 @@ namespace Vacancy_Scraper
         /// <summary>
         /// An enumeration to store the currently selected tab
         /// </summary>
-        private enum Tabs { Dashboard, Scrape, Vacancies, Blacklist, Done, Companies, Settings }
+        public enum Tabs { Dashboard, Scrape, Vacancies, Blacklist, Done, Companies, Settings }
 
         /// <summary>
         /// The constructor of the class
@@ -41,24 +41,31 @@ namespace Vacancy_Scraper
             switch (e.TabPage.Text)
             {
                 case "Dashboard":
+                    NotifyTabChanged(Tabs.Dashboard);
                     currentTab = Tabs.Dashboard;
                     break;
                 case "Scrape":
+                    NotifyTabChanged(Tabs.Scrape);
                     currentTab = Tabs.Scrape;
                     break;
                 case "Vacancies":
+                    NotifyTabChanged(Tabs.Vacancies);
                     currentTab = Tabs.Vacancies;
                     break;
                 case "Blacklist":
+                    NotifyTabChanged(Tabs.Blacklist);
                     currentTab = Tabs.Blacklist;
                     break;
                 case "Done":
+                    NotifyTabChanged(Tabs.Done);
                     currentTab = Tabs.Done;
                     break;
                 case "Companies":
+                    NotifyTabChanged(Tabs.Companies);
                     currentTab = Tabs.Companies;
                     break;
                 case "Settings":
+                    NotifyTabChanged(Tabs.Settings);
                     currentTab = Tabs.Settings;
                     break;
                 default:
@@ -86,7 +93,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Dashboard.Instance.BringToFront();
                     }
-                    UserControls.Dashboard.Instance.ReloadContent();
                     break;
                 case Tabs.Scrape:
                     if (!panelScrape.Controls.Contains(UserControls.Scrape.Instance))
@@ -99,7 +105,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Scrape.Instance.BringToFront();
                     }
-                    UserControls.Scrape.Instance.ReloadContent();
                     break;
                 case Tabs.Vacancies:
                     if (!panelVacancies.Controls.Contains(UserControls.Vacancies.Instance))
@@ -112,7 +117,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Vacancies.Instance.BringToFront();
                     }
-                    UserControls.Vacancies.Instance.ReloadContent();
                     break;
                 case Tabs.Blacklist:
                     if (!panelBlacklist.Controls.Contains(UserControls.Blacklist.Instance))
@@ -125,7 +129,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Blacklist.Instance.BringToFront();
                     }
-                    UserControls.Blacklist.Instance.ReloadContent();
                     break;
                 case Tabs.Done:
                     if (!panelDone.Controls.Contains(UserControls.Done.Instance))
@@ -138,7 +141,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Done.Instance.BringToFront();
                     }
-                    UserControls.Done.Instance.ReloadContent();
                     break;
                 case Tabs.Companies:
                     if (!panelCompanies.Controls.Contains(UserControls.Companies.Instance))
@@ -151,7 +153,6 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Companies.Instance.BringToFront();
                     }
-                    UserControls.Companies.Instance.ReloadContent();
                     break;
                 case Tabs.Settings:
                     if (!panelSettings.Controls.Contains(UserControls.Settings.Instance))
@@ -164,11 +165,25 @@ namespace Vacancy_Scraper
                     {
                         UserControls.Settings.Instance.BringToFront();
                     }
-                    UserControls.Settings.Instance.ReloadContent();
                     break;
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Notify every tab that the active tab has changed
+        /// </summary>
+        /// <param name="newTab">the new active tab</param>
+        private void NotifyTabChanged(Tabs newTab) 
+        {
+            UserControls.Dashboard.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Scrape.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Vacancies.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Blacklist.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Done.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Companies.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.Settings.Instance.NotifyTabChanged(currentTab, newTab);
         }
     }
 }

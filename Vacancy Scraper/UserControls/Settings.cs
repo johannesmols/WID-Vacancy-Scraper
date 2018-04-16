@@ -36,6 +36,30 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
+        /// Gets called when the active tab in the tab control is changed
+        /// This is to notify the user controls of the change and make adjustments based on the change
+        /// </summary>
+        public void NotifyTabChanged(MainForm.Tabs oldTab, MainForm.Tabs newTab)
+        {
+            if (newTab == MainForm.Tabs.Settings)
+            {
+                ReloadContent();
+            }
+            else if (oldTab == MainForm.Tabs.Settings)
+            {
+                // Ask if the user wants to save any unchanged settings
+                if (contentChanged())
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to save all unsaved settings?", "Save changes", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        saveChanges();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Reloads the content of the user control
         /// </summary>
         public void ReloadContent()
@@ -78,18 +102,42 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
-        /// Apply the given settings and write them to the settings file
+        /// Assert whether any of the settings were changed by the user
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CmdSettingsApply_Click(object sender, EventArgs e)
+        /// <returns></returns>
+        private bool contentChanged()
+        {
+            if (txtSettingsWebDriversPath.Text.Equals(settingsManager.Settings.WebDriversPath) &&
+                txtSettingsResourcesPath.Text.Equals(settingsManager.Settings.ResourceFolderPath))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Save changes to the settings to the file, if valid
+        /// </summary>
+        private void saveChanges()
         {
             if (Directory.Exists(txtSettingsWebDriversPath.Text))
                 settingsManager.SetWebDriversPath(txtSettingsWebDriversPath.Text.Trim());
 
             if (Directory.Exists(txtSettingsResourcesPath.Text))
                 settingsManager.SetResourceFolderPath(txtSettingsResourcesPath.Text.Trim());
+        }
 
+        /// <summary>
+        /// Apply the given settings and write them to the settings file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdSettingsApply_Click(object sender, EventArgs e)
+        {
+            saveChanges();
             SetStatus();
         }
 
@@ -103,6 +151,11 @@ namespace Vacancy_Scraper.UserControls
             ReloadContent();
         }
 
+        /// <summary>
+        /// Browse for a path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CmdSettingsBrowseWebDriversPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -112,6 +165,11 @@ namespace Vacancy_Scraper.UserControls
             }
         }
 
+        /// <summary>
+        /// Browse for a path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CmdSettingsBrowseResourceFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -119,6 +177,26 @@ namespace Vacancy_Scraper.UserControls
             {
                 txtSettingsResourcesPath.Text = folderBrowserDialog.SelectedPath;
             }
+        }
+
+        /// <summary>
+        /// Update the status when changing the path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtSettingsWebDriversPath_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtSettingsResourcesPath_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
         }
     }
 }
