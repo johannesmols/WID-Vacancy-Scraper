@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.groupSettingsPaths = new System.Windows.Forms.GroupBox();
+            this.linkLblSettingsLogsPath = new System.Windows.Forms.LinkLabel();
+            this.lblSettingsLogsStatus = new System.Windows.Forms.Label();
+            this.cmdSettingsBrowseLogsFolder = new System.Windows.Forms.Button();
+            this.txtSettingsLogsFolderPath = new System.Windows.Forms.TextBox();
+            this.lblSettingsLogs = new System.Windows.Forms.Label();
             this.linkLblSettingsResourcesPath = new System.Windows.Forms.LinkLabel();
             this.lblSettingsResourcesStatus = new System.Windows.Forms.Label();
             this.cmdSettingsBrowseResourceFolder = new System.Windows.Forms.Button();
@@ -47,6 +52,13 @@
             // 
             // groupSettingsPaths
             // 
+            this.groupSettingsPaths.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSettingsPaths.Controls.Add(this.linkLblSettingsLogsPath);
+            this.groupSettingsPaths.Controls.Add(this.lblSettingsLogsStatus);
+            this.groupSettingsPaths.Controls.Add(this.cmdSettingsBrowseLogsFolder);
+            this.groupSettingsPaths.Controls.Add(this.txtSettingsLogsFolderPath);
+            this.groupSettingsPaths.Controls.Add(this.lblSettingsLogs);
             this.groupSettingsPaths.Controls.Add(this.linkLblSettingsResourcesPath);
             this.groupSettingsPaths.Controls.Add(this.lblSettingsResourcesStatus);
             this.groupSettingsPaths.Controls.Add(this.cmdSettingsBrowseResourceFolder);
@@ -57,32 +69,85 @@
             this.groupSettingsPaths.Controls.Add(this.cmdSettingsBrowseWebDriversPath);
             this.groupSettingsPaths.Controls.Add(this.txtSettingsWebDriversPath);
             this.groupSettingsPaths.Controls.Add(this.lblSettingsWebDrivers);
-            this.groupSettingsPaths.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupSettingsPaths.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.groupSettingsPaths.Location = new System.Drawing.Point(0, 0);
             this.groupSettingsPaths.Name = "groupSettingsPaths";
-            this.groupSettingsPaths.Size = new System.Drawing.Size(676, 110);
+            this.groupSettingsPaths.Size = new System.Drawing.Size(676, 158);
             this.groupSettingsPaths.TabIndex = 3;
             this.groupSettingsPaths.TabStop = false;
             this.groupSettingsPaths.Text = "Paths";
+            // 
+            // linkLblSettingsLogsPath
+            // 
+            this.linkLblSettingsLogsPath.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.linkLblSettingsLogsPath.AutoSize = true;
+            this.linkLblSettingsLogsPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.linkLblSettingsLogsPath.Location = new System.Drawing.Point(592, 135);
+            this.linkLblSettingsLogsPath.Name = "linkLblSettingsLogsPath";
+            this.linkLblSettingsLogsPath.Size = new System.Drawing.Size(10, 13);
+            this.linkLblSettingsLogsPath.TabIndex = 14;
+            this.linkLblSettingsLogsPath.TabStop = true;
+            this.linkLblSettingsLogsPath.Text = "-";
+            // 
+            // lblSettingsLogsStatus
+            // 
+            this.lblSettingsLogsStatus.AutoSize = true;
+            this.lblSettingsLogsStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSettingsLogsStatus.Location = new System.Drawing.Point(78, 134);
+            this.lblSettingsLogsStatus.Name = "lblSettingsLogsStatus";
+            this.lblSettingsLogsStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblSettingsLogsStatus.TabIndex = 13;
+            this.lblSettingsLogsStatus.Text = "Status:";
+            // 
+            // cmdSettingsBrowseLogsFolder
+            // 
+            this.cmdSettingsBrowseLogsFolder.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cmdSettingsBrowseLogsFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmdSettingsBrowseLogsFolder.Location = new System.Drawing.Point(595, 109);
+            this.cmdSettingsBrowseLogsFolder.Name = "cmdSettingsBrowseLogsFolder";
+            this.cmdSettingsBrowseLogsFolder.Size = new System.Drawing.Size(75, 23);
+            this.cmdSettingsBrowseLogsFolder.TabIndex = 12;
+            this.cmdSettingsBrowseLogsFolder.Text = "Browse...";
+            this.cmdSettingsBrowseLogsFolder.UseVisualStyleBackColor = true;
+            this.cmdSettingsBrowseLogsFolder.Click += new System.EventHandler(this.cmdSettingsBrowseLogsFolder_Click);
+            // 
+            // txtSettingsLogsFolderPath
+            // 
+            this.txtSettingsLogsFolderPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSettingsLogsFolderPath.Location = new System.Drawing.Point(81, 111);
+            this.txtSettingsLogsFolderPath.Name = "txtSettingsLogsFolderPath";
+            this.txtSettingsLogsFolderPath.Size = new System.Drawing.Size(508, 20);
+            this.txtSettingsLogsFolderPath.TabIndex = 11;
+            this.txtSettingsLogsFolderPath.TextChanged += new System.EventHandler(this.TxtSettingsLogsFolderPath_TextChanged);
+            // 
+            // lblSettingsLogs
+            // 
+            this.lblSettingsLogs.AutoSize = true;
+            this.lblSettingsLogs.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSettingsLogs.Location = new System.Drawing.Point(6, 114);
+            this.lblSettingsLogs.Name = "lblSettingsLogs";
+            this.lblSettingsLogs.Size = new System.Drawing.Size(33, 13);
+            this.lblSettingsLogs.TabIndex = 10;
+            this.lblSettingsLogs.Text = "Logs:";
             // 
             // linkLblSettingsResourcesPath
             // 
             this.linkLblSettingsResourcesPath.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.linkLblSettingsResourcesPath.AutoSize = true;
             this.linkLblSettingsResourcesPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.linkLblSettingsResourcesPath.Location = new System.Drawing.Point(595, 87);
+            this.linkLblSettingsResourcesPath.Location = new System.Drawing.Point(592, 85);
             this.linkLblSettingsResourcesPath.Name = "linkLblSettingsResourcesPath";
             this.linkLblSettingsResourcesPath.Size = new System.Drawing.Size(10, 13);
             this.linkLblSettingsResourcesPath.TabIndex = 9;
             this.linkLblSettingsResourcesPath.TabStop = true;
             this.linkLblSettingsResourcesPath.Text = "-";
+            this.linkLblSettingsResourcesPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLblSettingsResourcesPath_LinkClicked);
             // 
             // lblSettingsResourcesStatus
             // 
             this.lblSettingsResourcesStatus.AutoSize = true;
             this.lblSettingsResourcesStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSettingsResourcesStatus.Location = new System.Drawing.Point(81, 84);
+            this.lblSettingsResourcesStatus.Location = new System.Drawing.Point(78, 84);
             this.lblSettingsResourcesStatus.Name = "lblSettingsResourcesStatus";
             this.lblSettingsResourcesStatus.Size = new System.Drawing.Size(40, 13);
             this.lblSettingsResourcesStatus.TabIndex = 8;
@@ -124,18 +189,19 @@
             this.linkLblSettingsWebDriversPath.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.linkLblSettingsWebDriversPath.AutoSize = true;
             this.linkLblSettingsWebDriversPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.linkLblSettingsWebDriversPath.Location = new System.Drawing.Point(595, 36);
+            this.linkLblSettingsWebDriversPath.Location = new System.Drawing.Point(592, 36);
             this.linkLblSettingsWebDriversPath.Name = "linkLblSettingsWebDriversPath";
             this.linkLblSettingsWebDriversPath.Size = new System.Drawing.Size(10, 13);
             this.linkLblSettingsWebDriversPath.TabIndex = 4;
             this.linkLblSettingsWebDriversPath.TabStop = true;
             this.linkLblSettingsWebDriversPath.Text = "-";
+            this.linkLblSettingsWebDriversPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLblSettingsWebDriversPath_LinkClicked);
             // 
             // lblSettingsWebDriversPathStatus
             // 
             this.lblSettingsWebDriversPathStatus.AutoSize = true;
             this.lblSettingsWebDriversPathStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSettingsWebDriversPathStatus.Location = new System.Drawing.Point(81, 36);
+            this.lblSettingsWebDriversPathStatus.Location = new System.Drawing.Point(78, 36);
             this.lblSettingsWebDriversPathStatus.Name = "lblSettingsWebDriversPathStatus";
             this.lblSettingsWebDriversPathStatus.Size = new System.Drawing.Size(40, 13);
             this.lblSettingsWebDriversPathStatus.TabIndex = 3;
@@ -166,7 +232,7 @@
             // 
             this.lblSettingsWebDrivers.AutoSize = true;
             this.lblSettingsWebDrivers.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSettingsWebDrivers.Location = new System.Drawing.Point(6, 16);
+            this.lblSettingsWebDrivers.Location = new System.Drawing.Point(9, 16);
             this.lblSettingsWebDrivers.Name = "lblSettingsWebDrivers";
             this.lblSettingsWebDrivers.Size = new System.Drawing.Size(69, 13);
             this.lblSettingsWebDrivers.TabIndex = 0;
@@ -239,5 +305,10 @@
         private System.Windows.Forms.Button cmdSettingsCancel;
         private System.Windows.Forms.Button cmdSettingsApply;
         private System.Windows.Forms.Label lblSavedStatus;
+        private System.Windows.Forms.LinkLabel linkLblSettingsLogsPath;
+        private System.Windows.Forms.Label lblSettingsLogsStatus;
+        private System.Windows.Forms.Button cmdSettingsBrowseLogsFolder;
+        private System.Windows.Forms.TextBox txtSettingsLogsFolderPath;
+        private System.Windows.Forms.Label lblSettingsLogs;
     }
 }

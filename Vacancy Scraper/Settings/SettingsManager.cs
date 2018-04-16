@@ -36,7 +36,7 @@ namespace Vacancy_Scraper.Settings
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory()));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -58,7 +58,9 @@ namespace Vacancy_Scraper.Settings
         private void WriteSettings(SettingsObject settings)
         {
             string path = GetSettingsDirectory();
+            string logsPath = GetDefaultLogsDirectory();
             Directory.CreateDirectory(path); // Create directories and subdirectories if they don't already exist
+            Directory.CreateDirectory(logsPath);
             File.WriteAllText(GetSettingsFilePath(), JsonConvert.SerializeObject(settings, Formatting.Indented));
         }
 
@@ -81,13 +83,22 @@ namespace Vacancy_Scraper.Settings
         }
 
         /// <summary>
+        /// Get the default directory of the logs folder
+        /// </summary>
+        /// <returns></returns>
+        private string GetDefaultLogsDirectory()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Vacancy Scraper", "logs");
+        }
+
+        /// <summary>
         /// Verifies if the settings that were read from the file are valid and contain every property
         /// </summary>
         private void VerifySettings()
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory()));
             }
             else
             {
@@ -103,6 +114,12 @@ namespace Vacancy_Scraper.Settings
                 if (fixedSettings.ResourceFolderPath == null)
                 {
                     fixedSettings.ResourceFolderPath = "";
+                    changed = true;
+                }
+
+                if (fixedSettings.LogsFolderPath == null)
+                {
+                    fixedSettings.LogsFolderPath = GetDefaultLogsDirectory();
                     changed = true;
                 }
 
@@ -137,6 +154,19 @@ namespace Vacancy_Scraper.Settings
             if (!String.IsNullOrEmpty(resourceFolderPath))
             {
                 Settings.ResourceFolderPath = resourceFolderPath;
+                WriteSettings(Settings);
+            }
+        }
+
+        /// <summary>
+        /// Set the logs folder path setting and write it to the settings file
+        /// </summary>
+        /// <param name="logsFolderPath">the path</param>
+        public void SetLogsFolderPath(string logsFolderPath)
+        {
+            if (!String.IsNullOrEmpty(logsFolderPath))
+            {
+                Settings.LogsFolderPath = logsFolderPath;
                 WriteSettings(Settings);
             }
         }

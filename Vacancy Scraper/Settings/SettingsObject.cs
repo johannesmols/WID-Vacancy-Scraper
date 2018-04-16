@@ -13,11 +13,13 @@ namespace Vacancy_Scraper.Settings
     {
         public string WebDriversPath { get; set; }
         public string ResourceFolderPath { get; set; }
+        public string LogsFolderPath { get; set; }
 
-        public SettingsObject(string webDriversPath, string resourceFolderPath)
+        public SettingsObject(string webDriversPath, string resourceFolderPath, string logsFolderPath)
         {
             this.WebDriversPath = webDriversPath;
             this.ResourceFolderPath = resourceFolderPath;
+            this.LogsFolderPath = logsFolderPath;
         }
     }
 }
