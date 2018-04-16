@@ -54,8 +54,10 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Settings\SettingsManager.cs" />
-    <Compile Include="Settings\SettingsObject.cs" />
+    <Compile Include="JsonManagers\CompaniesManager.cs" />
+    <Compile Include="Objects\Company.cs" />
+    <Compile Include="JsonManagers\SettingsManager.cs" />
+    <Compile Include="Objects\SettingsObject.cs" />
     <Compile Include="UserControls\Blacklist.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,6 +168,11 @@
   <ItemGroup>
     <None Include="Resources\ic_stop_black_24dp_1x.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ic_add_black_24dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_delete_black_24dp_1x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

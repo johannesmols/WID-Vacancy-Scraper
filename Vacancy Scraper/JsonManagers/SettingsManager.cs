@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using Vacancy_Scraper.Objects;
 
-namespace Vacancy_Scraper.Settings
+namespace Vacancy_Scraper.JsonManagers
 {
     /// <summary>
     /// This class handles reading and writing to and from the settings file

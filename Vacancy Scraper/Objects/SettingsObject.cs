@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Vacancy_Scraper.Settings
+﻿namespace Vacancy_Scraper.Objects
 {
     /// <summary>
     /// Holds values that are read from the settings file or should be written to it

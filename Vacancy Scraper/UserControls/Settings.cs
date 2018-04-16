@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-
-using Vacancy_Scraper.Settings;
+using Vacancy_Scraper.JsonManagers;
 
 namespace Vacancy_Scraper.UserControls
 {
