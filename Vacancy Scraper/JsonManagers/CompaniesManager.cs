@@ -46,10 +46,11 @@ namespace Vacancy_Scraper.JsonManagers
                 // Create an empty file if the file doesn't exist already
                 if (!File.Exists(_filepath))
                 {
-                    using (StreamWriter sw = File.CreateText(_filepath))
-                    {
-                        sw.WriteLine(JsonConvert.SerializeObject(Companies, Formatting.Indented));
-                    }
+                    MessageBox.Show(
+                        @"The companies file doesn't exist. Please create it by going to the settings.",
+                        @"File doesn't exist",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 }
                 else
                 {
