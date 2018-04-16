@@ -41,6 +41,7 @@
             this.lblSettingsWebDrivers = new System.Windows.Forms.Label();
             this.cmdSettingsCancel = new System.Windows.Forms.Button();
             this.cmdSettingsApply = new System.Windows.Forms.Button();
+            this.lblSavedStatus = new System.Windows.Forms.Label();
             this.groupSettingsPaths.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,10 +196,21 @@
             this.cmdSettingsApply.UseVisualStyleBackColor = true;
             this.cmdSettingsApply.Click += new System.EventHandler(this.CmdSettingsApply_Click);
             // 
+            // lblSavedStatus
+            // 
+            this.lblSavedStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSavedStatus.AutoSize = true;
+            this.lblSavedStatus.Location = new System.Drawing.Point(9, 366);
+            this.lblSavedStatus.Name = "lblSavedStatus";
+            this.lblSavedStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblSavedStatus.TabIndex = 6;
+            this.lblSavedStatus.Text = "Status";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblSavedStatus);
             this.Controls.Add(this.groupSettingsPaths);
             this.Controls.Add(this.cmdSettingsCancel);
             this.Controls.Add(this.cmdSettingsApply);
@@ -207,6 +219,7 @@
             this.groupSettingsPaths.ResumeLayout(false);
             this.groupSettingsPaths.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -225,5 +238,6 @@
         private System.Windows.Forms.Label lblSettingsWebDrivers;
         private System.Windows.Forms.Button cmdSettingsCancel;
         private System.Windows.Forms.Button cmdSettingsApply;
+        private System.Windows.Forms.Label lblSavedStatus;
     }
 }

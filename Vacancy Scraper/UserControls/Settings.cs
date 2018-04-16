@@ -76,6 +76,12 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         private void SetStatus()
         {
+            // Change the status label in the lower left corner if all changes are saved or not
+            switchSaveStatusLabel(!contentChanged());
+
+            // Check if all settings are valid
+            bool allSettingsValid = true;
+
             // Web Drivers Path
             if (Directory.Exists(txtSettingsWebDriversPath.Text))
             {
@@ -84,6 +90,7 @@ namespace Vacancy_Scraper.UserControls
             }
             else
             {
+                allSettingsValid = false;
                 lblSettingsWebDriversPathStatus.Text = "Path does not exist";
                 linkLblSettingsWebDriversPath.Visible = false;
             }
@@ -96,9 +103,13 @@ namespace Vacancy_Scraper.UserControls
             }
             else
             {
+                allSettingsValid = false;
                 lblSettingsResourcesStatus.Text = "Path does not exist";
                 linkLblSettingsResourcesPath.Visible = false;
             }
+
+            // Enable or disable the apply button based on if all changes are valid
+            cmdSettingsApply.Enabled = allSettingsValid;
         }
 
         /// <summary>
@@ -123,11 +134,41 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         private void saveChanges()
         {
+            bool errorsWhileSaving = false;
+
             if (Directory.Exists(txtSettingsWebDriversPath.Text))
                 settingsManager.SetWebDriversPath(txtSettingsWebDriversPath.Text.Trim());
+            else
+                errorsWhileSaving = true;
 
             if (Directory.Exists(txtSettingsResourcesPath.Text))
                 settingsManager.SetResourceFolderPath(txtSettingsResourcesPath.Text.Trim());
+            else
+                errorsWhileSaving = true;
+
+            // This should never show, because the "Apply" button is disabled if there are invalid changes
+            if (errorsWhileSaving)
+            {
+                MessageBox.Show("There was one or more erros while saving, because the settings are invalid", "Error while saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Change between the modes of saying that all changes are saved and that there are unsaved changes
+        /// </summary>
+        /// <param name="allChangesAreSaved">true if there are no changes</param>
+        private void switchSaveStatusLabel(bool allChangesAreSaved)
+        {
+            if (allChangesAreSaved)
+            {
+                lblSavedStatus.Text = "All changes saved";
+                lblSavedStatus.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblSavedStatus.Text = "There are unsaved changes";
+                lblSavedStatus.ForeColor = Color.Red;
+            }
         }
 
         /// <summary>
