@@ -12,15 +12,27 @@ namespace Vacancy_Scraper.JsonManagers
 {
     class CompaniesManager
     {
-        public List<Company> Companies = new List<Company>();
+        public List<Company> Companies { get; private set; }
 
         private readonly SettingsManager _settings = new SettingsManager();
         private readonly string _filepath;
 
+        /// <summary>
+        /// Initialize the local copy of all companies and get the path of the file
+        /// </summary>
         public CompaniesManager()
         {
+            Companies = new List<Company>();
             _filepath = Path.Combine(_settings.Settings.ResourceFolderPath, "companies.json");
             ReadCompanies();
+        }
+
+        /// <summary>
+        /// Write the changes in the local copy of companies to the file
+        /// </summary>
+        public void SaveChangesToFile()
+        {
+            WriteCompanies(Companies);
         }
 
         /// <summary>
