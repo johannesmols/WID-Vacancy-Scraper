@@ -108,6 +108,8 @@
     <Compile Include="UserControls\Vacancies.Designer.cs">
       <DependentUpon>Vacancies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\PropertyComparer.cs" />
+    <Compile Include="Utilities\SortableBindingList.cs" />
     <EmbeddedResource Include="UserControls\Blacklist.resx">
       <DependentUpon>Blacklist.cs</DependentUpon>
     </EmbeddedResource>

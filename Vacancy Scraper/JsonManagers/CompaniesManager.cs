@@ -43,7 +43,6 @@ namespace Vacancy_Scraper.JsonManagers
             // Determine if the user has set a path to the file
             if (!string.IsNullOrWhiteSpace(_settings.Settings.ResourceFolderPath) && Directory.Exists(_settings.Settings.ResourceFolderPath))
             {
-                // Create an empty file if the file doesn't exist already
                 if (!File.Exists(_filepath))
                 {
                     MessageBox.Show(
@@ -57,7 +56,8 @@ namespace Vacancy_Scraper.JsonManagers
                     // Read the JSON file into the company list. If there is an error, the user will be notified that there is an error in the file
                     try
                     {
-                        Companies = JsonConvert.DeserializeObject<List<Company>>(File.ReadAllText(_filepath));
+                        // The list will be set to NULL, if the read file is empty. Initialize new empty list in that case to avoid null pointer exceptions
+                        Companies = JsonConvert.DeserializeObject<List<Company>>(File.ReadAllText(_filepath)) ?? new List<Company>();
                     }
                     catch
                     {

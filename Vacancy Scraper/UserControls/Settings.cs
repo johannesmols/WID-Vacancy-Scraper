@@ -49,7 +49,7 @@ namespace Vacancy_Scraper.UserControls
                 // Ask if the user wants to save any unchanged settings
                 if (contentChanged())
                 {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to save all unsaved settings?", "Save changes", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show(@"Do you want to save all unsaved settings?", @"Save changes", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         saveChanges();
@@ -107,16 +107,16 @@ namespace Vacancy_Scraper.UserControls
                 else
                 {
                     lblSettingsWebDriversPathStatus.ForeColor = Color.Red;
-                    lblSettingsWebDriversPathStatus.Text = "Path valid, but no drivers found";
+                    lblSettingsWebDriversPathStatus.Text = @"Path valid, but no drivers found";
                 }
                 linkLblSettingsWebDriversPath.Visible = true;
-                linkLblSettingsWebDriversPath.Text = "Download more";
+                linkLblSettingsWebDriversPath.Text = @"Download more";
             }
             else
             {
                 allSettingsValid = false;
                 lblSettingsWebDriversPathStatus.ForeColor = Color.Red;
-                lblSettingsWebDriversPathStatus.Text = "Path does not exist or is invalid";
+                lblSettingsWebDriversPathStatus.Text = @"Path does not exist or is invalid";
                 linkLblSettingsWebDriversPath.Visible = false;
             }
 
@@ -131,13 +131,13 @@ namespace Vacancy_Scraper.UserControls
                 if (vacancies && blacklist && done && companies)
                 {
                     lblSettingsResourcesStatus.ForeColor = SystemColors.ControlText;
-                    lblSettingsResourcesStatus.Text = "All files are present";
+                    lblSettingsResourcesStatus.Text = @"All files are present";
                     linkLblSettingsResourcesPath.Visible = false;
                 }
                 else
                 {
                     lblSettingsResourcesStatus.ForeColor = Color.Red;
-                    lblSettingsResourcesStatus.Text = "Path valid, but files are missing";
+                    lblSettingsResourcesStatus.Text = @"Path valid, but files are missing";
                     linkLblSettingsResourcesPath.Visible = true;
                     linkLblSettingsResourcesPath.Text = "Create files";
                 }
@@ -146,7 +146,7 @@ namespace Vacancy_Scraper.UserControls
             {
                 allSettingsValid = false;
                 lblSettingsResourcesStatus.ForeColor = Color.Red;
-                lblSettingsResourcesStatus.Text = "Path does not exist or is invalid";
+                lblSettingsResourcesStatus.Text = @"Path does not exist or is invalid";
                 linkLblSettingsResourcesPath.Visible = false;
             }
 
@@ -154,14 +154,14 @@ namespace Vacancy_Scraper.UserControls
             if (Directory.Exists(txtSettingsLogsFolderPath.Text))
             {
                 lblSettingsLogsStatus.ForeColor = SystemColors.ControlText;
-                lblSettingsLogsStatus.Text = "Path valid";
+                lblSettingsLogsStatus.Text = @"Path valid";
                 linkLblSettingsLogsPath.Visible = false;
             }
             else
             {
                 allSettingsValid = false;
                 lblSettingsLogsStatus.ForeColor = Color.Red;
-                lblSettingsLogsStatus.Text = "Path does not exist or is invalid";
+                lblSettingsLogsStatus.Text = @"Path does not exist or is invalid";
                 linkLblSettingsLogsPath.Visible = false;
             }
 
@@ -212,7 +212,7 @@ namespace Vacancy_Scraper.UserControls
             // This should never show, because the "Apply" button is disabled if there are invalid changes
             if (errorsWhileSaving)
             {
-                MessageBox.Show("There was one or more erros while saving, because the settings are invalid", "Error while saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There was one or more erros while saving, because the settings are invalid", @"Error while saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -224,12 +224,12 @@ namespace Vacancy_Scraper.UserControls
         {
             if (allChangesAreSaved)
             {
-                lblSavedStatus.Text = "All changes saved";
+                lblSavedStatus.Text = @"All changes saved";
                 lblSavedStatus.ForeColor = Color.Green;
             }
             else
             {
-                lblSavedStatus.Text = "There are unsaved changes";
+                lblSavedStatus.Text = @"There are unsaved changes";
                 lblSavedStatus.ForeColor = Color.Red;
             }
         }

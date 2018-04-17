@@ -31,28 +31,28 @@
             System.Windows.Forms.TabControl tabControl;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.tabVacancies = new System.Windows.Forms.TabPage();
-            this.tabPageBlacklist = new System.Windows.Forms.TabPage();
-            this.tabCompanies = new System.Windows.Forms.TabPage();
-            this.tabSettings = new System.Windows.Forms.TabPage();
-            this.tabPageDone = new System.Windows.Forms.TabPage();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.panelBlacklist = new System.Windows.Forms.Panel();
             this.tabPageScrape = new System.Windows.Forms.TabPage();
             this.panelScrape = new System.Windows.Forms.Panel();
+            this.tabVacancies = new System.Windows.Forms.TabPage();
             this.panelVacancies = new System.Windows.Forms.Panel();
+            this.tabPageBlacklist = new System.Windows.Forms.TabPage();
+            this.panelBlacklist = new System.Windows.Forms.Panel();
+            this.tabPageDone = new System.Windows.Forms.TabPage();
             this.panelDone = new System.Windows.Forms.Panel();
+            this.tabCompanies = new System.Windows.Forms.TabPage();
             this.panelCompanies = new System.Windows.Forms.Panel();
+            this.tabSettings = new System.Windows.Forms.TabPage();
             this.panelSettings = new System.Windows.Forms.Panel();
             tabControl = new System.Windows.Forms.TabControl();
             tabControl.SuspendLayout();
             this.tabDashboard.SuspendLayout();
+            this.tabPageScrape.SuspendLayout();
             this.tabVacancies.SuspendLayout();
             this.tabPageBlacklist.SuspendLayout();
+            this.tabPageDone.SuspendLayout();
             this.tabCompanies.SuspendLayout();
             this.tabSettings.SuspendLayout();
-            this.tabPageDone.SuspendLayout();
-            this.tabPageScrape.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -81,55 +81,10 @@
             this.tabDashboard.Name = "tabDashboard";
             this.tabDashboard.UseVisualStyleBackColor = true;
             // 
-            // tabVacancies
-            // 
-            this.tabVacancies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabVacancies.Controls.Add(this.panelVacancies);
-            resources.ApplyResources(this.tabVacancies, "tabVacancies");
-            this.tabVacancies.Name = "tabVacancies";
-            this.tabVacancies.UseVisualStyleBackColor = true;
-            // 
-            // tabPageBlacklist
-            // 
-            this.tabPageBlacklist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPageBlacklist.Controls.Add(this.panelBlacklist);
-            resources.ApplyResources(this.tabPageBlacklist, "tabPageBlacklist");
-            this.tabPageBlacklist.Name = "tabPageBlacklist";
-            this.tabPageBlacklist.UseVisualStyleBackColor = true;
-            // 
-            // tabCompanies
-            // 
-            this.tabCompanies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabCompanies.Controls.Add(this.panelCompanies);
-            resources.ApplyResources(this.tabCompanies, "tabCompanies");
-            this.tabCompanies.Name = "tabCompanies";
-            this.tabCompanies.UseVisualStyleBackColor = true;
-            // 
-            // tabSettings
-            // 
-            this.tabSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabSettings.Controls.Add(this.panelSettings);
-            resources.ApplyResources(this.tabSettings, "tabSettings");
-            this.tabSettings.Name = "tabSettings";
-            this.tabSettings.UseVisualStyleBackColor = true;
-            // 
-            // tabPageDone
-            // 
-            this.tabPageDone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPageDone.Controls.Add(this.panelDone);
-            resources.ApplyResources(this.tabPageDone, "tabPageDone");
-            this.tabPageDone.Name = "tabPageDone";
-            this.tabPageDone.UseVisualStyleBackColor = true;
-            // 
             // panelDashboard
             // 
             resources.ApplyResources(this.panelDashboard, "panelDashboard");
             this.panelDashboard.Name = "panelDashboard";
-            // 
-            // panelBlacklist
-            // 
-            resources.ApplyResources(this.panelBlacklist, "panelBlacklist");
-            this.panelBlacklist.Name = "panelBlacklist";
             // 
             // tabPageScrape
             // 
@@ -143,20 +98,65 @@
             resources.ApplyResources(this.panelScrape, "panelScrape");
             this.panelScrape.Name = "panelScrape";
             // 
+            // tabVacancies
+            // 
+            this.tabVacancies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabVacancies.Controls.Add(this.panelVacancies);
+            resources.ApplyResources(this.tabVacancies, "tabVacancies");
+            this.tabVacancies.Name = "tabVacancies";
+            this.tabVacancies.UseVisualStyleBackColor = true;
+            // 
             // panelVacancies
             // 
             resources.ApplyResources(this.panelVacancies, "panelVacancies");
             this.panelVacancies.Name = "panelVacancies";
+            // 
+            // tabPageBlacklist
+            // 
+            this.tabPageBlacklist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPageBlacklist.Controls.Add(this.panelBlacklist);
+            resources.ApplyResources(this.tabPageBlacklist, "tabPageBlacklist");
+            this.tabPageBlacklist.Name = "tabPageBlacklist";
+            this.tabPageBlacklist.UseVisualStyleBackColor = true;
+            // 
+            // panelBlacklist
+            // 
+            resources.ApplyResources(this.panelBlacklist, "panelBlacklist");
+            this.panelBlacklist.Name = "panelBlacklist";
+            // 
+            // tabPageDone
+            // 
+            this.tabPageDone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPageDone.Controls.Add(this.panelDone);
+            resources.ApplyResources(this.tabPageDone, "tabPageDone");
+            this.tabPageDone.Name = "tabPageDone";
+            this.tabPageDone.UseVisualStyleBackColor = true;
             // 
             // panelDone
             // 
             resources.ApplyResources(this.panelDone, "panelDone");
             this.panelDone.Name = "panelDone";
             // 
+            // tabCompanies
+            // 
+            this.tabCompanies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabCompanies.Controls.Add(this.panelCompanies);
+            resources.ApplyResources(this.tabCompanies, "tabCompanies");
+            this.tabCompanies.Name = "tabCompanies";
+            this.tabCompanies.UseVisualStyleBackColor = true;
+            // 
             // panelCompanies
             // 
             resources.ApplyResources(this.panelCompanies, "panelCompanies");
             this.panelCompanies.Name = "panelCompanies";
+            // 
+            // tabSettings
+            // 
+            this.tabSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabSettings.Controls.Add(this.panelSettings);
+            resources.ApplyResources(this.tabSettings, "tabSettings");
+            this.tabSettings.Name = "tabSettings";
+            this.tabSettings.UseVisualStyleBackColor = true;
             // 
             // panelSettings
             // 
@@ -171,12 +171,12 @@
             this.Name = "MainForm";
             tabControl.ResumeLayout(false);
             this.tabDashboard.ResumeLayout(false);
+            this.tabPageScrape.ResumeLayout(false);
             this.tabVacancies.ResumeLayout(false);
             this.tabPageBlacklist.ResumeLayout(false);
+            this.tabPageDone.ResumeLayout(false);
             this.tabCompanies.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);
-            this.tabPageDone.ResumeLayout(false);
-            this.tabPageScrape.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
