@@ -19,10 +19,11 @@ namespace Vacancy_Scraper.UserControls
     {
         private static Companies _instance;
 
-        private CompaniesManager companiesManager;
-        private DataTable table;
+        private CompaniesManager _companiesManager;
+        private BindingList<Company> _bindingList;
 
-        private bool isSortedDescendingOrUnsorted = true;
+        private bool _isSortedDescendingOrUnsorted = true;
+        private bool _searchActive = false; // Indicates whether or not the user is searching, or otherwise the list would be filtered by the hint in the search box
 
         public static Companies Instance
         {
@@ -60,9 +61,9 @@ namespace Vacancy_Scraper.UserControls
             txtSearch.ForeColor = SystemColors.GrayText;
 
             // Fill table
-            companiesManager = new CompaniesManager();
-            var bindingList = new SortableBindingList<Company>(companiesManager.Companies);
-            var source = new BindingSource(bindingList, null);
+            _companiesManager = new CompaniesManager();
+            _bindingList = new BindingList<Company>(_companiesManager.Companies);
+            var source = new BindingSource(_bindingList, null);
             gridCompanies.DataSource = source;
             AdjustTableSettings();
         }
@@ -116,6 +117,7 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void TxtSearch_Enter(object sender, EventArgs e)
         {
+            _searchActive = true;
             if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text.Equals("Search..."))
             {
                 txtSearch.ForeColor = SystemColors.ControlText;
@@ -130,11 +132,66 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void TxtSearch_Leave(object sender, EventArgs e)
         {
+            _searchActive = false;
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
                 txtSearch.ForeColor = SystemColors.GrayText;
                 txtSearch.Text = @"Search...";
             }
+        }
+
+        /// <summary>
+        /// Filter data by the company name when searching
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_searchActive)
+                {
+                    string filter = txtSearch.Text.Trim().Replace("'", "''");
+                    gridCompanies.DataSource = new BindingList<Company>(_bindingList.Where(m => m.Name.Contains(filter)).ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"Error while searching", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Add a company to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdAdd_Click(object sender, EventArgs e)
+        {
+            _bindingList.Add(new Company("ye", 1, 2, 3, "boi", true, "ye", "boi"));
+            _companiesManager.SaveChangesToFile();
+            ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting added to the table when the grid view wasn't focused at the point of clicking the add button
+        }
+
+        /// <summary>
+        /// Delete one or more companies from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdDelete_Click(object sender, EventArgs e)
+        {
+            var message = gridCompanies.SelectedRows.Count == 1 ? 
+                @"Do you want to delete this company?" : "Do you want to delete " + gridCompanies.SelectedRows.Count + @" companies?";
+            DialogResult dialogResult = MessageBox.Show(message, @"Delete companies", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in gridCompanies.SelectedRows)
+                {
+                    _bindingList.RemoveAt(row.Index);
+                }
+                _companiesManager.SaveChangesToFile();
+                ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting removed from the table when the grid view wasn't focused at the point of clicking the delete button
+            }  
         }
 
         /* --- Data Grid View Events --- */
@@ -156,7 +213,7 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void gridCompanies_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            companiesManager.SaveChangesToFile();
+            _companiesManager.SaveChangesToFile();
         }
 
         /// <summary>
@@ -166,15 +223,69 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void gridCompanies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (isSortedDescendingOrUnsorted)
+            if (_isSortedDescendingOrUnsorted)
             {
-                gridCompanies.Sort(gridCompanies.Columns[e.ColumnIndex], ListSortDirection.Ascending);
-                isSortedDescendingOrUnsorted = false;
+                switch (e.ColumnIndex)
+                {
+                    case 0: // Name
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Name).ToList());
+                        break;
+                    case 1: // CVR
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Cvr).ToList());
+                        break;
+                    case 2: // P-No.
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.PNo).ToList());
+                        break;
+                    case 3: // Telephone
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Telephone).ToList());
+                        break;
+                    case 4: // Consultants
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Consultants).ToList());
+                        break;
+                    case 5: // Enabled
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Enabled).ToList());
+                        break;
+                    case 6: // Comment
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Comment).ToList());
+                        break;
+                    case 7: // Url
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Url).ToList());
+                        break;
+                }
+
+                _isSortedDescendingOrUnsorted = false;
             }
             else
             {
-                gridCompanies.Sort(gridCompanies.Columns[e.ColumnIndex], ListSortDirection.Descending);
-                isSortedDescendingOrUnsorted = true;
+                switch (e.ColumnIndex)
+                {
+                    case 0: // Name
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Name).ToList());
+                        break;
+                    case 1: // CVR
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Cvr).ToList());
+                        break;
+                    case 2: // P-No.
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.PNo).ToList());
+                        break;
+                    case 3: // Telephone
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Telephone).ToList());
+                        break;
+                    case 4: // Consultants
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Consultants).ToList());
+                        break;
+                    case 5: // Enabled
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Enabled).ToList());
+                        break;
+                    case 6: // Comment
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Comment).ToList());
+                        break;
+                    case 7: // Url
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Url).ToList());
+                        break;
+                }
+
+                _isSortedDescendingOrUnsorted = true;
             }
         }
     }

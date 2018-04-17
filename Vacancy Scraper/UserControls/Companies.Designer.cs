@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.cmdAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -65,6 +65,7 @@
             this.cmdAdd.Name = "cmdAdd";
             this.cmdAdd.Size = new System.Drawing.Size(49, 22);
             this.cmdAdd.Text = "Add";
+            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
             // 
             // toolStripSeparator1
             // 
@@ -80,6 +81,7 @@
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(60, 22);
             this.cmdDelete.Text = "Delete";
+            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
             // toolStripSeparator2
             // 
@@ -94,15 +96,16 @@
             this.txtSearch.Size = new System.Drawing.Size(200, 25);
             this.txtSearch.Enter += new System.EventHandler(this.TxtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.TxtSearch_Leave);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // gridCompanies
             // 
             this.gridCompanies.AllowUserToAddRows = false;
             this.gridCompanies.AllowUserToDeleteRows = false;
             this.gridCompanies.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCompanies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCompanies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCompanies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridCompanies.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridCompanies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -116,9 +119,9 @@
             this.gridCompanies.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridCompanies.RowHeadersVisible = false;
             this.gridCompanies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.NullValue = null;
-            this.gridCompanies.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.NullValue = null;
+            this.gridCompanies.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridCompanies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridCompanies.Size = new System.Drawing.Size(676, 360);
             this.gridCompanies.TabIndex = 0;
