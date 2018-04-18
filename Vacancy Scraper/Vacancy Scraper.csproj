@@ -61,6 +61,7 @@
       <DependentUpon>AddCompanyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="JsonManagers\CompaniesManager.cs" />
+    <Compile Include="JsonManagers\VacanciesManager.cs" />
     <Compile Include="Objects\CompanyObject.cs" />
     <Compile Include="JsonManagers\SettingsManager.cs" />
     <Compile Include="Objects\SettingsObject.cs" />
@@ -183,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_delete_black_24dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_block_black_24dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_done_black_24dp_1x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

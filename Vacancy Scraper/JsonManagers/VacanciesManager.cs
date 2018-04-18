@@ -5,42 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vacancy_Scraper.Objects;
 using Newtonsoft.Json;
+using Vacancy_Scraper.Objects;
 
 namespace Vacancy_Scraper.JsonManagers
 {
-    class CompaniesManager
+    class VacanciesManager
     {
-        public List<CompanyObject> Companies { get; private set; }
+        public List<VacancyObject> Vacancies { get; private set; }
 
-        private readonly SettingsManager _settings = new SettingsManager();
+        private readonly  SettingsManager _settings = new SettingsManager();
         private readonly string _filepath;
 
         private bool _showedPathWarning = false; // to prevent having an infinite amount of message boxes from popping up when not having a path
 
         /// <summary>
-        /// Initialize the local copy of all companies and get the path of the file
+        /// Initialize the local copy of all vacancies and get the path of the file
         /// </summary>
-        public CompaniesManager()
+        public VacanciesManager()
         {
-            Companies = new List<CompanyObject>();
-            _filepath = Path.Combine(_settings.Settings.ResourceFolderPath, "companies.json");
-            ReadCompanies();
+            Vacancies = new List<VacancyObject>();
+            _filepath = Path.Combine(_settings.Settings.ResourceFolderPath, "vacancies.json");
+            ReadVacancies();
         }
 
         /// <summary>
-        /// Write the changes in the local copy of companies to the file
+        /// Write the changes in the local copy of vacancies to the file
         /// </summary>
         public void SaveChangesToFile()
         {
-            WriteCompanies(Companies);
+            WriteVacancies(Vacancies);
         }
 
         /// <summary>
-        /// Read the companies JSON file and read the objects into a list of the type CompanyObject
+        /// Read the vacancies JSON file and read the objects into a list of the type VacancyObject
         /// </summary>
-        private void ReadCompanies()
+        public void ReadVacancies()
         {
             // Determine if the user has set a path to the file
             if (!string.IsNullOrWhiteSpace(_settings.Settings.ResourceFolderPath) && Directory.Exists(_settings.Settings.ResourceFolderPath))
@@ -48,31 +48,31 @@ namespace Vacancy_Scraper.JsonManagers
                 if (!File.Exists(_filepath))
                 {
                     MessageBox.Show(
-                        @"The companies file doesn't exist. Please create it by going to the settings.",
+                        @"The vacancies file doesn't exist. Please create it by going to the settings.",
                         @"File doesn't exist",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    // Read the JSON file into the company list. If there is an error, the user will be notified that there is an error in the file
+                    // Read the JSON file into the vacancy list. If there is an error, the user will be notified that there is an error in the file
                     try
                     {
                         // The list will be set to NULL, if the read file is empty. Initialize new empty list in that case to avoid null pointer exceptions
-                        Companies = JsonConvert.DeserializeObject<List<CompanyObject>>(File.ReadAllText(_filepath)) ?? new List<CompanyObject>();
+                        Vacancies = JsonConvert.DeserializeObject<List<VacancyObject>>(File.ReadAllText(_filepath)) ?? new List<VacancyObject>();
                     }
                     catch
                     {
                         DialogResult dialogResult = MessageBox.Show(
-                            @"There seems to be an error in the companies file. Would you like to reset it? This will cause you to lose all data in that specific file.",
+                            @"There seems to be an error in the vacancies file. Would you like to reset it? This will cause you to lose all data in that specific file.",
                             @"Error in file",
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning);
 
                         if (dialogResult == DialogResult.Yes)
                         {
-                            WriteCompanies(new List<CompanyObject>());
-                            ReadCompanies();
+                            WriteVacancies(new List<VacancyObject>());
+                            ReadVacancies();
                         }
                     }
                 }
@@ -92,14 +92,14 @@ namespace Vacancy_Scraper.JsonManagers
         }
 
         /// <summary>
-        /// Write a list of companies to a JSON file
+        /// Write a list of vacancies to a JSON file
         /// </summary>
-        /// <param name="companies"></param>
-        private void WriteCompanies(List<CompanyObject> companies)
+        /// <param name="vacancies"></param>
+        public void WriteVacancies(List<VacancyObject> vacancies)
         {
             if (Directory.Exists(_settings.Settings.ResourceFolderPath))
             {
-                File.WriteAllText(_filepath, JsonConvert.SerializeObject(companies, Formatting.Indented));
+                File.WriteAllText(_filepath, JsonConvert.SerializeObject(vacancies, Formatting.Indented));
             }
             else
             {
