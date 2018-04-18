@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
-using Vacancy_Scraper.Utilities;
 
 namespace Vacancy_Scraper.UserControls
 {
@@ -73,7 +73,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         private void AdjustTableSettings()
         {
-            int colCount = 8;
+            int colCount = 9;
             if (gridCompanies.Columns.Count == colCount)
             {
                 // Column Header Text
@@ -83,8 +83,9 @@ namespace Vacancy_Scraper.UserControls
                 gridCompanies.Columns[3].HeaderText = @"Telephone";
                 gridCompanies.Columns[4].HeaderText = @"Consultants";
                 gridCompanies.Columns[5].HeaderText = @"Enabled";
-                gridCompanies.Columns[6].HeaderText = @"Comment";
-                gridCompanies.Columns[7].HeaderText = @"URL";
+                gridCompanies.Columns[6].HeaderText = @"Selected";
+                gridCompanies.Columns[7].HeaderText = @"Comment";
+                gridCompanies.Columns[8].HeaderText = @"URL";
 
                 // Fill Weight when auto filling
                 gridCompanies.Columns[0].FillWeight = 100;
@@ -93,19 +94,25 @@ namespace Vacancy_Scraper.UserControls
                 gridCompanies.Columns[3].FillWeight = 75;
                 gridCompanies.Columns[4].FillWeight = 100;
                 gridCompanies.Columns[5].FillWeight = 50;
-                gridCompanies.Columns[6].FillWeight = 200;
+                gridCompanies.Columns[6].FillWeight = 50;
                 gridCompanies.Columns[7].FillWeight = 200;
+                gridCompanies.Columns[8].FillWeight = 200;
 
                 // Special settings for the enabled column
                 gridCompanies.Columns[5].ReadOnly = true;
                 gridCompanies.Columns[5].Resizable = DataGridViewTriState.False;
                 gridCompanies.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 gridCompanies.Columns[5].Width = 50;
+                gridCompanies.Columns[5].ToolTipText = @"This value can't be changed. Please contact the developer for activation.";
+
+                // Hide the selected column, this should only be shown in the Scrape tab
+                gridCompanies.Columns[6].Visible = false;
 
                 // Equal settings for all columns
                 for (int i = 0; i < colCount; i++)
                 {
                     gridCompanies.Columns[i].MinimumWidth = 50;
+                    gridCompanies.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 }
             }
         }
@@ -168,9 +175,17 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdAdd_Click(object sender, EventArgs e)
         {
-            _bindingList.Add(new Company("ye", 1, 2, 3, "boi", true, "ye", "boi"));
-            _companiesManager.SaveChangesToFile();
-            ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting added to the table when the grid view wasn't focused at the point of clicking the add button
+            using (var form = new AddCompanyForm())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Company newCompany = form.ReturnCompany;
+                    _bindingList.Add(newCompany);
+                    _companiesManager.SaveChangesToFile();
+                    ReloadContent();
+                }
+            }
         }
 
         /// <summary>
@@ -182,7 +197,8 @@ namespace Vacancy_Scraper.UserControls
         {
             var message = gridCompanies.SelectedRows.Count == 1 ? 
                 @"Do you want to delete this company?" : "Do you want to delete " + gridCompanies.SelectedRows.Count + @" companies?";
-            DialogResult dialogResult = MessageBox.Show(message, @"Delete companies", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var title = gridCompanies.SelectedRows.Count == 1 ? @"Delete company" : @"Delete companies";
+            DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in gridCompanies.SelectedRows)
@@ -245,10 +261,13 @@ namespace Vacancy_Scraper.UserControls
                     case 5: // Enabled
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Enabled).ToList());
                         break;
-                    case 6: // Comment
+                    case 6:
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Selected).ToList());
+                        break;
+                    case 7: // Comment
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Comment).ToList());
                         break;
-                    case 7: // Url
+                    case 8: // Url
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Url).ToList());
                         break;
                 }
@@ -278,10 +297,13 @@ namespace Vacancy_Scraper.UserControls
                     case 5: // Enabled
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Enabled).ToList());
                         break;
-                    case 6: // Comment
+                    case 6: // Selected
+                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Selected).ToList());
+                        break;
+                    case 7: // Comment
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Comment).ToList());
                         break;
-                    case 7: // Url
+                    case 8: // Url
                         gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Url).ToList());
                         break;
                 }

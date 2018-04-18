@@ -17,7 +17,7 @@ namespace Vacancy_Scraper.JsonManagers
         private readonly SettingsManager _settings = new SettingsManager();
         private readonly string _filepath;
 
-        private bool showedPathWarning = false; // to prevent having an infinite amount of message boxes from popping up when not having a path
+        private bool _showedPathWarning = false; // to prevent having an infinite amount of message boxes from popping up when not having a path
 
         /// <summary>
         /// Initialize the local copy of all companies and get the path of the file
@@ -79,14 +79,14 @@ namespace Vacancy_Scraper.JsonManagers
             }
             else
             {
-                if (!showedPathWarning)
+                if (!_showedPathWarning)
                 {
                     MessageBox.Show(
                         @"Resource path is invalid. Please set the path in the settings.",
                         @"Resource path invalid",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-                    showedPathWarning = true;
+                    _showedPathWarning = true;
                 }
             }
         }
@@ -103,14 +103,14 @@ namespace Vacancy_Scraper.JsonManagers
             }
             else
             {
-                if (!showedPathWarning)
+                if (!_showedPathWarning)
                 {
                     MessageBox.Show(
                         @"Resource path is invalid. Please set the path in the settings.",
                         @"Resource path invalid",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-                    showedPathWarning = true;
+                    _showedPathWarning = true;
                 }
             }
         }
