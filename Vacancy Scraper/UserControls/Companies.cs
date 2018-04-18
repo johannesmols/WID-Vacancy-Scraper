@@ -268,6 +268,7 @@ namespace Vacancy_Scraper.UserControls
         private void gridCompanies_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             _companiesManager.SaveChangesToFile();
+            ReloadContent();
         }
 
         /// <summary>
