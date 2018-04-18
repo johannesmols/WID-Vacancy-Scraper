@@ -253,6 +253,7 @@ namespace Vacancy_Scraper.UserControls
                         break;
                 }
 
+                gridCompanies.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
                 _isSortedDescendingOrUnsorted = false;
             }
             else
@@ -285,6 +286,7 @@ namespace Vacancy_Scraper.UserControls
                         break;
                 }
 
+                gridCompanies.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
                 _isSortedDescendingOrUnsorted = true;
             }
         }
