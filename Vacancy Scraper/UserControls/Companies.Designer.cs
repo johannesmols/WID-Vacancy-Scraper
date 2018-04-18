@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.cmdAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -103,9 +103,9 @@
             this.gridCompanies.AllowUserToAddRows = false;
             this.gridCompanies.AllowUserToDeleteRows = false;
             this.gridCompanies.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCompanies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCompanies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCompanies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridCompanies.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridCompanies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -119,14 +119,16 @@
             this.gridCompanies.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridCompanies.RowHeadersVisible = false;
             this.gridCompanies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.NullValue = null;
-            this.gridCompanies.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.NullValue = null;
+            this.gridCompanies.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridCompanies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridCompanies.Size = new System.Drawing.Size(676, 360);
             this.gridCompanies.TabIndex = 0;
+            this.gridCompanies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridCompanies_CellMouseClick);
             this.gridCompanies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCompanies_CellValueChanged);
             this.gridCompanies.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridCompanies_ColumnHeaderMouseClick);
+            this.gridCompanies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridCompanies_DataBindingComplete);
             this.gridCompanies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridCompanies_DataError);
             // 
             // Companies

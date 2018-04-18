@@ -61,9 +61,10 @@
       <DependentUpon>AddCompanyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="JsonManagers\CompaniesManager.cs" />
-    <Compile Include="Objects\Company.cs" />
+    <Compile Include="Objects\CompanyObject.cs" />
     <Compile Include="JsonManagers\SettingsManager.cs" />
     <Compile Include="Objects\SettingsObject.cs" />
+    <Compile Include="Objects\VacancyObject.cs" />
     <Compile Include="UserControls\Blacklist.cs">
       <SubType>UserControl</SubType>
     </Compile>

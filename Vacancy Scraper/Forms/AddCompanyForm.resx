@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>8</value>
   </data>
   <data name="cmdCancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -157,7 +157,7 @@
     <value>75, 23</value>
   </data>
   <data name="cmdAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="cmdAdd.Text" xml:space="preserve">
     <value>Add</value>
@@ -265,7 +265,7 @@
     <value>286, 20</value>
   </data>
   <data name="numCVR.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;numCVR.Name" xml:space="preserve">
     <value>numCVR</value>
@@ -286,7 +286,7 @@
     <value>286, 20</value>
   </data>
   <data name="numPNo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;numPNo.Name" xml:space="preserve">
     <value>numPNo</value>
@@ -340,7 +340,7 @@
     <value>286, 20</value>
   </data>
   <data name="numTelephone.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;numTelephone.Name" xml:space="preserve">
     <value>numTelephone</value>
@@ -394,7 +394,7 @@
     <value>286, 20</value>
   </data>
   <data name="txtConsultants.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;txtConsultants.Name" xml:space="preserve">
     <value>txtConsultants</value>
@@ -475,7 +475,7 @@
     <value>286, 20</value>
   </data>
   <data name="txtCareerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtCareerPage.Name" xml:space="preserve">
     <value>txtCareerPage</value>
@@ -529,7 +529,7 @@
     <value>286, 20</value>
   </data>
   <data name="txtComment.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtComment.Name" xml:space="preserve">
     <value>txtComment</value>

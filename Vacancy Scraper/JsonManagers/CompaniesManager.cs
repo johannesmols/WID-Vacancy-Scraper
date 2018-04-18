@@ -12,7 +12,7 @@ namespace Vacancy_Scraper.JsonManagers
 {
     class CompaniesManager
     {
-        public List<Company> Companies { get; private set; }
+        public List<CompanyObject> Companies { get; private set; }
 
         private readonly SettingsManager _settings = new SettingsManager();
         private readonly string _filepath;
@@ -24,7 +24,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// </summary>
         public CompaniesManager()
         {
-            Companies = new List<Company>();
+            Companies = new List<CompanyObject>();
             _filepath = Path.Combine(_settings.Settings.ResourceFolderPath, "companies.json");
             ReadCompanies();
         }
@@ -59,7 +59,7 @@ namespace Vacancy_Scraper.JsonManagers
                     try
                     {
                         // The list will be set to NULL, if the read file is empty. Initialize new empty list in that case to avoid null pointer exceptions
-                        Companies = JsonConvert.DeserializeObject<List<Company>>(File.ReadAllText(_filepath)) ?? new List<Company>();
+                        Companies = JsonConvert.DeserializeObject<List<CompanyObject>>(File.ReadAllText(_filepath)) ?? new List<CompanyObject>();
                     }
                     catch
                     {
@@ -71,7 +71,7 @@ namespace Vacancy_Scraper.JsonManagers
 
                         if (dialogResult == DialogResult.Yes)
                         {
-                            WriteCompanies(new List<Company>());
+                            WriteCompanies(new List<CompanyObject>());
                             ReadCompanies();
                         }
                     }
@@ -95,7 +95,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// Write a list of companies to a JSON file
         /// </summary>
         /// <param name="companies"></param>
-        private void WriteCompanies(List<Company> companies)
+        private void WriteCompanies(List<CompanyObject> companies)
         {
             if (Directory.Exists(_settings.Settings.ResourceFolderPath))
             {

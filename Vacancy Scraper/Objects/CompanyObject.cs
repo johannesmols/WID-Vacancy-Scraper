@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vacancy_Scraper.Objects
 {
-    public class Company
+    public class CompanyObject
     {
         public string Name { get; set; }
         public long Cvr { get; set; }
@@ -18,7 +18,7 @@ namespace Vacancy_Scraper.Objects
         public string Comment { get; set; }
         public string Url { get; set; }
 
-        public Company(string name, long cvr, long pNo, long telephone, string consultants, bool enabled, bool selected, string comment, string url)
+        public CompanyObject(string name, long cvr, long pNo, long telephone, string consultants, bool enabled, bool selected, string comment, string url)
         {
             Name = name;
             Cvr = cvr;

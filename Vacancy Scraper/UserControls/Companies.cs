@@ -20,7 +20,7 @@ namespace Vacancy_Scraper.UserControls
         private static Companies _instance;
 
         private CompaniesManager _companiesManager;
-        private BindingList<Company> _bindingList;
+        private BindingList<CompanyObject> _bindingList;
 
         private bool _isSortedDescendingOrUnsorted = true;
         private bool _searchActive = false; // Indicates whether or not the user is searching, or otherwise the list would be filtered by the hint in the search box
@@ -62,7 +62,7 @@ namespace Vacancy_Scraper.UserControls
 
             // Fill table
             _companiesManager = new CompaniesManager();
-            _bindingList = new BindingList<Company>(_companiesManager.Companies);
+            _bindingList = new BindingList<CompanyObject>(_companiesManager.Companies);
             var source = new BindingSource(_bindingList, null);
             gridCompanies.DataSource = source;
             AdjustTableSettings();
@@ -108,11 +108,49 @@ namespace Vacancy_Scraper.UserControls
                 // Hide the selected column, this should only be shown in the Scrape tab
                 gridCompanies.Columns[6].Visible = false;
 
+                // Show a tooltip that the user can open the URL by control clicking it
+                gridCompanies.Columns[8].ToolTipText = @"Control-click to open URL";
+
                 // Equal settings for all columns
                 for (int i = 0; i < colCount; i++)
                 {
                     gridCompanies.Columns[i].MinimumWidth = 50;
                     gridCompanies.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show cells with a valid URL with special formatting to show that it is clickable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gridCompanies_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in gridCompanies.Rows)
+            {
+                var cell = row.Cells["URL"];
+                if (System.Uri.IsWellFormedUriString(cell.Value.ToString(), UriKind.Absolute))
+                {
+                    cell.Style.Font = new Font(DefaultFont, FontStyle.Underline);
+                    cell.Style.ForeColor = Color.Green;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Open the URL if it is valid and the user control-clicked the link
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gridCompanies_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
+            {
+                var cell = gridCompanies.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (System.Uri.IsWellFormedUriString(cell.Value.ToString(), UriKind.Absolute))
+                {
+                    System.Diagnostics.Process.Start(cell.Value.ToString());
                 }
             }
         }
@@ -159,7 +197,7 @@ namespace Vacancy_Scraper.UserControls
                 if (_searchActive)
                 {
                     string filter = txtSearch.Text.Trim().Replace("'", "''");
-                    gridCompanies.DataSource = new BindingList<Company>(_bindingList.Where(m => m.Name.Contains(filter)).ToList());
+                    gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.Where(m => m.Name.Contains(filter)).ToList());
                 }
             }
             catch (Exception ex)
@@ -180,7 +218,7 @@ namespace Vacancy_Scraper.UserControls
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Company newCompany = form.ReturnCompany;
+                    CompanyObject newCompany = form.ReturnCompany;
                     _bindingList.Add(newCompany);
                     _companiesManager.SaveChangesToFile();
                     ReloadContent();
@@ -244,31 +282,31 @@ namespace Vacancy_Scraper.UserControls
                 switch (e.ColumnIndex)
                 {
                     case 0: // Name
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Name).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Name).ToList());
                         break;
                     case 1: // CVR
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Cvr).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Cvr).ToList());
                         break;
                     case 2: // P-No.
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.PNo).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.PNo).ToList());
                         break;
                     case 3: // Telephone
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Telephone).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Telephone).ToList());
                         break;
                     case 4: // Consultants
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Consultants).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Consultants).ToList());
                         break;
                     case 5: // Enabled
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Enabled).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Enabled).ToList());
                         break;
                     case 6:
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Selected).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Selected).ToList());
                         break;
                     case 7: // Comment
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Comment).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Comment).ToList());
                         break;
                     case 8: // Url
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderBy(x => x.Url).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Url).ToList());
                         break;
                 }
 
@@ -280,31 +318,31 @@ namespace Vacancy_Scraper.UserControls
                 switch (e.ColumnIndex)
                 {
                     case 0: // Name
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Name).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Name).ToList());
                         break;
                     case 1: // CVR
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Cvr).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Cvr).ToList());
                         break;
                     case 2: // P-No.
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.PNo).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.PNo).ToList());
                         break;
                     case 3: // Telephone
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Telephone).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Telephone).ToList());
                         break;
                     case 4: // Consultants
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Consultants).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Consultants).ToList());
                         break;
                     case 5: // Enabled
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Enabled).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Enabled).ToList());
                         break;
                     case 6: // Selected
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Selected).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Selected).ToList());
                         break;
                     case 7: // Comment
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Comment).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Comment).ToList());
                         break;
                     case 8: // Url
-                        gridCompanies.DataSource = new BindingList<Company>(_bindingList.OrderByDescending(x => x.Url).ToList());
+                        gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderByDescending(x => x.Url).ToList());
                         break;
                 }
 

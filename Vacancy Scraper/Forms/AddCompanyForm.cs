@@ -13,7 +13,7 @@ namespace Vacancy_Scraper.Forms
 {
     public partial class AddCompanyForm : Form
     {
-        public Company ReturnCompany { get; private set; }
+        public CompanyObject ReturnCompany { get; private set; }
 
         public AddCompanyForm()
         {
@@ -31,7 +31,7 @@ namespace Vacancy_Scraper.Forms
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
             {
-                ReturnCompany = new Company(
+                ReturnCompany = new CompanyObject(
                     txtName.Text,
                     (long) numCVR.Value,
                     (long) numPNo.Value,
