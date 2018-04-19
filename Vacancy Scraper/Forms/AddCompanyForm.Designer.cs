@@ -37,7 +37,6 @@
             this.numCVR = new System.Windows.Forms.NumericUpDown();
             this.numPNo = new System.Windows.Forms.NumericUpDown();
             this.lblPNo = new System.Windows.Forms.Label();
-            this.numTelephone = new System.Windows.Forms.NumericUpDown();
             this.lblTelephone = new System.Windows.Forms.Label();
             this.txtConsultants = new System.Windows.Forms.TextBox();
             this.lblConsultants = new System.Windows.Forms.Label();
@@ -48,9 +47,9 @@
             this.lblComment = new System.Windows.Forms.Label();
             this.checkAddMultiple = new System.Windows.Forms.CheckBox();
             this.cmdClose = new System.Windows.Forms.Button();
+            this.txtTelephone = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numCVR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelephone)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -111,17 +110,6 @@
             resources.ApplyResources(this.lblPNo, "lblPNo");
             this.lblPNo.Name = "lblPNo";
             // 
-            // numTelephone
-            // 
-            resources.ApplyResources(this.numTelephone, "numTelephone");
-            this.numTelephone.Maximum = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            0});
-            this.numTelephone.Name = "numTelephone";
-            this.numTelephone.Enter += new System.EventHandler(this.ControlFocusEnter);
-            // 
             // lblTelephone
             // 
             resources.ApplyResources(this.lblTelephone, "lblTelephone");
@@ -179,12 +167,19 @@
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.CmdCloseAndSave_Click);
             // 
+            // txtTelephone
+            // 
+            resources.ApplyResources(this.txtTelephone, "txtTelephone");
+            this.txtTelephone.Name = "txtTelephone";
+            this.txtTelephone.Enter += new System.EventHandler(this.ControlFocusEnter);
+            // 
             // AddCompanyForm
             // 
             this.AcceptButton = this.cmdAdd;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
+            this.Controls.Add(this.txtTelephone);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.checkAddMultiple);
             this.Controls.Add(this.txtComment);
@@ -194,7 +189,6 @@
             this.Controls.Add(this.lblConsultantsInfo);
             this.Controls.Add(this.txtConsultants);
             this.Controls.Add(this.lblConsultants);
-            this.Controls.Add(this.numTelephone);
             this.Controls.Add(this.lblTelephone);
             this.Controls.Add(this.numPNo);
             this.Controls.Add(this.lblPNo);
@@ -213,7 +207,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             ((System.ComponentModel.ISupportInitialize)(this.numCVR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelephone)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,7 +221,6 @@
         private System.Windows.Forms.NumericUpDown numCVR;
         private System.Windows.Forms.NumericUpDown numPNo;
         private System.Windows.Forms.Label lblPNo;
-        private System.Windows.Forms.NumericUpDown numTelephone;
         private System.Windows.Forms.Label lblTelephone;
         private System.Windows.Forms.TextBox txtConsultants;
         private System.Windows.Forms.Label lblConsultants;
@@ -239,5 +231,6 @@
         private System.Windows.Forms.Label lblComment;
         private System.Windows.Forms.CheckBox checkAddMultiple;
         private System.Windows.Forms.Button cmdClose;
+        private System.Windows.Forms.TextBox txtTelephone;
     }
 }

@@ -11,14 +11,14 @@ namespace Vacancy_Scraper.Objects
         public string Name { get; set; }
         public long Cvr { get; set; }
         public long PNo { get; set; }
-        public long Telephone { get; set; }
+        public string Telephone { get; set; }
         public string Consultants { get; set; }
         public bool Enabled { get; set; }
         public bool Selected { get; set; }
         public string Comment { get; set; }
         public string Url { get; set; }
 
-        public CompanyObject(string name, long cvr, long pNo, long telephone, string consultants, bool enabled, bool selected, string comment, string url)
+        public CompanyObject(string name, long cvr, long pNo, string telephone, string consultants, bool enabled, bool selected, string comment, string url)
         {
             Name = name;
             Cvr = cvr;

@@ -333,27 +333,6 @@
   <data name="&gt;&gt;lblPNo.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="numTelephone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 87</value>
-  </data>
-  <data name="numTelephone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 20</value>
-  </data>
-  <data name="numTelephone.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;numTelephone.Name" xml:space="preserve">
-    <value>numTelephone</value>
-  </data>
-  <data name="&gt;&gt;numTelephone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numTelephone.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;numTelephone.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="lblTelephone.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -406,7 +385,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtConsultants.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblConsultants.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -439,7 +418,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblConsultants.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblConsultantsInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -466,7 +445,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblConsultantsInfo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="txtCareerPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 178</value>
@@ -487,7 +466,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtCareerPage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblCareerPage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -520,7 +499,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCareerPage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="txtComment.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 152</value>
@@ -541,7 +520,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtComment.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblComment.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -574,7 +553,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblComment.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="checkAddMultiple.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,7 +583,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkAddMultiple.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cmdClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -631,6 +610,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdClose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtTelephone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 87</value>
+  </data>
+  <data name="txtTelephone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 20</value>
+  </data>
+  <data name="txtTelephone.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;txtTelephone.Name" xml:space="preserve">
+    <value>txtTelephone</value>
+  </data>
+  <data name="&gt;&gt;txtTelephone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTelephone.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtTelephone.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vacancy_Scraper.Objects;
@@ -16,6 +17,9 @@ namespace Vacancy_Scraper.Forms
     {
         public List<CompanyObject> ReturnCompanies { get; private set; }
 
+        // https://stackoverflow.com/questions/8908976/c-sharp-regex-to-validate-phone-number
+        private readonly Regex _telephoneRegex = new Regex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$");
+
         public AddCompanyForm()
         {
             InitializeComponent();
@@ -23,7 +27,6 @@ namespace Vacancy_Scraper.Forms
 
             numCVR.Text = string.Empty;
             numPNo.Text = string.Empty;
-            numTelephone.Text = string.Empty;
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace Vacancy_Scraper.Forms
                     txtName.Text,
                     (long) numCVR.Value,
                     (long) numPNo.Value,
-                    (long) numTelephone.Value,
+                    txtTelephone.Text,
                     txtConsultants.Text,
                     false, // don't allow scraping by default, as new companies have to have a scraper implemented first. This can be manually changed in the file
                     true,
@@ -104,7 +107,7 @@ namespace Vacancy_Scraper.Forms
             if (string.IsNullOrWhiteSpace(txtName.Text)) return false;
             if (numCVR.Value < 0 || numCVR.Value > 99999999) return false;
             if (numPNo.Value < 0 || numPNo.Value > 9999999999) return false;
-            if (numTelephone.Value < 0 || numTelephone.Value > 99999999) return false;
+            if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text)) return false;
             if (string.IsNullOrWhiteSpace(txtConsultants.Text)) return false;
             if (txtConsultants.Text.Split(',').Length == 0) return false;
             if (string.IsNullOrWhiteSpace(txtCareerPage.Text)) return false;
@@ -129,8 +132,8 @@ namespace Vacancy_Scraper.Forms
             if (numPNo.Value < 0 || numPNo.Value > 9999999999)
                 errors.Add("Invalid P number");
 
-            if (numTelephone.Value < 0 || numTelephone.Value > 99999999)
-                errors.Add("Invalid phone number, only danish numbers allowed");
+            if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text))
+                errors.Add("Invalid phone number");
 
             if (string.IsNullOrWhiteSpace(txtConsultants.Text) || txtConsultants.Text.Split(',').Length == 0)
                 errors.Add("Please add at least one consultant");
@@ -167,7 +170,7 @@ namespace Vacancy_Scraper.Forms
             txtName.Text = string.Empty;
             numCVR.Text = string.Empty;
             numPNo.Text = string.Empty;
-            numTelephone.Text = string.Empty;
+            txtTelephone.Text = string.Empty;
             txtConsultants.Text = string.Empty;
             txtComment.Text = string.Empty;
             txtCareerPage.Text = string.Empty;
