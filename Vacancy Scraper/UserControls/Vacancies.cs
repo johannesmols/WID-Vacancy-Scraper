@@ -228,6 +228,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdDelete_Click(object sender, EventArgs e)
         {
+            if (gridVacancies.SelectedRows.Count <= 0) return;
+
             var message = gridVacancies.SelectedRows.Count == 1 ?
                 @"Do you want to delete this vacancy?" : "Do you want to delete " + gridVacancies.SelectedRows.Count + @" vacancies?";
             var title = gridVacancies.SelectedRows.Count == 1 ? @"Delete vacancy" : @"Delete vacancies";
@@ -250,6 +252,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdAddToBlacklist_Click(object sender, EventArgs e)
         {
+            if (gridVacancies.SelectedRows.Count <= 0) return;
+
             var message = gridVacancies.SelectedRows.Count > 1
                 ? @"Add " + gridVacancies.SelectedRows.Count + @" vacancies to the blacklist?"
                 : @"Add this vacancy to the blacklist?";
@@ -283,6 +287,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdMarkAsDone_Click(object sender, EventArgs e)
         {
+            if (gridVacancies.SelectedRows.Count <= 0) return;
+
             var message = gridVacancies.SelectedRows.Count > 1
                 ? @"Mark " + gridVacancies.SelectedRows.Count + @" vacancies as done?"
                 : @"Mark this vacancy as done?";

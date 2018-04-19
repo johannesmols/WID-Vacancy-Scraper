@@ -248,6 +248,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdDelete_Click(object sender, EventArgs e)
         {
+            if (gridCompanies.SelectedRows.Count <= 0) return;
+
             var message = gridCompanies.SelectedRows.Count == 1 ? 
                 @"Do you want to delete this company?" : "Do you want to delete " + gridCompanies.SelectedRows.Count + @" companies?";
             var title = gridCompanies.SelectedRows.Count == 1 ? @"Delete company" : @"Delete companies";

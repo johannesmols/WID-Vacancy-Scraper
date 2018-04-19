@@ -228,6 +228,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdRestore_Click(object sender, EventArgs e)
         {
+            if (gridBlacklistedVacancies.SelectedRows.Count <= 0) return;
+
             var message = gridBlacklistedVacancies.SelectedRows.Count > 1
                 ? @"Restore " + gridBlacklistedVacancies.SelectedRows.Count + @" vacancies?"
                 : @"Restore this vacancy?";
@@ -261,6 +263,8 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void cmdDelete_Click(object sender, EventArgs e)
         {
+            if (gridBlacklistedVacancies.SelectedRows.Count <= 0) return;
+
             var message = gridBlacklistedVacancies.SelectedRows.Count == 1 ?
                 @"Do you want to delete this vacancy?" : "Do you want to delete " + gridBlacklistedVacancies.SelectedRows.Count + @" vacancies?";
             var title = gridBlacklistedVacancies.SelectedRows.Count == 1 ? @"Delete vacancy" : @"Delete vacancies";
