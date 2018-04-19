@@ -100,9 +100,6 @@ namespace Vacancy_Scraper.UserControls
 
                 // Special settings for the enabled column
                 gridCompanies.Columns[5].ReadOnly = true;
-                gridCompanies.Columns[5].Resizable = DataGridViewTriState.False;
-                gridCompanies.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                gridCompanies.Columns[5].Width = 50;
                 gridCompanies.Columns[5].ToolTipText = @"This value can't be changed. Please contact the developer for activation.";
 
                 // Hide the selected column, this should only be shown in the Scrape tab
@@ -232,8 +229,11 @@ namespace Vacancy_Scraper.UserControls
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    CompanyObject newCompany = form.ReturnCompany;
-                    _bindingList.Add(newCompany);
+                    List<CompanyObject> newCompanies = form.ReturnCompanies;
+                    foreach (var company in newCompanies)
+                    {
+                        _bindingList.Add(company);
+                    }
                     _companiesManager.SaveChangesToFile();
                     ReloadContent();
                 }

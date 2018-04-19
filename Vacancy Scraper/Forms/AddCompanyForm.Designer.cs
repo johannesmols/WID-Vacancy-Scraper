@@ -46,6 +46,8 @@
             this.lblCareerPage = new System.Windows.Forms.Label();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.lblComment = new System.Windows.Forms.Label();
+            this.checkAddMultiple = new System.Windows.Forms.CheckBox();
+            this.cmdClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numCVR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTelephone)).BeginInit();
@@ -80,6 +82,7 @@
             // 
             resources.ApplyResources(this.txtName, "txtName");
             this.txtName.Name = "txtName";
+            this.txtName.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // numCVR
             // 
@@ -90,6 +93,7 @@
             0,
             0});
             this.numCVR.Name = "numCVR";
+            this.numCVR.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // numPNo
             // 
@@ -100,6 +104,7 @@
             0,
             0});
             this.numPNo.Name = "numPNo";
+            this.numPNo.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblPNo
             // 
@@ -115,6 +120,7 @@
             0,
             0});
             this.numTelephone.Name = "numTelephone";
+            this.numTelephone.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblTelephone
             // 
@@ -125,6 +131,7 @@
             // 
             resources.ApplyResources(this.txtConsultants, "txtConsultants");
             this.txtConsultants.Name = "txtConsultants";
+            this.txtConsultants.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblConsultants
             // 
@@ -140,6 +147,7 @@
             // 
             resources.ApplyResources(this.txtCareerPage, "txtCareerPage");
             this.txtCareerPage.Name = "txtCareerPage";
+            this.txtCareerPage.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblCareerPage
             // 
@@ -150,11 +158,26 @@
             // 
             resources.ApplyResources(this.txtComment, "txtComment");
             this.txtComment.Name = "txtComment";
+            this.txtComment.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblComment
             // 
             resources.ApplyResources(this.lblComment, "lblComment");
             this.lblComment.Name = "lblComment";
+            // 
+            // checkAddMultiple
+            // 
+            resources.ApplyResources(this.checkAddMultiple, "checkAddMultiple");
+            this.checkAddMultiple.Name = "checkAddMultiple";
+            this.checkAddMultiple.UseVisualStyleBackColor = true;
+            // 
+            // cmdClose
+            // 
+            this.cmdClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.cmdClose, "cmdClose");
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.CmdCloseAndSave_Click);
             // 
             // AddCompanyForm
             // 
@@ -162,6 +185,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
+            this.Controls.Add(this.cmdClose);
+            this.Controls.Add(this.checkAddMultiple);
             this.Controls.Add(this.txtComment);
             this.Controls.Add(this.lblComment);
             this.Controls.Add(this.txtCareerPage);
@@ -212,5 +237,7 @@
         private System.Windows.Forms.Label lblCareerPage;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label lblComment;
+        private System.Windows.Forms.CheckBox checkAddMultiple;
+        private System.Windows.Forms.Button cmdClose;
     }
 }

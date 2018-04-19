@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,16 @@ namespace Vacancy_Scraper.Forms
 {
     public partial class AddCompanyForm : Form
     {
-        public CompanyObject ReturnCompany { get; private set; }
+        public List<CompanyObject> ReturnCompanies { get; private set; }
 
         public AddCompanyForm()
         {
             InitializeComponent();
+            ReturnCompanies = new List<CompanyObject>();
+
+            numCVR.Text = string.Empty;
+            numPNo.Text = string.Empty;
+            numTelephone.Text = string.Empty;
         }
 
         /// <summary>
@@ -31,7 +37,7 @@ namespace Vacancy_Scraper.Forms
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
             {
-                ReturnCompany = new CompanyObject(
+                ReturnCompanies.Add(new CompanyObject(
                     txtName.Text,
                     (long) numCVR.Value,
                     (long) numPNo.Value,
@@ -40,10 +46,20 @@ namespace Vacancy_Scraper.Forms
                     false, // don't allow scraping by default, as new companies have to have a scraper implemented first. This can be manually changed in the file
                     true,
                     txtComment.Text,
-                    txtCareerPage.Text);
+                    txtCareerPage.Text));
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                if (!checkAddMultiple.Checked)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    ClearControls();
+
+                    // Indicate on the close button how many companies are to be saved
+                    cmdClose.Text = @"Close and Save (" + ReturnCompanies.Count + @")";
+                }
             }
             else
             {
@@ -55,6 +71,17 @@ namespace Vacancy_Scraper.Forms
 
                 MessageBox.Show(errorMsg, @"Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        /// <summary>
+        /// Close the dialog with saving
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdCloseAndSave_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         /// <summary>
@@ -112,6 +139,38 @@ namespace Vacancy_Scraper.Forms
                 errors.Add("Please enter a URL");
 
             return errors;
+        }
+
+        /// <summary>
+        /// Select all text in a user control when the control gains focus, for quicker editing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ControlFocusEnter(object sender, EventArgs e)
+        {
+            switch (sender)
+            {
+                case TextBox box:
+                    box.SelectAll();
+                    break;
+                case NumericUpDown num:
+                    num.Select(0, num.Text.Length);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Empty all input controls so the user can add multiple companies
+        /// </summary>
+        private void ClearControls()
+        {
+            txtName.Text = string.Empty;
+            numCVR.Text = string.Empty;
+            numPNo.Text = string.Empty;
+            numTelephone.Text = string.Empty;
+            txtConsultants.Text = string.Empty;
+            txtComment.Text = string.Empty;
+            txtCareerPage.Text = string.Empty;
         }
     }
 }
