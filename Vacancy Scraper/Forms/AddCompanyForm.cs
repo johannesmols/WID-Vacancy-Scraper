@@ -15,7 +15,7 @@ namespace Vacancy_Scraper.Forms
 {
     public partial class AddCompanyForm : Form
     {
-        public List<CompanyObject> ReturnCompanies { get; private set; }
+        public List<CompanyObject> ReturnCompanies { get; }
 
         // https://stackoverflow.com/questions/8908976/c-sharp-regex-to-validate-phone-number
         private readonly Regex _telephoneRegex = new Regex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$");
@@ -30,7 +30,7 @@ namespace Vacancy_Scraper.Forms
         }
 
         /// <summary>
-        /// Try returning a Company object with the data and close the dialog.
+        /// Try returning a Company object list with the data and close the dialog.
         /// If the data is invalid, notify the user and leave the dialog open.
         /// </summary>
         /// <param name="sender"></param>

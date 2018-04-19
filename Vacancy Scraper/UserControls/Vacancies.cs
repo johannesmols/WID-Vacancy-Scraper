@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
 
@@ -197,14 +198,49 @@ namespace Vacancy_Scraper.UserControls
             }
         }
 
+        /// <summary>
+        /// Add a vacancy to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdAdd_Click(object sender, EventArgs e)
         {
-
+            using (var form = new AddVacancyForm())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    List<VacancyObject> newVacancies = form.ReturnVacancies;
+                    foreach (var vacancy in newVacancies)
+                    {
+                        _bindingList.Add(vacancy);
+                    }
+                    _vacanciesManager.SaveChangesToFile();
+                    ReloadContent();
+                }
+            }
         }
 
+        /// <summary>
+        /// Delete one or more vacancies from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdDelete_Click(object sender, EventArgs e)
         {
-
+            var message = gridVacancies.SelectedRows.Count == 1 ?
+                @"Do you want to delete this vacancy?" : "Do you want to delete " + gridVacancies.SelectedRows.Count + @" vacancies?";
+            var title = gridVacancies.SelectedRows.Count == 1 ? @"Delete vacancy" : @"Delete vacancies";
+            DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in gridVacancies.SelectedRows)
+                {
+                    _bindingList.RemoveAt(row.Index);
+                }
+                _vacanciesManager.SaveChangesToFile();
+                ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting removed from the table when the grid view wasn't focused at the point of clicking the delete button
+            }
         }
 
         private void cmdAddToBlacklist_Click(object sender, EventArgs e)

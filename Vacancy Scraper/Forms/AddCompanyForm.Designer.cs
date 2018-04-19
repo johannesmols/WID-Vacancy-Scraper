@@ -157,6 +157,7 @@
             // 
             resources.ApplyResources(this.checkAddMultiple, "checkAddMultiple");
             this.checkAddMultiple.Name = "checkAddMultiple";
+            this.checkAddMultiple.TabStop = false;
             this.checkAddMultiple.UseVisualStyleBackColor = true;
             // 
             // cmdClose

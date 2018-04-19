@@ -60,6 +60,12 @@
     <Compile Include="Forms\AddCompanyForm.Designer.cs">
       <DependentUpon>AddCompanyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddVacancyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddVacancyForm.Designer.cs">
+      <DependentUpon>AddVacancyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="JsonManagers\CompaniesManager.cs" />
     <Compile Include="JsonManagers\VacanciesManager.cs" />
     <Compile Include="Objects\CompanyObject.cs" />
@@ -118,6 +124,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AddCompanyForm.resx">
       <DependentUpon>AddCompanyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddVacancyForm.resx">
+      <DependentUpon>AddVacancyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Blacklist.resx">
       <DependentUpon>Blacklist.cs</DependentUpon>
