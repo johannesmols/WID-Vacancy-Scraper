@@ -104,6 +104,15 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void gridVacancies_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            FormatUrls();
+        }
+
+        /// <summary>
+        /// Format valid URLs with a special style and reset all other cells to the default style
+        /// This needs to be done, in case a valid URL gets changed to an invalid URL. This method will reset it's former URL style to the default again
+        /// </summary>
+        private void FormatUrls()
+        {
             foreach (DataGridViewRow row in gridVacancies.Rows)
             {
                 var cell = row.Cells["URL"];
@@ -111,6 +120,11 @@ namespace Vacancy_Scraper.UserControls
                 {
                     cell.Style.Font = new Font(DefaultFont, FontStyle.Underline);
                     cell.Style.ForeColor = Color.Green;
+                }
+                else
+                {
+                    cell.Style.Font = DefaultFont;
+                    cell.Style.ForeColor = DefaultForeColor;
                 }
             }
         }
@@ -223,7 +237,7 @@ namespace Vacancy_Scraper.UserControls
         private void gridVacancies_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             _vacanciesManager.SaveChangesToFile();
-            ReloadContent();
+            FormatUrls();
         }
 
         /// <summary>
