@@ -243,14 +243,70 @@ namespace Vacancy_Scraper.UserControls
             }
         }
 
+        /// <summary>
+        /// Add a vacancy to the blacklist so that the scraper always ignores this vacancy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdAddToBlacklist_Click(object sender, EventArgs e)
         {
+            var message = gridVacancies.SelectedRows.Count > 1
+                ? @"Add " + gridVacancies.SelectedRows.Count + @" vacancies to the blacklist?"
+                : @"Add this vacancy to the blacklist?";
 
+            var result = MessageBox.Show(message, @"Add to blacklist", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                JsonResourceManager<VacancyObject> blacklistManager = new JsonResourceManager<VacancyObject>(ResourceType.Blacklist);
+
+                var rows = gridVacancies.SelectedRows;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    // Add to blacklist
+                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    currentObject.Added = DateTime.Now;
+                    blacklistManager.Resources.Add(currentObject);
+
+                    // Remove from vacancies list
+                    _bindingList.RemoveAt(rows[i].Index);
+                }
+                blacklistManager.SaveChangesToFile();
+                _vacanciesManager.SaveChangesToFile();
+                ReloadContent();
+            }
         }
 
+        /// <summary>
+        /// Mark this vacancy as done so that the scraper ignores this vacancy for a while, and is available for export
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdMarkAsDone_Click(object sender, EventArgs e)
         {
+            var message = gridVacancies.SelectedRows.Count > 1
+                ? @"Mark " + gridVacancies.SelectedRows.Count + @" vacancies as done?"
+                : @"Mark this vacancy as done?";
 
+            var result = MessageBox.Show(message, @"Mark as done", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                JsonResourceManager<VacancyObject> doneManager = new JsonResourceManager<VacancyObject>(ResourceType.Done);
+
+                var rows = gridVacancies.SelectedRows;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    // Add to Done list
+                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    currentObject.Added = DateTime.Now;
+                    doneManager.Resources.Add(currentObject);
+
+                    // Remove from vacancies list
+                    _bindingList.RemoveAt(rows[i].Index);
+                }
+                doneManager.SaveChangesToFile();
+                _vacanciesManager.SaveChangesToFile();
+                ReloadContent();
+            }
         }
 
         /* --- Data Grid View Events --- */

@@ -199,5 +199,8 @@
   <ItemGroup>
     <None Include="Resources\ic_done_black_24dp_1x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_restore_black_24dp_1x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

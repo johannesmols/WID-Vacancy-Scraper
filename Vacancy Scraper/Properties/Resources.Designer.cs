@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.Properties {
         }
         
         /// <summary>
-        ///   Returns the cached JsonResourceManager instance used by this class.
+        ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
@@ -126,6 +126,16 @@ namespace Vacancy_Scraper.Properties {
         internal static System.Drawing.Bitmap ic_play_arrow_black_24dp_1x1 {
             get {
                 object obj = ResourceManager.GetObject("ic_play_arrow_black_24dp_1x1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_restore_black_24dp_1x {
+            get {
+                object obj = ResourceManager.GetObject("ic_restore_black_24dp_1x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
