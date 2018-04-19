@@ -94,8 +94,19 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (ReturnCompanies.Count > 0)
+            {
+                var result = MessageBox.Show(@"Are you sure?", @"Close without saving", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    this.DialogResult = DialogResult.None;
+                }
+            }
         }
 
         /// <summary>

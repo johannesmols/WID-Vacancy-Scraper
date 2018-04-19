@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
 
 namespace Vacancy_Scraper.Forms
@@ -19,6 +20,12 @@ namespace Vacancy_Scraper.Forms
         {
             InitializeComponent();
             ReturnVacancies = new List<VacancyObject>();
+
+            CompaniesManager companiesManager = new CompaniesManager();
+            foreach (var company in companiesManager.Companies)
+            {
+                comboCompanies.Items.Add(company.Name);
+            }
         }
 
         /// <summary>
@@ -81,8 +88,19 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (ReturnVacancies.Count > 0)
+            {
+                var result = MessageBox.Show(@"Are you sure?", @"Close without saving", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    this.DialogResult = DialogResult.None;
+                }
+            }
         }
 
         /// <summary>
@@ -139,12 +157,12 @@ namespace Vacancy_Scraper.Forms
                     break;
             }
         }
+
         /// <summary>
         /// Empty all input controls so the user can add multiple companies
         /// </summary>
         private void ClearControls()
         {
-            comboCompanies.Text = string.Empty;
             txtVacancy.Text = string.Empty;
             txtUrl.Text = string.Empty;
         }

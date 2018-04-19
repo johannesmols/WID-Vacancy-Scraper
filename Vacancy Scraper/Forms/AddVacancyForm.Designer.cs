@@ -48,6 +48,7 @@
             // 
             // comboCompanies
             // 
+            this.comboCompanies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCompanies.FormattingEnabled = true;
             resources.ApplyResources(this.comboCompanies, "comboCompanies");
             this.comboCompanies.Name = "comboCompanies";
@@ -107,8 +108,10 @@
             // 
             // AddVacancyForm
             // 
+            this.AcceptButton = this.cmdAdd;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cmdCancel;
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdAdd);
