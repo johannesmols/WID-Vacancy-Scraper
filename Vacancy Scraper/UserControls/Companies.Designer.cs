@@ -108,6 +108,7 @@
             this.gridCompanies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCompanies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridCompanies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.gridCompanies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridCompanies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gridCompanies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridCompanies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;

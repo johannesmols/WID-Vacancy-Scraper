@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory()));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", true));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -95,7 +95,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory()));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", true));
             }
             else
             {
@@ -120,6 +120,18 @@ namespace Vacancy_Scraper.JsonManagers
                     changed = true;
                 }
 
+                if (fixedSettings.ScraperWebDriver == null)
+                {
+                    fixedSettings.ScraperWebDriver = "";
+                    changed = true;
+                }
+
+                if (fixedSettings.ScraperBannedKeywords == null)
+                {
+                    fixedSettings.ScraperBannedKeywords = "";
+                    changed = true;
+                }
+
                 if (changed)
                 {
                     WriteSettings(fixedSettings);
@@ -135,7 +147,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// <param name="webDriversPath">the path</param>
         public void SetWebDriversPath(string webDriversPath)
         {
-            if (!String.IsNullOrEmpty(webDriversPath))
+            if (!string.IsNullOrWhiteSpace(webDriversPath))
             {
                 Settings.WebDriversPath = webDriversPath;
                 WriteSettings(Settings);
@@ -148,7 +160,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// <param name="webDriversPath">the path</param>
         public void SetResourceFolderPath(string resourceFolderPath)
         {
-            if (!String.IsNullOrEmpty(resourceFolderPath))
+            if (!string.IsNullOrWhiteSpace(resourceFolderPath))
             {
                 Settings.ResourceFolderPath = resourceFolderPath;
                 WriteSettings(Settings);
@@ -161,11 +173,47 @@ namespace Vacancy_Scraper.JsonManagers
         /// <param name="logsFolderPath">the path</param>
         public void SetLogsFolderPath(string logsFolderPath)
         {
-            if (!String.IsNullOrEmpty(logsFolderPath))
+            if (!string.IsNullOrWhiteSpace(logsFolderPath))
             {
                 Settings.LogsFolderPath = logsFolderPath;
                 WriteSettings(Settings);
             }
+        }
+
+        /// <summary>
+        /// Set the web driver that should be used and write it to the settings file
+        /// </summary>
+        /// <param name="webDriver"></param>
+        public void SetScraperWebDriver(string webDriver)
+        {
+            if (!string.IsNullOrWhiteSpace(webDriver))
+            {
+                Settings.ScraperWebDriver = webDriver;
+                WriteSettings(Settings);
+            }
+        }
+
+        /// <summary>
+        /// Write the banned keywords to the settings file
+        /// </summary>
+        /// <param name="bannedKeywords"></param>
+        public void SetScraperBannedKeywords(string bannedKeywords)
+        {
+            if (!string.IsNullOrWhiteSpace(bannedKeywords))
+            {
+                Settings.ScraperBannedKeywords = bannedKeywords;
+                WriteSettings(Settings);
+            }
+        }
+
+        /// <summary>
+        /// Write to the settings file if the scraper should check jobnet for duplicates
+        /// </summary>
+        /// <param name="checkJobnet"></param>
+        public void SetScraperCheckJobnet(bool checkJobnet)
+        {
+            Settings.ScraperCheckJobnet = checkJobnet;
+            WriteSettings(Settings);
         }
     }
 }

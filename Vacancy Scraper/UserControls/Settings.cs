@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Windows.Documents;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 
@@ -16,7 +17,7 @@ namespace Vacancy_Scraper.UserControls
     public partial class Settings : UserControl
     {
         private static Settings _instance;
-        private SettingsManager settingsManager;
+        private SettingsManager _settingsManager;
 
         public static Settings Instance
         {
@@ -32,7 +33,7 @@ namespace Vacancy_Scraper.UserControls
         {
             InitializeComponent();
 
-            settingsManager = new SettingsManager();
+            _settingsManager = new SettingsManager();
         }
 
         /// <summary>
@@ -48,12 +49,12 @@ namespace Vacancy_Scraper.UserControls
             else if (oldTab == MainForm.Tabs.Settings)
             {
                 // Ask if the user wants to save any unchanged settings
-                if (contentChanged())
+                if (ContentChanged())
                 {
                     DialogResult dialogResult = MessageBox.Show(@"Do you want to save all unsaved settings?", @"Save changes", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        saveChanges();
+                        SaveChanges();
                     }
                 }
             }
@@ -64,10 +65,19 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         public void ReloadContent()
         {
-            settingsManager = new SettingsManager();
-            txtSettingsWebDriversPath.Text = settingsManager.Settings.WebDriversPath;
-            txtSettingsResourcesPath.Text = settingsManager.Settings.ResourceFolderPath;
-            txtSettingsLogsFolderPath.Text = settingsManager.Settings.LogsFolderPath;
+            _settingsManager = new SettingsManager();
+            txtSettingsWebDriversPath.Text = _settingsManager.Settings.WebDriversPath;
+            txtSettingsResourcesPath.Text = _settingsManager.Settings.ResourceFolderPath;
+            txtSettingsLogsFolderPath.Text = _settingsManager.Settings.LogsFolderPath;
+            txtBannedKeywords.Text = _settingsManager.Settings.ScraperBannedKeywords;
+            checkJobnet.Checked = _settingsManager.Settings.ScraperCheckJobnet;
+
+            comboScraperWebDriver.Items.Clear();
+            foreach (var webDriver in InstalledWebDrivers(_settingsManager.Settings.WebDriversPath))
+            {
+                comboScraperWebDriver.Items.Add(webDriver);
+            }
+            comboScraperWebDriver.SelectedItem = _settingsManager.Settings.ScraperWebDriver;
 
             SetStatus();
         }
@@ -78,7 +88,7 @@ namespace Vacancy_Scraper.UserControls
         private void SetStatus()
         {
             // Change the status label in the lower left corner if all changes are saved or not
-            switchSaveStatusLabel(!contentChanged());
+            SwitchSaveStatusLabel(!ContentChanged());
 
             // Check if all settings are valid
             bool allSettingsValid = true;
@@ -86,24 +96,11 @@ namespace Vacancy_Scraper.UserControls
             // Check which web drivers are installed
             if (Directory.Exists(txtSettingsWebDriversPath.Text))
             {
-                
-                bool chrome = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "chromedriver.exe"));
-                bool edge = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "MicrosoftWebDriver.exe"));
-                bool firefox = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "geckodriver.exe"));
-                bool opera = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "operadriver.exe"));
-                bool phantomjs = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "phantomjs.exe"));
-
-                if (firefox || chrome || opera || edge || phantomjs)
+                List<string> installedWebDrivers = InstalledWebDrivers(txtSettingsWebDriversPath.Text);
+                if (installedWebDrivers.Count > 0)
                 {
-                    List<string> drivers = new List<string>();
-                    if (chrome) { drivers.Add("Chrome"); }
-                    if (edge) { drivers.Add("Edge"); }
-                    if (firefox) { drivers.Add("Firefox"); }
-                    if (opera) { drivers.Add("Opera"); }
-                    if (phantomjs) { drivers.Add("PhantomJS"); }
-
                     lblSettingsWebDriversPathStatus.ForeColor = SystemColors.ControlText;
-                    lblSettingsWebDriversPathStatus.Text = "Installed: " + string.Join(", ", drivers);
+                    lblSettingsWebDriversPathStatus.Text = @"Installed: " + string.Join(", ", installedWebDrivers);
                 }
                 else
                 {
@@ -140,7 +137,7 @@ namespace Vacancy_Scraper.UserControls
                     lblSettingsResourcesStatus.ForeColor = Color.Red;
                     lblSettingsResourcesStatus.Text = @"Path valid, but files are missing";
                     linkLblSettingsResourcesPath.Visible = true;
-                    linkLblSettingsResourcesPath.Text = "Create files";
+                    linkLblSettingsResourcesPath.Text = @"Create files";
                 }
             }
             else
@@ -171,14 +168,46 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
+        /// Get a list of all installed web drivers in a given path
+        /// </summary>
+        /// <param name="path">the directory path where the drivers should be</param>
+        /// <returns>a list of all web drivers in that directory, as name</returns>
+        private List<string> InstalledWebDrivers(string path)
+        {
+            List<string> drivers = new List<string>();
+            if (Directory.Exists(path))
+            {
+                bool chrome = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "chromedriver.exe"));
+                bool edge = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "MicrosoftWebDriver.exe"));
+                bool firefox = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "geckodriver.exe"));
+                bool opera = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "operadriver.exe"));
+                bool phantomjs = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "phantomjs.exe"));
+
+                if (firefox || chrome || opera || edge || phantomjs)
+                {
+                    if (chrome) { drivers.Add("Chrome"); }
+                    if (edge) { drivers.Add("Edge"); }
+                    if (firefox) { drivers.Add("Firefox"); }
+                    if (opera) { drivers.Add("Opera"); }
+                    if (phantomjs) { drivers.Add("PhantomJS"); }
+                }
+            }
+
+            return drivers;
+        }
+
+        /// <summary>
         /// Assert whether any of the settings were changed by the user
         /// </summary>
         /// <returns></returns>
-        private bool contentChanged()
+        private bool ContentChanged()
         {
-            if (txtSettingsWebDriversPath.Text.Equals(settingsManager.Settings.WebDriversPath) &&
-                txtSettingsResourcesPath.Text.Equals(settingsManager.Settings.ResourceFolderPath) &&
-                txtSettingsLogsFolderPath.Text.Equals(settingsManager.Settings.LogsFolderPath))
+            if (txtSettingsWebDriversPath.Text.Equals(_settingsManager.Settings.WebDriversPath) &&
+                txtSettingsResourcesPath.Text.Equals(_settingsManager.Settings.ResourceFolderPath) &&
+                txtSettingsLogsFolderPath.Text.Equals(_settingsManager.Settings.LogsFolderPath) &&
+                comboScraperWebDriver.Text.Equals(_settingsManager.Settings.ScraperWebDriver) &&
+                txtBannedKeywords.Text.Equals(_settingsManager.Settings.ScraperBannedKeywords) &&
+                checkJobnet.Checked == _settingsManager.Settings.ScraperCheckJobnet)
             {
                 return false;
             }
@@ -191,24 +220,28 @@ namespace Vacancy_Scraper.UserControls
         /// <summary>
         /// Save changes to the settings to the file, if valid
         /// </summary>
-        private void saveChanges()
+        private void SaveChanges()
         {
             bool errorsWhileSaving = false;
 
             if (Directory.Exists(txtSettingsWebDriversPath.Text))
-                settingsManager.SetWebDriversPath(txtSettingsWebDriversPath.Text.Trim());
+                _settingsManager.SetWebDriversPath(txtSettingsWebDriversPath.Text.Trim());
             else
                 errorsWhileSaving = true;
 
             if (Directory.Exists(txtSettingsResourcesPath.Text))
-                settingsManager.SetResourceFolderPath(txtSettingsResourcesPath.Text.Trim());
+                _settingsManager.SetResourceFolderPath(txtSettingsResourcesPath.Text.Trim());
             else
                 errorsWhileSaving = true;
 
             if (Directory.Exists(txtSettingsLogsFolderPath.Text))
-                settingsManager.SetLogsFolderPath(txtSettingsLogsFolderPath.Text.Trim());
+                _settingsManager.SetLogsFolderPath(txtSettingsLogsFolderPath.Text.Trim());
             else
                 errorsWhileSaving = true;
+
+            _settingsManager.SetScraperWebDriver(comboScraperWebDriver.Text);
+            _settingsManager.SetScraperBannedKeywords(txtBannedKeywords.Text);
+            _settingsManager.SetScraperCheckJobnet(checkJobnet.Checked);
 
             // This should never show, because the "Apply" button is disabled if there are invalid changes
             if (errorsWhileSaving)
@@ -221,7 +254,7 @@ namespace Vacancy_Scraper.UserControls
         /// Change between the modes of saying that all changes are saved and that there are unsaved changes
         /// </summary>
         /// <param name="allChangesAreSaved">true if there are no changes</param>
-        private void switchSaveStatusLabel(bool allChangesAreSaved)
+        private void SwitchSaveStatusLabel(bool allChangesAreSaved)
         {
             if (allChangesAreSaved)
             {
@@ -242,7 +275,7 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void CmdSettingsApply_Click(object sender, EventArgs e)
         {
-            saveChanges();
+            SaveChanges();
             SetStatus();
         }
 
@@ -324,6 +357,36 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TxtSettingsLogsFolderPath_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the web driver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboScraperWebDriver_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the banned keywords
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtBannedKeywords_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the jobnet checkbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkJobnet_CheckedChanged(object sender, EventArgs e)
         {
             SetStatus();
         }

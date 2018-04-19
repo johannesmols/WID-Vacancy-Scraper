@@ -8,12 +8,18 @@
         public string WebDriversPath { get; set; }
         public string ResourceFolderPath { get; set; }
         public string LogsFolderPath { get; set; }
+        public string ScraperWebDriver { get; set; }
+        public string ScraperBannedKeywords { get; set; }
+        public bool ScraperCheckJobnet { get; set; }
 
-        public SettingsObject(string webDriversPath, string resourceFolderPath, string logsFolderPath)
+        public SettingsObject(string webDriversPath, string resourceFolderPath, string logsFolderPath, string scraperWebDriver, string scraperBannedKeywords, bool scraperCheckJobnet)
         {
-            this.WebDriversPath = webDriversPath;
-            this.ResourceFolderPath = resourceFolderPath;
-            this.LogsFolderPath = logsFolderPath;
+            WebDriversPath = webDriversPath;
+            ResourceFolderPath = resourceFolderPath;
+            LogsFolderPath = logsFolderPath;
+            ScraperWebDriver = scraperWebDriver;
+            ScraperBannedKeywords = scraperBannedKeywords;
+            ScraperCheckJobnet = scraperCheckJobnet;
         }
     }
 }

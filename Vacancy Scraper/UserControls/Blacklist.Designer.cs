@@ -31,13 +31,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.cmdAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmdRestore = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmdDelete = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.gridBlacklistedVacancies = new System.Windows.Forms.DataGridView();
-            this.cmdAdd = new System.Windows.Forms.ToolStripButton();
-            this.cmdRestore = new System.Windows.Forms.ToolStripButton();
-            this.cmdDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBlacklistedVacancies)).BeginInit();
             this.SuspendLayout();
@@ -60,15 +60,44 @@
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "Tool Strip";
             // 
+            // cmdAdd
+            // 
+            this.cmdAdd.Image = global::Vacancy_Scraper.Properties.Resources.ic_add_black_24dp_1x;
+            this.cmdAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdAdd.Name = "cmdAdd";
+            this.cmdAdd.Size = new System.Drawing.Size(49, 22);
+            this.cmdAdd.Text = "Add";
+            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // cmdRestore
+            // 
+            this.cmdRestore.BackColor = System.Drawing.Color.Transparent;
+            this.cmdRestore.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cmdRestore.Image = global::Vacancy_Scraper.Properties.Resources.ic_restore_black_24dp_1x;
+            this.cmdRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdRestore.Name = "cmdRestore";
+            this.cmdRestore.Size = new System.Drawing.Size(66, 22);
+            this.cmdRestore.Text = "Restore";
+            this.cmdRestore.Click += new System.EventHandler(this.cmdRestore_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // cmdDelete
+            // 
+            this.cmdDelete.Image = global::Vacancy_Scraper.Properties.Resources.ic_delete_black_24dp_1x;
+            this.cmdDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(60, 22);
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
             // txtSearch
             // 
@@ -90,6 +119,7 @@
             this.gridBlacklistedVacancies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridBlacklistedVacancies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridBlacklistedVacancies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.gridBlacklistedVacancies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridBlacklistedVacancies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gridBlacklistedVacancies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridBlacklistedVacancies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -112,35 +142,6 @@
             this.gridBlacklistedVacancies.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridBlacklistedVacancies_ColumnHeaderMouseClick);
             this.gridBlacklistedVacancies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridBlacklistedVacancies_DataBindingComplete);
             this.gridBlacklistedVacancies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridBlacklistedVacancies_DataError);
-            // 
-            // cmdAdd
-            // 
-            this.cmdAdd.Image = global::Vacancy_Scraper.Properties.Resources.ic_add_black_24dp_1x;
-            this.cmdAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cmdAdd.Name = "cmdAdd";
-            this.cmdAdd.Size = new System.Drawing.Size(49, 22);
-            this.cmdAdd.Text = "Add";
-            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
-            // 
-            // cmdRestore
-            // 
-            this.cmdRestore.BackColor = System.Drawing.Color.Transparent;
-            this.cmdRestore.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cmdRestore.Image = global::Vacancy_Scraper.Properties.Resources.ic_restore_black_24dp_1x;
-            this.cmdRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cmdRestore.Name = "cmdRestore";
-            this.cmdRestore.Size = new System.Drawing.Size(66, 22);
-            this.cmdRestore.Text = "Restore";
-            this.cmdRestore.Click += new System.EventHandler(this.cmdRestore_Click);
-            // 
-            // cmdDelete
-            // 
-            this.cmdDelete.Image = global::Vacancy_Scraper.Properties.Resources.ic_delete_black_24dp_1x;
-            this.cmdDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cmdDelete.Name = "cmdDelete";
-            this.cmdDelete.Size = new System.Drawing.Size(60, 22);
-            this.cmdDelete.Text = "Delete";
-            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
             // Blacklist
             // 

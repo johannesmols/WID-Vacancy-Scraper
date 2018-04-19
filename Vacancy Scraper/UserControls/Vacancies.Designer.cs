@@ -31,14 +31,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmdAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmdDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmdAddToBlacklist = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmdMarkAsDone = new System.Windows.Forms.ToolStripButton();
+            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.gridVacancies = new System.Windows.Forms.DataGridView();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVacancies)).BeginInit();
@@ -64,31 +64,6 @@
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "Tool Strip";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(200, 25);
-            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
-            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // cmdAdd
             // 
             this.cmdAdd.Image = global::Vacancy_Scraper.Properties.Resources.ic_add_black_24dp_1x;
@@ -97,6 +72,11 @@
             this.cmdAdd.Size = new System.Drawing.Size(49, 22);
             this.cmdAdd.Text = "Add";
             this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // cmdDelete
             // 
@@ -109,6 +89,11 @@
             this.cmdDelete.Text = "Delete";
             this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // cmdAddToBlacklist
             // 
             this.cmdAddToBlacklist.Image = global::Vacancy_Scraper.Properties.Resources.ic_block_black_24dp_1x;
@@ -118,6 +103,11 @@
             this.cmdAddToBlacklist.Text = "Add to blacklist";
             this.cmdAddToBlacklist.Click += new System.EventHandler(this.cmdAddToBlacklist_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // cmdMarkAsDone
             // 
             this.cmdMarkAsDone.Image = global::Vacancy_Scraper.Properties.Resources.ic_done_black_24dp_1x;
@@ -126,6 +116,16 @@
             this.cmdMarkAsDone.Size = new System.Drawing.Size(98, 22);
             this.cmdMarkAsDone.Text = "Mark as done";
             this.cmdMarkAsDone.Click += new System.EventHandler(this.cmdMarkAsDone_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(200, 25);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // gridVacancies
             // 
@@ -137,6 +137,7 @@
             this.gridVacancies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridVacancies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridVacancies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.gridVacancies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridVacancies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gridVacancies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridVacancies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;

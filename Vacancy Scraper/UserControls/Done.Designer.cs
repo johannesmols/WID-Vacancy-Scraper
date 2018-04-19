@@ -119,6 +119,7 @@
             this.gridDoneVacancies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridDoneVacancies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridDoneVacancies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.gridDoneVacancies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridDoneVacancies.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gridDoneVacancies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridDoneVacancies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
