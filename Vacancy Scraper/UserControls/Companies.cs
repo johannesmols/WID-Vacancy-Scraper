@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
@@ -19,7 +20,7 @@ namespace Vacancy_Scraper.UserControls
     {
         private static Companies _instance;
 
-        private CompaniesManager _companiesManager;
+        private JsonResourceManager<CompanyObject> _companiesManager;
         private BindingList<CompanyObject> _bindingList;
 
         private bool _isSortedDescendingOrUnsorted = true;
@@ -61,8 +62,8 @@ namespace Vacancy_Scraper.UserControls
             txtSearch.ForeColor = SystemColors.GrayText;
 
             // Fill table
-            _companiesManager = new CompaniesManager();
-            _bindingList = new BindingList<CompanyObject>(_companiesManager.Companies);
+            _companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
+            _bindingList = new BindingList<CompanyObject>(_companiesManager.Resources);
             var source = new BindingSource(_bindingList, null);
             gridCompanies.DataSource = source;
             AdjustTableSettings();

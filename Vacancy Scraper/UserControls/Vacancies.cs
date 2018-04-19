@@ -17,7 +17,7 @@ namespace Vacancy_Scraper.UserControls
     {
         private static Vacancies _instance;
 
-        private VacanciesManager _vacanciesManager;
+        private JsonResourceManager<VacancyObject> _vacanciesManager;
         private BindingList<VacancyObject> _bindingList;
 
         private bool _isSortedDescendingOrUnsorted = true;
@@ -59,8 +59,8 @@ namespace Vacancy_Scraper.UserControls
             txtSearch.ForeColor = SystemColors.GrayText;
 
             // Fill table
-            _vacanciesManager = new VacanciesManager();
-            _bindingList = new BindingList<VacancyObject>(_vacanciesManager.Vacancies);
+            _vacanciesManager = new JsonResourceManager<VacancyObject>(ResourceType.Vacancies);
+            _bindingList = new BindingList<VacancyObject>(_vacanciesManager.Resources);
             var source = new BindingSource(_bindingList, null);
             gridVacancies.DataSource = source;
             AdjustTableSettings();

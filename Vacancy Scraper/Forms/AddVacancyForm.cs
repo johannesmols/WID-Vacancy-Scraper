@@ -21,8 +21,8 @@ namespace Vacancy_Scraper.Forms
             InitializeComponent();
             ReturnVacancies = new List<VacancyObject>();
 
-            CompaniesManager companiesManager = new CompaniesManager();
-            foreach (var company in companiesManager.Companies)
+            JsonResourceManager<CompanyObject> companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
+            foreach (var company in companiesManager.Resources)
             {
                 comboCompanies.Items.Add(company.Name);
             }

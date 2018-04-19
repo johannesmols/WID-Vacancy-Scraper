@@ -66,8 +66,7 @@
     <Compile Include="Forms\AddVacancyForm.Designer.cs">
       <DependentUpon>AddVacancyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="JsonManagers\CompaniesManager.cs" />
-    <Compile Include="JsonManagers\VacanciesManager.cs" />
+    <Compile Include="JsonManagers\JsonResourceManager.cs" />
     <Compile Include="Objects\CompanyObject.cs" />
     <Compile Include="JsonManagers\SettingsManager.cs" />
     <Compile Include="Objects\SettingsObject.cs" />
