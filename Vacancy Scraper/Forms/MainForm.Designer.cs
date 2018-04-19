@@ -1,4 +1,4 @@
-﻿namespace Vacancy_Scraper
+﻿namespace Vacancy_Scraper.Forms
 {
     partial class MainForm
     {

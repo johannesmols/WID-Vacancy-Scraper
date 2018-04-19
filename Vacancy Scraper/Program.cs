@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vacancy_Scraper.Forms;
 
 namespace Vacancy_Scraper
 {
