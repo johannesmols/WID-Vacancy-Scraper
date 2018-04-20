@@ -20,6 +20,9 @@ namespace Vacancy_Scraper.UserControls
         private JsonResourceManager<CompanyObject> _companiesManager;
         private BindingList<ScrapeGridObject> _bindingList;
 
+        private List<CompanyObject> _toBeScraped;
+        private bool _scrapeRunning, _scrapePaused;
+
         public static Scrape Instance
         {
             get
@@ -52,6 +55,10 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         public void ReloadContent()
         {
+            // Disable pause and stop buttons
+            cmdScrapePause.Enabled = false;
+            cmdScrapeStop.Enabled = false;
+
             _companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
             _bindingList = new BindingList<ScrapeGridObject>();
 
@@ -92,6 +99,11 @@ namespace Vacancy_Scraper.UserControls
             }
         }
 
+        /// <summary>
+        /// Save the changes in the table to the file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridScrape_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
@@ -114,6 +126,130 @@ namespace Vacancy_Scraper.UserControls
         private void gridScrape_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             gridScrape.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private List<CompanyObject> PrepareCompanyListFromTable()
+        {
+            var companies = new List<CompanyObject>();
+            foreach (var company in _bindingList)
+            {
+                companies.Add(company.Company);
+            }
+
+            return companies;
+        }
+
+        private async Task<string> ScrapeWebsite(CompanyObject company)
+        {
+            var task = new Scraper.Scraper().Scrape(1500);
+            return await task;
+        }
+
+        /// <summary>
+        /// Start the scraping process by going through the table
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void cmdScrapeRun_Click(object sender, EventArgs e)
+        {
+            // Only start the process if it's not already running
+            if (!_scrapeRunning)
+            {
+                // Disable this button, enable others
+                cmdScrapeRun.Enabled = false;
+                cmdScrapePause.Enabled = true;
+                cmdScrapeStop.Enabled = true;
+
+                // Set the status to be "Running"
+                _scrapeRunning = true;
+
+                // Only create a new list of tasks if the execution wasn't paused before.
+                // If it was only paused, the remaining tasks should be completed
+                if (!_scrapePaused)
+                    _toBeScraped = PrepareCompanyListFromTable();
+
+                // Unpause when continuing
+                if (_scrapePaused)
+                    _scrapePaused = false;
+
+                // Go through the list until there are no tasks left
+                while (_toBeScraped.Count > 0)
+                {
+                    // Only run the newest task if the process hasn't been stopped or paused
+                    if (_scrapeRunning && !_scrapePaused)
+                    {
+                        var company = _toBeScraped[0];
+                        Console.WriteLine(await ScrapeWebsite(company) + @", remaining: " + (_toBeScraped.Count - 1));
+                        _toBeScraped.Remove(company);
+                    }
+                    else
+                    {
+                        // The execution has been paused, exit the loop and wait for further action
+                        if (_scrapePaused)
+                        {
+                            Console.WriteLine(@"Paused tasks");
+                            break;
+                        }
+                        // The execution has been stopped, exit the loop, set the status to "Not Running" and wait for further action
+                        // It is important to set the status to not running so that the list of tasks will be reset upon a restart
+                        else if (!_scrapeRunning)
+                        {
+                            Console.WriteLine(@"Stopped tasks");
+                            _scrapeRunning = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (!_scrapePaused)
+                    Console.WriteLine(@"Done with all tasks");
+
+                // All tasks are complete, or the execution has been paused / stopped
+                _scrapeRunning = false;
+
+                // Reset buttons when done, but not when the process was only paused
+                if (!_scrapePaused)
+                {
+                    cmdScrapeRun.Enabled = true;
+                    cmdScrapePause.Enabled = false;
+                    cmdScrapeStop.Enabled = false;
+                }
+            }
+            else
+            {
+                Console.WriteLine(@"Already executing list of tasks");
+            }
+        }
+
+        /// <summary>
+        /// Pause the scraping process after finishing the currently running scrapes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdScrapePause_Click(object sender, EventArgs e)
+        {
+            _scrapePaused = true;
+
+            // Disable this button, enable others
+            cmdScrapeRun.Enabled = true;
+            cmdScrapePause.Enabled = false;
+            cmdScrapeStop.Enabled = true;
+        }
+
+        /// <summary>
+        /// Stop all scrapes after finishing the currently running scrapes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdScrapeStop_Click(object sender, EventArgs e)
+        {
+            _scrapeRunning = false;
+            _scrapePaused = false;
+
+            // Disable this button, enable others
+            cmdScrapeRun.Enabled = true;
+            cmdScrapePause.Enabled = false;
+            cmdScrapeStop.Enabled = false;
         }
     }
 }
