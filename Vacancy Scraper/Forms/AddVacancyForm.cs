@@ -26,6 +26,7 @@ namespace Vacancy_Scraper.Forms
             {
                 comboCompanies.Items.Add(company.Name);
             }
+            comboCompanies.Sorted = true;
         }
 
         /// <summary>

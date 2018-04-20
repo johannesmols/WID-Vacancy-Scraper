@@ -52,6 +52,7 @@
             this.comboCompanies.FormattingEnabled = true;
             resources.ApplyResources(this.comboCompanies, "comboCompanies");
             this.comboCompanies.Name = "comboCompanies";
+            this.comboCompanies.Sorted = true;
             this.comboCompanies.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblVacancy

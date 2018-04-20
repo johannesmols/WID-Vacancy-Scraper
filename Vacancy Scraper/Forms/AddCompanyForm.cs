@@ -122,6 +122,7 @@ namespace Vacancy_Scraper.Forms
             if (string.IsNullOrWhiteSpace(txtConsultants.Text)) return false;
             if (txtConsultants.Text.Split(',').Length == 0) return false;
             if (string.IsNullOrWhiteSpace(txtCareerPage.Text)) return false;
+            if (!Uri.IsWellFormedUriString(txtCareerPage.Text, UriKind.Absolute)) return false;
 
             return true;
         }
@@ -151,6 +152,9 @@ namespace Vacancy_Scraper.Forms
 
             if (string.IsNullOrWhiteSpace(txtCareerPage.Text))
                 errors.Add("Please enter a URL");
+
+            if (!Uri.IsWellFormedUriString(txtCareerPage.Text, UriKind.Absolute))
+                errors.Add("URL has invalid format");
 
             return errors;
         }

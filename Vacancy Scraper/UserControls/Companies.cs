@@ -74,7 +74,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         private void AdjustTableSettings()
         {
-            int colCount = 9;
+            const int colCount = 9;
             if (gridCompanies.Columns.Count == colCount)
             {
                 // Column Header Text

@@ -292,7 +292,7 @@
             this.groupSettingsScraper.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupSettingsScraper.Location = new System.Drawing.Point(0, 158);
             this.groupSettingsScraper.Name = "groupSettingsScraper";
-            this.groupSettingsScraper.Size = new System.Drawing.Size(676, 193);
+            this.groupSettingsScraper.Size = new System.Drawing.Size(676, 133);
             this.groupSettingsScraper.TabIndex = 7;
             this.groupSettingsScraper.TabStop = false;
             this.groupSettingsScraper.Text = "Scraper";

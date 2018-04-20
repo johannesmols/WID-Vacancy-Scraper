@@ -81,13 +81,16 @@ namespace Vacancy_Scraper.UserControls
                 gridVacancies.Columns[3].HeaderText = @"URL";
 
                 // Fill Weight when auto filling
-                gridVacancies.Columns[0].FillWeight = 100;
+                gridVacancies.Columns[0].FillWeight = 75;
                 gridVacancies.Columns[1].FillWeight = 150;
                 gridVacancies.Columns[2].FillWeight = 75;
                 gridVacancies.Columns[3].FillWeight = 100;
 
                 // Date can't be changed
                 gridVacancies.Columns[2].ReadOnly = true;
+
+                // Show a tooltip that the user can open the URL by control clicking it
+                gridVacancies.Columns[3].ToolTipText = @"Control-click to open URL";
 
                 // Equal settings for all columns
                 for (int i = 0; i < colCount; i++)
