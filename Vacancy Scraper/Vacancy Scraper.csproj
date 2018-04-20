@@ -69,6 +69,7 @@
     <Compile Include="JsonManagers\JsonResourceManager.cs" />
     <Compile Include="Objects\CompanyObject.cs" />
     <Compile Include="JsonManagers\SettingsManager.cs" />
+    <Compile Include="Objects\ScrapeGridObject.cs" />
     <Compile Include="Objects\SettingsObject.cs" />
     <Compile Include="Objects\VacancyObject.cs" />
     <Compile Include="UserControls\Blacklist.cs">

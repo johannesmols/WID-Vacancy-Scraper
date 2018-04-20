@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.cmdScrapeRun = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -38,7 +40,6 @@
             this.lblScrapeStatus = new System.Windows.Forms.ToolStripLabel();
             this.splitContainerScrape = new System.Windows.Forms.SplitContainer();
             this.gridScrape = new System.Windows.Forms.DataGridView();
-            this.colScrapeCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtScrapeLog = new System.Windows.Forms.RichTextBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScrape)).BeginInit();
@@ -137,22 +138,35 @@
             // 
             // gridScrape
             // 
-            this.gridScrape.BackgroundColor = System.Drawing.Color.White;
+            this.gridScrape.AllowUserToAddRows = false;
+            this.gridScrape.AllowUserToDeleteRows = false;
+            this.gridScrape.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridScrape.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridScrape.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridScrape.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridScrape.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridScrape.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridScrape.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colScrapeCompany});
+            this.gridScrape.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.gridScrape.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.gridScrape.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gridScrape.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridScrape.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridScrape.Location = new System.Drawing.Point(0, 0);
+            this.gridScrape.MultiSelect = false;
             this.gridScrape.Name = "gridScrape";
+            this.gridScrape.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.gridScrape.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.gridScrape.RowHeadersVisible = false;
+            this.gridScrape.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.NullValue = null;
+            this.gridScrape.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.gridScrape.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridScrape.Size = new System.Drawing.Size(674, 225);
-            this.gridScrape.TabIndex = 0;
-            // 
-            // colScrapeCompany
-            // 
-            this.colScrapeCompany.HeaderText = "Company";
-            this.colScrapeCompany.Name = "colScrapeCompany";
-            this.colScrapeCompany.ReadOnly = true;
+            this.gridScrape.TabIndex = 3;
+            this.gridScrape.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellContentClick);
+            this.gridScrape.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellValueChanged);
             // 
             // txtScrapeLog
             // 
@@ -198,8 +212,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel lblScrapeStatus;
         private System.Windows.Forms.SplitContainer splitContainerScrape;
-        private System.Windows.Forms.DataGridView gridScrape;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colScrapeCompany;
         private System.Windows.Forms.RichTextBox txtScrapeLog;
+        private System.Windows.Forms.DataGridView gridScrape;
     }
 }

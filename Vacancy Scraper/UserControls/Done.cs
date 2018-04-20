@@ -75,10 +75,7 @@ namespace Vacancy_Scraper.UserControls
             if (gridDoneVacancies.Columns.Count == colCount)
             {
                 // Column Header Text
-                gridDoneVacancies.Columns[0].HeaderText = @"Company";
-                gridDoneVacancies.Columns[1].HeaderText = @"Vacancy Title";
                 gridDoneVacancies.Columns[2].HeaderText = @"Completed";
-                gridDoneVacancies.Columns[3].HeaderText = @"URL";
 
                 // Fill Weight when auto filling
                 gridDoneVacancies.Columns[0].FillWeight = 75;

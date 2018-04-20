@@ -75,10 +75,7 @@ namespace Vacancy_Scraper.UserControls
             if (gridBlacklistedVacancies.Columns.Count == colCount)
             {
                 // Column Header Text
-                gridBlacklistedVacancies.Columns[0].HeaderText = @"Company";
-                gridBlacklistedVacancies.Columns[1].HeaderText = @"Vacancy Title";
                 gridBlacklistedVacancies.Columns[2].HeaderText = @"Blacklisted";
-                gridBlacklistedVacancies.Columns[3].HeaderText = @"URL";
 
                 // Fill Weight when auto filling
                 gridBlacklistedVacancies.Columns[0].FillWeight = 75;

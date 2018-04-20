@@ -74,20 +74,9 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         private void AdjustTableSettings()
         {
-            const int colCount = 9;
+            const int colCount = 8;
             if (gridCompanies.Columns.Count == colCount)
             {
-                // Column Header Text
-                gridCompanies.Columns[0].HeaderText = @"Name";
-                gridCompanies.Columns[1].HeaderText = @"CVR";
-                gridCompanies.Columns[2].HeaderText = @"P-No.";
-                gridCompanies.Columns[3].HeaderText = @"Telephone";
-                gridCompanies.Columns[4].HeaderText = @"Consultants";
-                gridCompanies.Columns[5].HeaderText = @"Enabled";
-                gridCompanies.Columns[6].HeaderText = @"Selected";
-                gridCompanies.Columns[7].HeaderText = @"Comment";
-                gridCompanies.Columns[8].HeaderText = @"URL";
-
                 // Fill Weight when auto filling
                 gridCompanies.Columns[0].FillWeight = 100;
                 gridCompanies.Columns[1].FillWeight = 75;
@@ -95,22 +84,18 @@ namespace Vacancy_Scraper.UserControls
                 gridCompanies.Columns[3].FillWeight = 75;
                 gridCompanies.Columns[4].FillWeight = 100;
                 gridCompanies.Columns[5].FillWeight = 50;
-                gridCompanies.Columns[6].FillWeight = 50;
+                gridCompanies.Columns[6].FillWeight = 200;
                 gridCompanies.Columns[7].FillWeight = 200;
-                gridCompanies.Columns[8].FillWeight = 200;
 
                 // Special settings for the enabled column
                 gridCompanies.Columns[5].ReadOnly = true;
                 gridCompanies.Columns[5].ToolTipText = @"This value can't be changed. Please contact the developer for activation.";
 
-                // Hide the selected column, this should only be shown in the Scrape tab
-                gridCompanies.Columns[6].Visible = false;
-
                 // Show a tooltip that the user can open the URL by control clicking it
-                gridCompanies.Columns[8].ToolTipText = @"Control-click to open URL";
+                gridCompanies.Columns[7].ToolTipText = @"Control-click to open URL";
 
                 // Equal settings for all columns
-                for (int i = 0; i < colCount; i++)
+                for (var i = 0; i < colCount; i++)
                 {
                     gridCompanies.Columns[i].MinimumWidth = 50;
                     gridCompanies.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
