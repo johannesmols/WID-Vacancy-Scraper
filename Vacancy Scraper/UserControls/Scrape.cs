@@ -118,7 +118,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridScrape_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void GridScrape_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -142,7 +142,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridScrape_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void GridScrape_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             gridScrape.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
@@ -168,7 +168,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void cmdScrapeRun_Click(object sender, EventArgs e)
+        private async void CmdScrapeRun_Click(object sender, EventArgs e)
         {
             // Only start the process if it's not already running
             if (!_scrapeRunning)
@@ -184,6 +184,9 @@ namespace Vacancy_Scraper.UserControls
                 // Update label
                 lblScrapeStatus.Text = @"Status: Running";
 
+                // Clear log
+                txtScrapeLog.Text = string.Empty;
+
                 // Set the status to be "Running"
                 _scrapeRunning = true;
 
@@ -193,7 +196,8 @@ namespace Vacancy_Scraper.UserControls
                 {
                     UpdateEveryStatus();
                     _toBeScraped = PrepareCompanyListFromTable();
-                }              
+                    WriteLineToLog("Starting");
+                }
 
                 // Unpause when continuing
                 if (_scrapePaused)
@@ -206,12 +210,14 @@ namespace Vacancy_Scraper.UserControls
                     if (_scrapeRunning && !_scrapePaused)
                     {
                         var company = _toBeScraped[0]; // always use the first in the list
+                        WriteLineToLog("Scraping " + company.Name);
 
                         // Update the status
                         _bindingList.First(o => o.Name.Equals(company.Name)).Status = "Running";
 
+                        // Execute task and wait for result
                         var result = await new Scraper.Scraper().Scrape(company);
-                        Console.WriteLine(result);
+                        WriteLineToLog(company.Name + @": " + result);
                         Console.WriteLine(@"Tasks remaining: " + (_toBeScraped.Count - 1));
 
                         // Update the status with the result
@@ -224,14 +230,14 @@ namespace Vacancy_Scraper.UserControls
                         // The execution has been paused, exit the loop and wait for further action
                         if (_scrapePaused)
                         {
-                            Console.WriteLine(@"Paused tasks");
+                            WriteLineToLog("Paused");
                             break;
                         }
                         // The execution has been stopped, exit the loop, set the status to "Not Running" and wait for further action
                         // It is important to set the status to not running so that the list of tasks will be reset upon a restart
                         else if (!_scrapeRunning)
                         {
-                            Console.WriteLine(@"Stopped tasks");
+                            WriteLineToLog("Stopped");
                             _scrapeRunning = false;
                             break;
                         }
@@ -239,7 +245,7 @@ namespace Vacancy_Scraper.UserControls
                 }
 
                 if (!_scrapePaused)
-                    Console.WriteLine(@"Done with all tasks");
+                    WriteLineToLog("Done with all tasks");
 
                 // All tasks are complete, or the execution has been paused / stopped
                 _scrapeRunning = false;
@@ -259,10 +265,6 @@ namespace Vacancy_Scraper.UserControls
                     gridScrape.Columns[0].ReadOnly = false;
                 }
             }
-            else
-            {
-                Console.WriteLine(@"Already executing list of tasks");
-            }
         }
 
         /// <summary>
@@ -270,7 +272,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdScrapePause_Click(object sender, EventArgs e)
+        private void CmdScrapePause_Click(object sender, EventArgs e)
         {
             _scrapePaused = true;
 
@@ -288,7 +290,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdScrapeStop_Click(object sender, EventArgs e)
+        private void CmdScrapeStop_Click(object sender, EventArgs e)
         {
             _scrapeRunning = false;
             _scrapePaused = false;
@@ -307,9 +309,18 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridScrape_SelectionChanged(object sender, EventArgs e)
+        private void GridScrape_SelectionChanged(object sender, EventArgs e)
         {
             gridScrape.ClearSelection();
+        }
+
+        /// <summary>
+        /// Write a line to the log
+        /// </summary>
+        /// <param name="line"></param>
+        private void WriteLineToLog(string line)
+        {
+            txtScrapeLog.Text += line + Environment.NewLine;
         }
     }
 }

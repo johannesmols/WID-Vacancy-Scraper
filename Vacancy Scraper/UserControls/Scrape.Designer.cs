@@ -75,7 +75,7 @@
             this.cmdScrapeRun.Name = "cmdScrapeRun";
             this.cmdScrapeRun.Size = new System.Drawing.Size(48, 22);
             this.cmdScrapeRun.Text = "Run";
-            this.cmdScrapeRun.Click += new System.EventHandler(this.cmdScrapeRun_Click);
+            this.cmdScrapeRun.Click += new System.EventHandler(this.CmdScrapeRun_Click);
             // 
             // toolStripSeparator1
             // 
@@ -90,7 +90,7 @@
             this.cmdScrapePause.Name = "cmdScrapePause";
             this.cmdScrapePause.Size = new System.Drawing.Size(58, 22);
             this.cmdScrapePause.Text = "Pause";
-            this.cmdScrapePause.Click += new System.EventHandler(this.cmdScrapePause_Click);
+            this.cmdScrapePause.Click += new System.EventHandler(this.CmdScrapePause_Click);
             // 
             // toolStripSeparator2
             // 
@@ -104,7 +104,7 @@
             this.cmdScrapeStop.Name = "cmdScrapeStop";
             this.cmdScrapeStop.Size = new System.Drawing.Size(51, 22);
             this.cmdScrapeStop.Text = "Stop";
-            this.cmdScrapeStop.Click += new System.EventHandler(this.cmdScrapeStop_Click);
+            this.cmdScrapeStop.Click += new System.EventHandler(this.CmdScrapeStop_Click);
             // 
             // toolStripSeparator3
             // 
@@ -149,7 +149,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridScrape.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridScrape.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridScrape.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.gridScrape.BackgroundColor = System.Drawing.Color.White;
             this.gridScrape.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridScrape.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gridScrape.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -169,9 +169,9 @@
             this.gridScrape.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridScrape.Size = new System.Drawing.Size(674, 225);
             this.gridScrape.TabIndex = 3;
-            this.gridScrape.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellContentClick);
-            this.gridScrape.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellValueChanged);
-            this.gridScrape.SelectionChanged += new System.EventHandler(this.gridScrape_SelectionChanged);
+            this.gridScrape.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridScrape_CellContentClick);
+            this.gridScrape.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridScrape_CellValueChanged);
+            this.gridScrape.SelectionChanged += new System.EventHandler(this.GridScrape_SelectionChanged);
             // 
             // txtScrapeLog
             // 
