@@ -9,10 +9,10 @@ namespace Vacancy_Scraper.Scraper
 {
     class Scraper
     {
-        public async Task<bool> Scrape(CompanyObject company)
+        public async Task<string> Scrape(CompanyObject company)
         {
-            await Task.Delay(1000);
-            return true;
+            await Task.Delay(2000);
+            return @"Complete (24/31 vacancies added)";
         }
     }
 }

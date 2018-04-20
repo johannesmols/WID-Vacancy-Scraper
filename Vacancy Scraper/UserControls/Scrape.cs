@@ -71,6 +71,20 @@ namespace Vacancy_Scraper.UserControls
             var source = new BindingSource(_bindingList, null);
             gridScrape.DataSource = source;
             AdjustTableSettings();
+
+            // Update status on every item
+            UpdateEveryStatus();
+        }
+
+        /// <summary>
+        /// Update status on every object in the table
+        /// </summary>
+        private void UpdateEveryStatus()
+        {
+            foreach (var gridObject in _bindingList)
+            {
+                gridObject.Status = gridObject.Selected ? @"Waiting" : @"Disabled";
+            }
         }
 
         /// <summary>
@@ -113,6 +127,11 @@ namespace Vacancy_Scraper.UserControls
                 {
                     _companiesManager.Resources.First(o => o.Equals(gridObject.Company)).Selected = gridObject.Selected;
                     _companiesManager.SaveChangesToFile();
+
+                    // Update status
+                    _bindingList.First(o => o.Name.Equals(gridObject.Company.Name)).Status = 
+                        _companiesManager.Resources.First(o => o.Equals(gridObject.Company)).Selected ?
+                        @"Waiting" : @"Disabled";
                 }
             }
         }
@@ -154,6 +173,8 @@ namespace Vacancy_Scraper.UserControls
             // Only start the process if it's not already running
             if (!_scrapeRunning)
             {
+                UpdateEveryStatus();
+
                 // Disable this button, enable others
                 cmdScrapeRun.Enabled = false;
                 cmdScrapePause.Enabled = true;
@@ -178,9 +199,17 @@ namespace Vacancy_Scraper.UserControls
                     if (_scrapeRunning && !_scrapePaused)
                     {
                         var company = _toBeScraped[0]; // always use the first in the list
-                        bool result = await new Scraper.Scraper().Scrape(company);
-                        Console.WriteLine(@"Successful: " + result);
+
+                        // Update the status
+                        _bindingList.First(o => o.Name.Equals(company.Name)).Status = "Running";
+
+                        var result = await new Scraper.Scraper().Scrape(company);
+                        Console.WriteLine(result);
                         Console.WriteLine(@"Tasks remaining: " + (_toBeScraped.Count - 1));
+
+                        // Update the status with the result
+                        _bindingList.First(o => o.Name.Equals(company.Name)).Status = result;
+
                         _toBeScraped.Remove(company);
                     }
                     else
