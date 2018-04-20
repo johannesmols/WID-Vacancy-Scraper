@@ -128,21 +128,20 @@ namespace Vacancy_Scraper.UserControls
             gridScrape.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
+        /// <summary>
+        /// Create a list with all companies in the table that have the checkbox enabled
+        /// </summary>
+        /// <returns></returns>
         private List<CompanyObject> PrepareCompanyListFromTable()
         {
             var companies = new List<CompanyObject>();
             foreach (var company in _bindingList)
             {
-                companies.Add(company.Company);
+                if (company.Selected)
+                    companies.Add(company.Company);
             }
 
             return companies;
-        }
-
-        private async Task<string> ScrapeWebsite(CompanyObject company)
-        {
-            var task = new Scraper.Scraper().Scrape(1500);
-            return await task;
         }
 
         /// <summary>
@@ -178,8 +177,10 @@ namespace Vacancy_Scraper.UserControls
                     // Only run the newest task if the process hasn't been stopped or paused
                     if (_scrapeRunning && !_scrapePaused)
                     {
-                        var company = _toBeScraped[0];
-                        Console.WriteLine(await ScrapeWebsite(company) + @", remaining: " + (_toBeScraped.Count - 1));
+                        var company = _toBeScraped[0]; // always use the first in the list
+                        bool result = await new Scraper.Scraper().Scrape(company);
+                        Console.WriteLine(@"Successful: " + result);
+                        Console.WriteLine(@"Tasks remaining: " + (_toBeScraped.Count - 1));
                         _toBeScraped.Remove(company);
                     }
                     else

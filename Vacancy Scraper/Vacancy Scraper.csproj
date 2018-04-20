@@ -72,6 +72,7 @@
     <Compile Include="Objects\ScrapeGridObject.cs" />
     <Compile Include="Objects\SettingsObject.cs" />
     <Compile Include="Objects\VacancyObject.cs" />
+    <Compile Include="Scraper\Scraper.cs" />
     <Compile Include="UserControls\Blacklist.cs">
       <SubType>UserControl</SubType>
     </Compile>
