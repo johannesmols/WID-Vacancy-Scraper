@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.cmdScrapeRun = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -114,8 +114,9 @@
             // lblScrapeStatus
             // 
             this.lblScrapeStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblScrapeStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblScrapeStatus.Name = "lblScrapeStatus";
-            this.lblScrapeStatus.Size = new System.Drawing.Size(50, 22);
+            this.lblScrapeStatus.Size = new System.Drawing.Size(53, 22);
             this.lblScrapeStatus.Text = "Status: -";
             // 
             // splitContainerScrape
@@ -144,9 +145,9 @@
             this.gridScrape.AllowUserToAddRows = false;
             this.gridScrape.AllowUserToDeleteRows = false;
             this.gridScrape.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridScrape.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridScrape.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridScrape.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridScrape.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridScrape.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -162,14 +163,15 @@
             this.gridScrape.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gridScrape.RowHeadersVisible = false;
             this.gridScrape.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.NullValue = null;
-            this.gridScrape.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.NullValue = null;
+            this.gridScrape.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridScrape.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridScrape.Size = new System.Drawing.Size(674, 225);
             this.gridScrape.TabIndex = 3;
             this.gridScrape.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellContentClick);
             this.gridScrape.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridScrape_CellValueChanged);
+            this.gridScrape.SelectionChanged += new System.EventHandler(this.gridScrape_SelectionChanged);
             // 
             // txtScrapeLog
             // 

@@ -173,12 +173,16 @@ namespace Vacancy_Scraper.UserControls
             // Only start the process if it's not already running
             if (!_scrapeRunning)
             {
-                UpdateEveryStatus();
+                // Disable editing the table while running
+                gridScrape.Columns[0].ReadOnly = true;
 
                 // Disable this button, enable others
                 cmdScrapeRun.Enabled = false;
                 cmdScrapePause.Enabled = true;
                 cmdScrapeStop.Enabled = true;
+
+                // Update label
+                lblScrapeStatus.Text = @"Status: Running";
 
                 // Set the status to be "Running"
                 _scrapeRunning = true;
@@ -186,7 +190,10 @@ namespace Vacancy_Scraper.UserControls
                 // Only create a new list of tasks if the execution wasn't paused before.
                 // If it was only paused, the remaining tasks should be completed
                 if (!_scrapePaused)
+                {
+                    UpdateEveryStatus();
                     _toBeScraped = PrepareCompanyListFromTable();
+                }              
 
                 // Unpause when continuing
                 if (_scrapePaused)
@@ -240,9 +247,16 @@ namespace Vacancy_Scraper.UserControls
                 // Reset buttons when done, but not when the process was only paused
                 if (!_scrapePaused)
                 {
+                    // Update label
+                    lblScrapeStatus.Text = @"Status: Complete";
+
+                    // Update buttons
                     cmdScrapeRun.Enabled = true;
                     cmdScrapePause.Enabled = false;
                     cmdScrapeStop.Enabled = false;
+
+                    // Reenable editing
+                    gridScrape.Columns[0].ReadOnly = false;
                 }
             }
             else
@@ -260,6 +274,9 @@ namespace Vacancy_Scraper.UserControls
         {
             _scrapePaused = true;
 
+            // Update label
+            lblScrapeStatus.Text = @"Status: Paused";
+
             // Disable this button, enable others
             cmdScrapeRun.Enabled = true;
             cmdScrapePause.Enabled = false;
@@ -276,10 +293,23 @@ namespace Vacancy_Scraper.UserControls
             _scrapeRunning = false;
             _scrapePaused = false;
 
+            // Update label
+            lblScrapeStatus.Text = @"Status: Stopped";
+
             // Disable this button, enable others
             cmdScrapeRun.Enabled = true;
             cmdScrapePause.Enabled = false;
             cmdScrapeStop.Enabled = false;
+        }
+
+        /// <summary>
+        /// Disable selection by instantly clearing a selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gridScrape_SelectionChanged(object sender, EventArgs e)
+        {
+            gridScrape.ClearSelection();
         }
     }
 }
