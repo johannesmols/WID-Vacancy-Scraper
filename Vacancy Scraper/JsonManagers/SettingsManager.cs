@@ -215,5 +215,32 @@ namespace Vacancy_Scraper.JsonManagers
             Settings.ScraperCheckJobnet = checkJobnet;
             WriteSettings(Settings);
         }
+
+        /// <summary>
+        /// Check if the driver executable exists for the currently selected driver
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfCurrentDriversExist()
+        {
+            switch (Settings.ScraperWebDriver)
+            {
+                case "Chrome":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "chromedriver.exe"));
+                case "Headless Chrome":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "chromedriver.exe"));
+                case "Firefox":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "geckodriver.exe"));
+                case "Internet Explorer":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "IEDriverServer.exe"));
+                case "Edge":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "MicrosoftWebDriver.exe"));
+                case "PhantomJS":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "phantomjs.exe"));
+                case "Opera":
+                    return File.Exists(Path.Combine(Settings.WebDriversPath, "operadriver.exe"));
+                default:
+                    return false;
+            }
+        }
     }
 }

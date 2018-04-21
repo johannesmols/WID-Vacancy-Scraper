@@ -75,27 +75,27 @@ namespace Vacancy_Scraper.Forms
             switch (currentTab)
             {
                 case Tabs.Dashboard:
-                    if (!panelDashboard.Controls.Contains(UserControls.Dashboard.Instance))
+                    if (!panelDashboard.Controls.Contains(UserControls.UC_Dashboard.Instance))
                     {
-                        panelDashboard.Controls.Add(UserControls.Dashboard.Instance);
-                        UserControls.Dashboard.Instance.Dock = DockStyle.Fill;
-                        UserControls.Dashboard.Instance.BringToFront();
+                        panelDashboard.Controls.Add(UserControls.UC_Dashboard.Instance);
+                        UserControls.UC_Dashboard.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Dashboard.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Dashboard.Instance.BringToFront();
+                        UserControls.UC_Dashboard.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Scrape:
-                    if (!panelScrape.Controls.Contains(UserControls.Scrape.Instance))
+                    if (!panelScrape.Controls.Contains(UserControls.UC_Scrape.Instance))
                     {
-                        panelScrape.Controls.Add(UserControls.Scrape.Instance);
-                        UserControls.Scrape.Instance.Dock = DockStyle.Fill;
-                        UserControls.Scrape.Instance.BringToFront();
+                        panelScrape.Controls.Add(UserControls.UC_Scrape.Instance);
+                        UserControls.UC_Scrape.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Scrape.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Scrape.Instance.BringToFront();
+                        UserControls.UC_Scrape.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Vacancies:
@@ -111,51 +111,51 @@ namespace Vacancy_Scraper.Forms
                     }
                     break;
                 case Tabs.Blacklist:
-                    if (!panelBlacklist.Controls.Contains(UserControls.Blacklist.Instance))
+                    if (!panelBlacklist.Controls.Contains(UserControls.UC_Blacklist.Instance))
                     {
-                        panelBlacklist.Controls.Add(UserControls.Blacklist.Instance);
-                        UserControls.Blacklist.Instance.Dock = DockStyle.Fill;
-                        UserControls.Blacklist.Instance.BringToFront();
+                        panelBlacklist.Controls.Add(UserControls.UC_Blacklist.Instance);
+                        UserControls.UC_Blacklist.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Blacklist.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Blacklist.Instance.BringToFront();
+                        UserControls.UC_Blacklist.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Done:
-                    if (!panelDone.Controls.Contains(UserControls.Done.Instance))
+                    if (!panelDone.Controls.Contains(UserControls.UC_Done.Instance))
                     {
-                        panelDone.Controls.Add(UserControls.Done.Instance);
-                        UserControls.Done.Instance.Dock = DockStyle.Fill;
-                        UserControls.Done.Instance.BringToFront();
+                        panelDone.Controls.Add(UserControls.UC_Done.Instance);
+                        UserControls.UC_Done.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Done.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Done.Instance.BringToFront();
+                        UserControls.UC_Done.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Companies:
-                    if (!panelCompanies.Controls.Contains(UserControls.Companies.Instance))
+                    if (!panelCompanies.Controls.Contains(UserControls.UC_Companies.Instance))
                     {
-                        panelCompanies.Controls.Add(UserControls.Companies.Instance);
-                        UserControls.Companies.Instance.Dock = DockStyle.Fill;
-                        UserControls.Companies.Instance.BringToFront();
+                        panelCompanies.Controls.Add(UserControls.UC_Companies.Instance);
+                        UserControls.UC_Companies.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Companies.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Companies.Instance.BringToFront();
+                        UserControls.UC_Companies.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Settings:
-                    if (!panelSettings.Controls.Contains(UserControls.Settings.Instance))
+                    if (!panelSettings.Controls.Contains(UserControls.UC_Settings.Instance))
                     {
-                        panelSettings.Controls.Add(UserControls.Settings.Instance);
-                        UserControls.Settings.Instance.Dock = DockStyle.Fill;
-                        UserControls.Settings.Instance.BringToFront();
+                        panelSettings.Controls.Add(UserControls.UC_Settings.Instance);
+                        UserControls.UC_Settings.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Settings.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Settings.Instance.BringToFront();
+                        UserControls.UC_Settings.Instance.BringToFront();
                     }
                     break;
                 default:
@@ -169,13 +169,13 @@ namespace Vacancy_Scraper.Forms
         /// <param name="newTab">the new active tab</param>
         private void NotifyTabChanged(Tabs newTab) 
         {
-            UserControls.Dashboard.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Scrape.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Dashboard.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Scrape.Instance.NotifyTabChanged(currentTab, newTab);
             UserControls.Vacancies.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Blacklist.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Done.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Companies.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Settings.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Blacklist.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Done.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Companies.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Settings.Instance.NotifyTabChanged(currentTab, newTab);
         }
     }
 }
