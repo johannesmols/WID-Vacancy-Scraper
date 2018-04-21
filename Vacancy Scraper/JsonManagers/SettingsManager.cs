@@ -157,7 +157,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// <summary>
         /// Set the resource folder path setting and write it to the settings file
         /// </summary>
-        /// <param name="webDriversPath">the path</param>
+        /// <param name="resourceFolderPath">the path</param>
         public void SetResourceFolderPath(string resourceFolderPath)
         {
             if (!string.IsNullOrWhiteSpace(resourceFolderPath))

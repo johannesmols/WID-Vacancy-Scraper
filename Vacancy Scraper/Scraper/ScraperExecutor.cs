@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,9 @@ namespace Vacancy_Scraper.Scraper
         /// <returns>a list of all found vacancies</returns>
         public async Task<string> Scrape(CompanyObject company)
         {
+            var log = new StringBuilder();
             var foundVacancies = new List<VacancyObject>();
+
             await Task.Run(() =>
             {
                 switch (company.Name)
@@ -37,6 +40,11 @@ namespace Vacancy_Scraper.Scraper
                         break;
                 }
             });
+
+            // Logging
+            log.Append("Company: " + company.Name + Environment.NewLine);
+            log.Append(DateTime.Now.ToString(CultureInfo.CurrentCulture) + Environment.NewLine);
+            log.Append(Environment.NewLine);
 
             var totalVacanciesFound = foundVacancies.Count;
 
@@ -52,6 +60,8 @@ namespace Vacancy_Scraper.Scraper
                     if (foundVacancies[i].Title.IndexOf(bannedKeyword, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         remove = true;
+
+                        log.Append("Found vacancy, removed by keyword match '" + bannedKeyword + "' : " + foundVacancies[i].Title + Environment.NewLine);
                     }
                 }
 
@@ -65,21 +75,33 @@ namespace Vacancy_Scraper.Scraper
             for (var i = foundVacancies.Count - 1; i >= 0; i--)
             {
                 if (_vacancyManager.Resources.Contains(foundVacancies[i]))
+                {
+                    log.Append("Found vacancy, removed by duplicate in 'vacancies' : " + foundVacancies[i].Title + Environment.NewLine);
+
                     foundVacancies.RemoveAt(i);
+                }
             }
 
             // Check for items in the blacklist
             for (var i = foundVacancies.Count - 1; i >= 0; i--)
             {
                 if (_blacklistManager.Resources.Contains(foundVacancies[i]))
+                {
+                    log.Append("Found vacancy, removed by duplicate in 'blacklist' : " + foundVacancies[i].Title + Environment.NewLine);
+
                     foundVacancies.RemoveAt(i);
+                }
             }
 
             // Check for items in the done list
             for (var i = foundVacancies.Count - 1; i >= 0; i--)
             {
                 if (_doneManager.Resources.Contains(foundVacancies[i]))
+                {
+                    log.Append("Found vacancy, removed by duplicate in 'done' : " + foundVacancies[i].Title + Environment.NewLine);
+
                     foundVacancies.RemoveAt(i);
+                }
             }
 
             if (_settingsManager.Settings.ScraperCheckJobnet)
@@ -87,11 +109,28 @@ namespace Vacancy_Scraper.Scraper
                 // Check jobnet for duplicates
             }
 
+            // Add all leftover vacancies to the log
+            foreach (var vacancy in foundVacancies)
+            {
+                log.Append("Found and added : " + vacancy.Title + Environment.NewLine);
+            }
+
+            // Log ending
+            log.Append(Environment.NewLine);
+            log.Append("Found: " + totalVacanciesFound + Environment.NewLine);
+            log.Append("Added: " + foundVacancies.Count);
+
             // All checks complete, save leftover vacancies
             foreach (var vacancy in foundVacancies)
             {
                 _vacancyManager.Resources.Add(vacancy);
                 _vacancyManager.SaveChangesToFile();
+            }
+
+            // Write complete log to file
+            if (Directory.Exists(_settingsManager.Settings.LogsFolderPath))
+            {
+                File.WriteAllText(Path.Combine(_settingsManager.Settings.LogsFolderPath, (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + " " + company.Name + ".txt")), log.ToString());
             }
 
             return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
