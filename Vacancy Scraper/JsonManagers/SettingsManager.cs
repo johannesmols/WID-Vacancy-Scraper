@@ -199,11 +199,8 @@ namespace Vacancy_Scraper.JsonManagers
         /// <param name="bannedKeywords"></param>
         public void SetScraperBannedKeywords(string bannedKeywords)
         {
-            if (!string.IsNullOrWhiteSpace(bannedKeywords))
-            {
-                Settings.ScraperBannedKeywords = bannedKeywords;
-                WriteSettings(Settings);
-            }
+            Settings.ScraperBannedKeywords = bannedKeywords;
+            WriteSettings(Settings);
         }
 
         /// <summary>

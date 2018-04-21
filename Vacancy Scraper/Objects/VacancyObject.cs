@@ -25,5 +25,23 @@ namespace Vacancy_Scraper.Objects
             Added = added;
             Url = url;
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as VacancyObject);
+        }
+
+        /// <summary>
+        /// Determines if two vacancy objects are equal
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool Equals(VacancyObject obj)
+        {
+            return obj != null 
+                   && obj.Company.Equals(this.Company) 
+                   && obj.Title.Equals(this.Title) 
+                   && obj.Url.Equals(this.Url);
+        }
     }
 }
