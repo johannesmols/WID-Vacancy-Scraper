@@ -9,6 +9,7 @@ using Vacancy_Scraper.Objects;
 
 namespace Vacancy_Scraper.Scraper.WebsiteScrapers
 {
+    /// <inheritdoc/>
     /// <summary>
     /// Scraper implementation for Novo Nordisk
     /// </summary>
@@ -66,6 +67,7 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
             }
 
             Driver.Close();
+            Driver.Quit();
 
             return foundVacancies;
         }
