@@ -37,13 +37,23 @@ namespace Vacancy_Scraper.Scraper
         /// Run the scraper and return information on the result
         /// </summary>
         /// <returns></returns>
-        public abstract List<VacancyObject> Run(CompanyObject company);
+        public abstract Dictionary<string, object> Run(CompanyObject company);
+
+        /// <summary>
+        /// Checks if the given url is a vlid Http or Https formatted url
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        protected bool IsValidHttpUrl(string url)
+        {
+            return Uri.TryCreate(url, UriKind.Absolute, out var uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
 
         /// <summary>
         /// Navigate the browser to a url and wait until the website is fully loaded
         /// </summary>
         /// <param name="url"></param>
-        protected void NavigateToUrlAndWaitUntilLoaded(String url)
+        protected void NavigateToUrlAndWaitUntilLoaded(string url)
         {
             Driver.Navigate().GoToUrl(url);
             WaitUntilLoaded();

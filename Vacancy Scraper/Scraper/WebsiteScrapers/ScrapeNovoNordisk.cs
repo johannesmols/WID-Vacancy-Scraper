@@ -15,61 +15,96 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
     /// </summary>
     internal class ScrapeNovoNordisk : AbstractWebsiteScraper
     {
-        public override List<VacancyObject> Run(CompanyObject company)
+        public override Dictionary<string, object> Run(CompanyObject company)
         {
+            var dictionary = new Dictionary<string, object>();
+
             var foundVacancies = new List<VacancyObject>();
+            var errors = new List<Exception>();
 
-            NavigateToUrlAndWaitUntilLoaded(company.Url);
-
-            IReadOnlyCollection<IWebElement> dropDownButtons = Driver.FindElements(By.TagName("button"));
-            IWebElement languageButton = null;
-            for (var i = 0; i < dropDownButtons.Count; i++)
+            try
             {
-                if (dropDownButtons.ElementAt(i).Text.Contains("Languages"))
-                {
-                    languageButton = dropDownButtons.ElementAt(i);
-                }
-            }
+                if (IsValidHttpUrl(company.Url))
+                    NavigateToUrlAndWaitUntilLoaded(company.Url);
+                else
+                    throw new WebDriverException("Invalid URL");
 
-            if (languageButton != null)
-            {
-                // Open dropdown menu
-                languageButton.Click();
+                IReadOnlyCollection<IWebElement> dropDownButtons = Driver.FindElements(By.TagName("button"));
+                IWebElement languageButton = null;
 
-                IReadOnlyCollection<IWebElement> languageCheckBoxes = Driver.FindElements(By.ClassName("custom-checked"));
-                IWebElement danishCheckBox = null;
-                for (var i = 0; i < languageCheckBoxes.Count; i++)
+                if (dropDownButtons.Count == 0)
+                    throw new WebDriverException("Couldn't find language dropdown buttons");
+
+                for (var i = 0; i < dropDownButtons.Count; i++)
                 {
-                    if (languageCheckBoxes.ElementAt(i).Text.Equals("Danish"))
+                    if (dropDownButtons.ElementAt(i).Text.Contains("Languages"))
                     {
-                        danishCheckBox = languageCheckBoxes.ElementAt(i);
+                        languageButton = dropDownButtons.ElementAt(i);
                     }
                 }
 
-                if (danishCheckBox != null)
+                if (languageButton != null)
                 {
-                    // Deselect danish
-                    danishCheckBox.Click();
+                    // Open dropdown menu
+                    languageButton.Click();
 
-                    ScrollToEndOfPage();
+                    IReadOnlyCollection<IWebElement> languageCheckBoxes = Driver.FindElements(By.ClassName("custom-checked"));
+                    IWebElement danishCheckBox = null;
 
-                    // Find all vacancies
-                    IReadOnlyCollection<IWebElement> vacancies = Driver.FindElements(By.XPath("//tr[@class='row-record']"));
-                    for (var i = 0; i < vacancies.Count; i++)
+                    if (languageCheckBoxes.Count == 0)
+                        throw new WebDriverException("Couldn't find language checkboxes");
+
+                    for (var i = 0; i < languageCheckBoxes.Count; i++)
                     {
-                        foundVacancies.Add(new VacancyObject(
-                            company.Name,
-                            vacancies.ElementAt(i).FindElement(By.ClassName("joblist-row-heading")).Text,
-                            DateTime.Now,
-                            vacancies.ElementAt(i).FindElement(By.TagName("a")).GetAttribute("href")));
+                        if (languageCheckBoxes.ElementAt(i).Text.Equals("Danish"))
+                        {
+                            danishCheckBox = languageCheckBoxes.ElementAt(i);
+                        }
+                    }
+
+                    if (danishCheckBox != null)
+                    {
+                        // Deselect danish
+                        danishCheckBox.Click();
+
+                        ScrollToEndOfPage();
+
+                        // Find all vacancies
+                        IReadOnlyCollection<IWebElement> vacancies = Driver.FindElements(By.XPath("//tr[@class='row-record']"));
+                        for (var i = 0; i < vacancies.Count; i++)
+                        {
+                            foundVacancies.Add(new VacancyObject(
+                                company.Name,
+                                vacancies.ElementAt(i).FindElement(By.ClassName("joblist-row-heading")).Text,
+                                DateTime.Now,
+                                vacancies.ElementAt(i).FindElement(By.TagName("a")).GetAttribute("href")));
+                        }
+                    }
+                    else
+                    {
+                        throw new WebDriverException("Couldn't find checkbox for danish language");
                     }
                 }
+                else
+                {
+                    throw new WebDriverException("Couldn't find language button");
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add(e);
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                Driver.Close();
+                Driver.Quit();
             }
 
-            Driver.Close();
-            Driver.Quit();
+            dictionary.Add(KeyCategory.Vacancies.Key, foundVacancies);
+            dictionary.Add(KeyCategory.Errors.Key, errors);
 
-            return foundVacancies;
+            return dictionary;
         }
     }
 }

@@ -5,12 +5,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
 using Vacancy_Scraper.Scraper.WebsiteScrapers;
 
 namespace Vacancy_Scraper.Scraper
 {
+    /// <summary>
+    /// Enum-like class to give keys for a dictionary to return values when scraping
+    /// </summary>
+    public class KeyCategory
+    {
+        private KeyCategory(string key) { Key = key; }
+
+        public string Key { get; set; }
+
+        public static KeyCategory Vacancies => new KeyCategory("Vacancies");
+        public static KeyCategory Errors => new KeyCategory("Errors");
+    }
+
     /// <summary>
     /// This class handles execution of the different scrapers and checks for duplicates afterwards
     /// </summary>
@@ -29,17 +43,21 @@ namespace Vacancy_Scraper.Scraper
         public async Task<string> Scrape(CompanyObject company)
         {
             var log = new StringBuilder();
-            var foundVacancies = new List<VacancyObject>();
+
+            var scrapeResults = new Dictionary<string, object>();
 
             await Task.Run(() =>
             {
                 switch (company.Name)
                 {
                     case "Novo Nordisk":
-                        foundVacancies = new ScrapeNovoNordisk().Run(company);
+                        scrapeResults = new ScrapeNovoNordisk().Run(company);
                         break;
                 }
             });
+
+            var foundVacancies = scrapeResults[KeyCategory.Vacancies.Key] as List<VacancyObject> ?? new List<VacancyObject>();
+            var exceptions = scrapeResults[KeyCategory.Errors.Key] as List<Exception> ?? new List<Exception>();
 
             // Logging
             log.Append("Company: " + company.Name + Environment.NewLine);
@@ -109,17 +127,6 @@ namespace Vacancy_Scraper.Scraper
                 // Check jobnet for duplicates
             }
 
-            // Add all leftover vacancies to the log
-            foreach (var vacancy in foundVacancies)
-            {
-                log.Append("Found and added : " + vacancy.Title + Environment.NewLine);
-            }
-
-            // Log ending
-            log.Append(Environment.NewLine);
-            log.Append("Found: " + totalVacanciesFound + Environment.NewLine);
-            log.Append("Added: " + foundVacancies.Count);
-
             // All checks complete, save leftover vacancies
             foreach (var vacancy in foundVacancies)
             {
@@ -127,13 +134,41 @@ namespace Vacancy_Scraper.Scraper
                 _vacancyManager.SaveChangesToFile();
             }
 
+            // Add all leftover vacancies to the log
+            foreach (var vacancy in foundVacancies)
+            {
+                log.Append("Found and added : " + vacancy.Title + Environment.NewLine);
+            }
+
+            // Normal Log ending
+            log.Append(Environment.NewLine);
+            log.Append("Found: " + totalVacanciesFound + Environment.NewLine);
+            log.Append("Added: " + foundVacancies.Count + Environment.NewLine);
+
+            // Log exceptions
+            if (exceptions.Count > 0)
+            {
+                log.Append(Environment.NewLine + "Exceptions:" + Environment.NewLine + Environment.NewLine);
+                foreach (var exception in exceptions)
+                {
+                    log.Append(exception.Message + Environment.NewLine + exception.StackTrace + Environment.NewLine + Environment.NewLine);
+                }
+            }
+            
             // Write complete log to file
             if (Directory.Exists(_settingsManager.Settings.LogsFolderPath))
             {
                 File.WriteAllText(Path.Combine(_settingsManager.Settings.LogsFolderPath, (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + " " + company.Name + ".txt")), log.ToString());
             }
 
-            return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
+            if (exceptions.Count > 0)
+            {
+                return @"Error (Check logs for more info)";
+            }
+            else
+            {
+                return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
+            }
         }
     }
 }
