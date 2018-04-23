@@ -59,6 +59,9 @@ namespace Vacancy_Scraper.Scraper
                     case "Novozymes":
                         scrapeResults = new ScrapeNovozymes().Run(company);
                         break;
+                    case "Biogen":
+                        scrapeResults = new ScrapeBiogen().Run(company);
+                        break;
                 }
             });
 
