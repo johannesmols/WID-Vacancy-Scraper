@@ -30,7 +30,7 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
                     throw new WebDriverException("Invalid URL (" + company.Url + ")");
 
                 // Get the language button
-                var languageButton = GetWebElementAsync(By.XPath("//button[contains(text(),'Languages')]"));
+                var languageButton = Driver.FindElement(By.XPath("//button[contains(text(),'Languages')]"));
 
                 if (languageButton != null)
                 {

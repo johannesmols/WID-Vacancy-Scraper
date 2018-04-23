@@ -79,9 +79,12 @@ namespace Vacancy_Scraper.Scraper
         /// <param name="element"></param>
         protected void ScrollElementIntoView(IWebElement element)
         {
-            var actions = new Actions(Driver);
-            actions.MoveToElement(element);
-            actions.Perform();
+            while (!element.Displayed)
+            {
+                var actions = new Actions(Driver);
+                actions.MoveToElement(element);
+                actions.Perform();
+            }
         }
 
         /// <summary>
@@ -143,7 +146,7 @@ namespace Vacancy_Scraper.Scraper
             catch (Exception)
             {
                 if (waitedTime >= maxWaitTime) throw;
-
+                
                 Thread.Sleep(interval);
                 waitedTime += interval;
 
