@@ -113,7 +113,7 @@ namespace Vacancy_Scraper.Scraper
         /// <param name="interval">the interval to wait between tries</param>
         /// <param name="maxWaitTime">the maximum time to wait until throwing the exception</param>
         /// <returns></returns>
-        private IEnumerable<string> FindVacanciesOnPage(ICollection<string> foundVacancies, long waitedTime, int interval, long maxWaitTime)
+        private IEnumerable<string> FindVacanciesOnPage(ICollection<string> foundVacancies, int waitedTime, int interval, int maxWaitTime)
         {
             try
             {

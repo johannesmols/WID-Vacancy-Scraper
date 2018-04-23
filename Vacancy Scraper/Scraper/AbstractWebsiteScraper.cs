@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -98,7 +99,7 @@ namespace Vacancy_Scraper.Scraper
                     ((IJavaScriptExecutor)Driver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
 
                     // TODO: Implement a better way to wait
-                    System.Threading.Thread.Sleep(2000);
+                    Thread.Sleep(1000);
 
                     long newHeight = (long)((IJavaScriptExecutor)Driver).ExecuteScript("return document.body.scrollHeight");
                     if (newHeight == lastHeight)
@@ -112,6 +113,77 @@ namespace Vacancy_Scraper.Scraper
             {
                 Console.WriteLine(e.StackTrace);
             }
+        }
+
+        /// <summary>
+        /// Get an IWebElement by waiting until it appears
+        /// </summary>
+        /// <param name="selector">the selector</param>
+        /// <returns>the element</returns>
+        protected IWebElement GetWebElementAsync(By selector)
+        {
+            return GetWebElementAsync(selector, 0, 50, 15000);
+        }
+
+        /// <summary>
+        /// Gets an IWebElement by waiting until it appears
+        /// </summary>
+        /// <param name="selector">the selector</param>
+        /// <param name="waitedTime">the total waited time</param>
+        /// <param name="interval">the interval between tries</param>
+        /// <param name="maxWaitTime">the maximum time to wait before throwing the exception</param>
+        /// <returns></returns>
+        protected IWebElement GetWebElementAsync(By selector, int waitedTime, int interval, int maxWaitTime)
+        {
+            try
+            {
+                var item = Driver.FindElement(selector);
+                return item;
+            }
+            catch (Exception)
+            {
+                if (waitedTime >= maxWaitTime) throw;
+
+                Thread.Sleep(interval);
+                waitedTime += interval;
+
+                return GetWebElementAsync(selector, waitedTime, interval, maxWaitTime);
+            }
+        }
+
+        /// <summary>
+        /// Get an IWebElement by waiting until it appears
+        /// </summary>
+        /// <param name="selector">the selector</param>
+        /// <returns>the element</returns>
+        protected ICollection<IWebElement> GetWebElementsAsync(By selector)
+        {
+            return GetWebElementsAsync(selector, 0, 50, 15000);
+        }
+
+        /// <summary>
+        /// Gets an IWebElement by waiting until it appears
+        /// </summary>
+        /// <param name="selector">the selector</param>
+        /// <param name="waitedTime">the total waited time</param>
+        /// <param name="interval">the interval between tries</param>
+        /// <param name="maxWaitTime">the maximum time to wait before throwing the exception</param>
+        /// <returns></returns>
+        protected ICollection<IWebElement> GetWebElementsAsync(By selector, int waitedTime, int interval, int maxWaitTime)
+        {
+            var items = Driver.FindElements(selector);
+
+            if (items.Count == 0)
+            {
+                if (waitedTime >= maxWaitTime) return new List<IWebElement>();
+
+                Thread.Sleep(interval);
+                waitedTime += interval;
+
+                return GetWebElementsAsync(selector, waitedTime, interval, maxWaitTime);
+            }
+
+            return items;
         }
 
         /// <summary>

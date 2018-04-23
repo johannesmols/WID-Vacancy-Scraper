@@ -29,19 +29,8 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
                 else
                     throw new WebDriverException("Invalid URL (" + company.Url + ")");
 
-                IReadOnlyCollection<IWebElement> dropDownButtons = Driver.FindElements(By.TagName("button"));
-                IWebElement languageButton = null;
-
-                if (dropDownButtons.Count == 0)
-                    throw new WebDriverException("Couldn't find language dropdown buttons");
-
-                for (var i = 0; i < dropDownButtons.Count; i++)
-                {
-                    if (dropDownButtons.ElementAt(i).Text.Contains("Languages"))
-                    {
-                        languageButton = dropDownButtons.ElementAt(i);
-                    }
-                }
+                // Get the language button
+                var languageButton = GetWebElementAsync(By.XPath("//button[contains(text(),'Languages')]"));
 
                 if (languageButton != null)
                 {
@@ -59,6 +48,7 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
                         if (languageCheckBoxes.ElementAt(i).Text.Equals("Danish"))
                         {
                             danishCheckBox = languageCheckBoxes.ElementAt(i);
+                            break;
                         }
                     }
 
