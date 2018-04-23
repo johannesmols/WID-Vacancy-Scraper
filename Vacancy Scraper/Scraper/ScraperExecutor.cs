@@ -183,10 +183,9 @@ namespace Vacancy_Scraper.Scraper
             }
             
             // Write complete log to file
-            if (Directory.Exists(_settingsManager.Settings.LogsFolderPath))
-            {
-                File.WriteAllText(Path.Combine(_settingsManager.Settings.LogsFolderPath, (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + " " + company.Name + ".txt")), log.ToString());
-            }
+            var path = Path.Combine(_settingsManager.Settings.LogsFolderPath, company.Name);
+            Directory.CreateDirectory(path);
+            File.WriteAllText(Path.Combine(path, (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + " " + company.Name + ".txt")), log.ToString());
 
             if (exceptions.Count > 0)
             {
