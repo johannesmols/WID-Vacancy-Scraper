@@ -53,8 +53,9 @@ namespace Vacancy_Scraper.Scraper
                     case "Novo Nordisk":
                         scrapeResults = new ScrapeNovoNordisk().Run(company);
                         break;
-                    default:
-                        return;
+                    case "DTU":
+                        scrapeResults = new ScrapeDTU().Run(company);
+                        break;
                 }
             });
 
