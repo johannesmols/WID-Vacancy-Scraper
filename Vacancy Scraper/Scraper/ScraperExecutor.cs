@@ -56,6 +56,9 @@ namespace Vacancy_Scraper.Scraper
                     case "DTU":
                         scrapeResults = new ScrapeDTU().Run(company);
                         break;
+                    case "Novozymes":
+                        scrapeResults = new ScrapeNovozymes().Run(company);
+                        break;
                 }
             });
 

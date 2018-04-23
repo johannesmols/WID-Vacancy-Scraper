@@ -83,6 +83,7 @@
     <Compile Include="Scraper\ScraperJobnet.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeDTU.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovoNordisk.cs" />
+    <Compile Include="Scraper\WebsiteScrapers\ScrapeNovozymes.cs" />
     <Compile Include="UserControls\UC_Blacklist.cs">
       <SubType>UserControl</SubType>
     </Compile>
