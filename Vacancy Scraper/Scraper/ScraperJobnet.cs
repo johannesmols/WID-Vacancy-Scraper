@@ -98,19 +98,43 @@ namespace Vacancy_Scraper.Scraper
         /// </summary>
         private IEnumerable<string> FindVacanciesOnPage()
         {
-            var vacancies = new List<string>();
+            return FindVacanciesOnPage(new List<string>(), 0, 50, 15000);
+        }
 
-            // todo: this is shit. but waiting for other stuff doesn't do shit either
-            // https://stackoverflow.com/questions/49971328/selenium-stale-element-reference-works-fine-when-debugging
-            Thread.Sleep(3000);
-
-            var list = Driver.FindElements(By.XPath("//*[@data-ng-bind=\"item.JobHeadline\"]"));
-            foreach (var vacancy in list)
+        /// <summary>
+        /// Try to find all elements on the page and add them to the list
+        /// This website throws "Stale Element" exceptions when not waited long enough (I couldn't find a way to wait for the website)
+        /// See here: https://stackoverflow.com/questions/49971328/selenium-stale-element-reference-works-fine-when-debugging
+        /// If an error appears, it is simply discared and the thread will sleep for a certain time until it tries again recursively
+        /// If the waited time passes a certain treshold, the exception will finally be thrown
+        /// </summary>
+        /// <param name="foundVacancies">the list of the previously found items</param>
+        /// <param name="waitedTime">the waited time in ms</param>
+        /// <param name="interval">the interval to wait between tries</param>
+        /// <param name="maxWaitTime">the maximum time to wait until throwing the exception</param>
+        /// <returns></returns>
+        private IEnumerable<string> FindVacanciesOnPage(ICollection<string> foundVacancies, long waitedTime, int interval, long maxWaitTime)
+        {
+            try
             {
-                vacancies.Add(vacancy.Text);
+                var list = Driver.FindElements(By.XPath("//*[@data-ng-bind=\"item.JobHeadline\"]"));
+                foreach (var vacancy in list)
+                {
+                    foundVacancies.Add(vacancy.Text);
+                }
+            }
+            catch (Exception)
+            {
+                if (waitedTime >= maxWaitTime) throw;
+
+                Thread.Sleep(interval);
+                waitedTime += interval;
+
+                return FindVacanciesOnPage(foundVacancies, waitedTime, interval, maxWaitTime);
+
             }
 
-            return vacancies;
+            return foundVacancies;
         }
     }
 }
