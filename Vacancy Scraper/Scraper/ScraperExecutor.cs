@@ -62,6 +62,9 @@ namespace Vacancy_Scraper.Scraper
                     case "Biogen":
                         scrapeResults = new ScrapeBiogen().Run(company);
                         break;
+                    case "CMC Biologics":
+                        scrapeResults = new ScrapeCMCBiologics().Run(company);
+                        break;
                 }
             });
 

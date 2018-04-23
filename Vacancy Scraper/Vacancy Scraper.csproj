@@ -82,6 +82,7 @@
     <Compile Include="Scraper\ScraperExecutor.cs" />
     <Compile Include="Scraper\ScraperJobnet.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeBiogen.cs" />
+    <Compile Include="Scraper\WebsiteScrapers\ScrapeCMCBiologics.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeDTU.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovoNordisk.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovozymes.cs" />

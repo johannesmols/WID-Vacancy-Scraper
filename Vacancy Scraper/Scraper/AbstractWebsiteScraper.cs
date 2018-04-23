@@ -34,8 +34,8 @@ namespace Vacancy_Scraper.Scraper
         {
             InitializeWebDriver();
 
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Vacancy_Scraper.Scraper
                     {
                         Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome);
 
-                        var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                        var chromeDriverService = ChromeDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
                         chromeDriverService.HideCommandPromptWindow = true;
 
                         var chromeOptions = new ChromeOptions();
@@ -146,7 +146,7 @@ namespace Vacancy_Scraper.Scraper
                     {
                         Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome2);
 
-                        var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                        var chromeDriverService = ChromeDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
                         chromeDriverService.HideCommandPromptWindow = true;
 
                         var chromeOptions = new ChromeOptions();
@@ -157,22 +157,60 @@ namespace Vacancy_Scraper.Scraper
                     }
                     break;
                 case "Firefox":
-                    Driver = new FirefoxDriver();
+                    var pathFirefox = Path.Combine(SettingsManager.Settings.WebDriversPath, "geckodriver.exe");
+                    if (File.Exists(pathFirefox))
+                    {
+                        Environment.SetEnvironmentVariable("webdriver.gecko.driver", pathFirefox);
+
+                        var firefoxDriverService = FirefoxDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
+                        firefoxDriverService.HideCommandPromptWindow = true;
+                        firefoxDriverService.FirefoxBinaryPath = pathFirefox;
+
+                        Driver = new FirefoxDriver(firefoxDriverService);
+                    }
                     break;
                 case "Internet Explorer":
-                    Driver = new InternetExplorerDriver();
+                    var pathIE = Path.Combine(SettingsManager.Settings.WebDriversPath, "IEDriverServer.exe");
+                    if (File.Exists(pathIE))
+                    {
+                        var ieDriverService = InternetExplorerDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
+                        ieDriverService.HideCommandPromptWindow = true;
+
+                        Driver = new InternetExplorerDriver(ieDriverService);
+                    }
                     break;
                 case "Edge":
-                    Driver = new EdgeDriver();
+                    var pathEdge = Path.Combine(SettingsManager.Settings.WebDriversPath, "MicrosoftWebDriver.exe");
+                    if (File.Exists(pathEdge))
+                    {
+                        var edgeDriverService = EdgeDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
+                        edgeDriverService.HideCommandPromptWindow = true;
+
+                        Driver = new EdgeDriver(edgeDriverService);
+                    }
                     break;
                 case "PhantomJS":
-                    Driver = new PhantomJSDriver();
+                    var pathPhantomJs = Path.Combine(SettingsManager.Settings.WebDriversPath, "phantomjs.exe");
+                    if (File.Exists(pathPhantomJs))
+                    {
+                        var phantomJsDriverService = PhantomJSDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
+                        phantomJsDriverService.HideCommandPromptWindow = true;
+
+                        Driver = new PhantomJSDriver(phantomJsDriverService);
+                    }
                     break;
                 case "Opera":
-                    Driver = new OperaDriver();
-                    break;
-                default:
-                    Driver = new InternetExplorerDriver();
+                    var pathOpera = Path.Combine(SettingsManager.Settings.WebDriversPath, "operadriver.exe");
+                    if (File.Exists(pathOpera))
+                    {
+                        var operaDriverService = OperaDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
+                        operaDriverService.HideCommandPromptWindow = true;
+
+                        var operaOptions = new OperaOptions();
+                        operaOptions.BinaryLocation = pathOpera;
+
+                        Driver = new OperaDriver(operaDriverService, operaOptions);
+                    }
                     break;
             }
         }
