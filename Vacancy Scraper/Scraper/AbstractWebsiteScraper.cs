@@ -9,6 +9,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Support.UI;
@@ -31,6 +32,9 @@ namespace Vacancy_Scraper.Scraper
         protected AbstractWebsiteScraper()
         {
             InitializeWebDriver();
+
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
         }
 
         /// <summary>
@@ -66,6 +70,17 @@ namespace Vacancy_Scraper.Scraper
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
             wait.Until(x => ((IJavaScriptExecutor) Driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        /// <summary>
+        /// Scroll a given element into the view
+        /// </summary>
+        /// <param name="element"></param>
+        protected void ScrollElementIntoView(IWebElement element)
+        {
+            var actions = new Actions(Driver);
+            actions.MoveToElement(element);
+            actions.Perform();
         }
 
         /// <summary>

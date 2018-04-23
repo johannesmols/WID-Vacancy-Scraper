@@ -80,6 +80,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Scraper\AbstractWebsiteScraper.cs" />
     <Compile Include="Scraper\ScraperExecutor.cs" />
+    <Compile Include="Scraper\ScraperJobnet.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovoNordisk.cs" />
     <Compile Include="UserControls\UC_Blacklist.cs">
       <SubType>UserControl</SubType>

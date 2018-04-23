@@ -27,7 +27,7 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
                 if (IsValidHttpUrl(company.Url))
                     NavigateToUrlAndWaitUntilLoaded(company.Url);
                 else
-                    throw new WebDriverException("Invalid URL");
+                    throw new WebDriverException("Invalid URL (" + company.Url + ")");
 
                 IReadOnlyCollection<IWebElement> dropDownButtons = Driver.FindElements(By.TagName("button"));
                 IWebElement languageButton = null;

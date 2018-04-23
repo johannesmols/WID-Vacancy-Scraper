@@ -53,6 +53,8 @@ namespace Vacancy_Scraper.Scraper
                     case "Novo Nordisk":
                         scrapeResults = new ScrapeNovoNordisk().Run(company);
                         break;
+                    default:
+                        return;
                 }
             });
 
@@ -122,9 +124,30 @@ namespace Vacancy_Scraper.Scraper
                 }
             }
 
+            // Check jobnet for duplicates
+            var jobnetResults = new Dictionary<string, object>();
             if (_settingsManager.Settings.ScraperCheckJobnet)
             {
-                // Check jobnet for duplicates
+                await Task.Run(() =>
+                {
+                    jobnetResults = new ScraperJobnet().Run(company);
+                });
+
+                var foundVacanciesJobnet = jobnetResults[KeyCategory.Vacancies.Key] as List<string> ?? new List<string>();
+                var exceptionsJobnet = jobnetResults[KeyCategory.Errors.Key] as List<Exception> ?? new List<Exception>();
+
+                exceptions.AddRange(exceptionsJobnet);
+
+                // Filter out duplicates
+                for (var i = foundVacancies.Count - 1; i >= 0; i--)
+                {
+                    if (foundVacanciesJobnet.Contains(foundVacancies[i].Title))
+                    {
+                        log.Append("Found vacancy, removed by duplicate on jobnet.dk : " + foundVacancies[i].Title + Environment.NewLine);
+
+                        foundVacancies.RemoveAt(i);
+                    }
+                }
             }
 
             // All checks complete, save leftover vacancies
@@ -165,10 +188,8 @@ namespace Vacancy_Scraper.Scraper
             {
                 return @"Error (Check logs for more info)";
             }
-            else
-            {
-                return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
-            }
+
+            return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
         }
     }
 }
