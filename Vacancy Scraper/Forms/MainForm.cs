@@ -7,12 +7,12 @@ namespace Vacancy_Scraper.Forms
         /// <summary>
         /// Holds the currently selected tab as an enum of the type Tabs
         /// </summary>
-        private Tabs currentTab = Tabs.Dashboard;
+        private Tabs _currentTab = Tabs.Scrape;
 
         /// <summary>
         /// An enumeration to store the currently selected tab
         /// </summary>
-        public enum Tabs { Dashboard, Scrape, Vacancies, Blacklist, Done, Companies, Settings }
+        public enum Tabs { Scrape, Vacancies, Blacklist, Done, Companies, Export, Settings }
 
         /// <summary>
         /// The constructor of the class
@@ -32,33 +32,33 @@ namespace Vacancy_Scraper.Forms
         {
             switch (e.TabPage.Text)
             {
-                case "Dashboard":
-                    NotifyTabChanged(Tabs.Dashboard);
-                    currentTab = Tabs.Dashboard;
-                    break;
                 case "Scrape":
                     NotifyTabChanged(Tabs.Scrape);
-                    currentTab = Tabs.Scrape;
+                    _currentTab = Tabs.Scrape;
                     break;
                 case "Vacancies":
                     NotifyTabChanged(Tabs.Vacancies);
-                    currentTab = Tabs.Vacancies;
+                    _currentTab = Tabs.Vacancies;
                     break;
                 case "Blacklist":
                     NotifyTabChanged(Tabs.Blacklist);
-                    currentTab = Tabs.Blacklist;
+                    _currentTab = Tabs.Blacklist;
                     break;
                 case "Done":
                     NotifyTabChanged(Tabs.Done);
-                    currentTab = Tabs.Done;
+                    _currentTab = Tabs.Done;
                     break;
                 case "Companies":
                     NotifyTabChanged(Tabs.Companies);
-                    currentTab = Tabs.Companies;
+                    _currentTab = Tabs.Companies;
+                    break;
+                case "Export":
+                    NotifyTabChanged(Tabs.Export);
+                    _currentTab = Tabs.Export;
                     break;
                 case "Settings":
                     NotifyTabChanged(Tabs.Settings);
-                    currentTab = Tabs.Settings;
+                    _currentTab = Tabs.Settings;
                     break;
                 default:
                     break;
@@ -72,20 +72,8 @@ namespace Vacancy_Scraper.Forms
         /// </summary>
         private void LoadTabContent()
         {
-            switch (currentTab)
+            switch (_currentTab)
             {
-                case Tabs.Dashboard:
-                    if (!panelDashboard.Controls.Contains(UserControls.UC_Dashboard.Instance))
-                    {
-                        panelDashboard.Controls.Add(UserControls.UC_Dashboard.Instance);
-                        UserControls.UC_Dashboard.Instance.Dock = DockStyle.Fill;
-                        UserControls.UC_Dashboard.Instance.BringToFront();
-                    }
-                    else
-                    {
-                        UserControls.UC_Dashboard.Instance.BringToFront();
-                    }
-                    break;
                 case Tabs.Scrape:
                     if (!panelScrape.Controls.Contains(UserControls.UC_Scrape.Instance))
                     {
@@ -146,6 +134,18 @@ namespace Vacancy_Scraper.Forms
                         UserControls.UC_Companies.Instance.BringToFront();
                     }
                     break;
+                case Tabs.Export:
+                    if (!panelCompanies.Controls.Contains(UserControls.UC_Export.Instance))
+                    {
+                        panelExport.Controls.Add(UserControls.UC_Export.Instance);
+                        UserControls.UC_Export.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Export.Instance.BringToFront();
+                    }
+                    else
+                    {
+                        UserControls.UC_Export.Instance.BringToFront();
+                    }
+                    break;
                 case Tabs.Settings:
                     if (!panelSettings.Controls.Contains(UserControls.UC_Settings.Instance))
                     {
@@ -169,13 +169,13 @@ namespace Vacancy_Scraper.Forms
         /// <param name="newTab">the new active tab</param>
         private void NotifyTabChanged(Tabs newTab) 
         {
-            UserControls.UC_Dashboard.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.UC_Scrape.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.Vacancies.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.UC_Blacklist.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.UC_Done.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.UC_Companies.Instance.NotifyTabChanged(currentTab, newTab);
-            UserControls.UC_Settings.Instance.NotifyTabChanged(currentTab, newTab);
+            UserControls.UC_Scrape.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.Vacancies.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Blacklist.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Done.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Companies.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Export.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Settings.Instance.NotifyTabChanged(_currentTab, newTab);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Vacancy_Scraper.UserControls
 {
-    partial class UC_Dashboard
+    partial class UC_Export
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,11 +30,11 @@
         {
             this.SuspendLayout();
             // 
-            // Dashboard
+            // UC_Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "Dashboard";
+            this.Name = "UC_Export";
             this.Size = new System.Drawing.Size(676, 385);
             this.ResumeLayout(false);
 

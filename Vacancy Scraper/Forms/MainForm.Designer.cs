@@ -30,8 +30,6 @@
         {
             System.Windows.Forms.TabControl tabControl;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.panelDashboard = new System.Windows.Forms.Panel();
             this.tabPageScrape = new System.Windows.Forms.TabPage();
             this.panelScrape = new System.Windows.Forms.Panel();
             this.tabVacancies = new System.Windows.Forms.TabPage();
@@ -44,25 +42,27 @@
             this.panelCompanies = new System.Windows.Forms.Panel();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.tabExport = new System.Windows.Forms.TabPage();
+            this.panelExport = new System.Windows.Forms.Panel();
             tabControl = new System.Windows.Forms.TabControl();
             tabControl.SuspendLayout();
-            this.tabDashboard.SuspendLayout();
             this.tabPageScrape.SuspendLayout();
             this.tabVacancies.SuspendLayout();
             this.tabPageBlacklist.SuspendLayout();
             this.tabPageDone.SuspendLayout();
             this.tabCompanies.SuspendLayout();
             this.tabSettings.SuspendLayout();
+            this.tabExport.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
-            tabControl.Controls.Add(this.tabDashboard);
             tabControl.Controls.Add(this.tabPageScrape);
             tabControl.Controls.Add(this.tabVacancies);
             tabControl.Controls.Add(this.tabPageBlacklist);
             tabControl.Controls.Add(this.tabPageDone);
             tabControl.Controls.Add(this.tabCompanies);
+            tabControl.Controls.Add(this.tabExport);
             tabControl.Controls.Add(this.tabSettings);
             resources.ApplyResources(tabControl, "tabControl");
             tabControl.HotTrack = true;
@@ -72,19 +72,6 @@
             tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl.TabStop = false;
             tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Selected);
-            // 
-            // tabDashboard
-            // 
-            this.tabDashboard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabDashboard.Controls.Add(this.panelDashboard);
-            resources.ApplyResources(this.tabDashboard, "tabDashboard");
-            this.tabDashboard.Name = "tabDashboard";
-            this.tabDashboard.UseVisualStyleBackColor = true;
-            // 
-            // panelDashboard
-            // 
-            resources.ApplyResources(this.panelDashboard, "panelDashboard");
-            this.panelDashboard.Name = "panelDashboard";
             // 
             // tabPageScrape
             // 
@@ -163,6 +150,18 @@
             resources.ApplyResources(this.panelSettings, "panelSettings");
             this.panelSettings.Name = "panelSettings";
             // 
+            // tabExport
+            // 
+            this.tabExport.Controls.Add(this.panelExport);
+            resources.ApplyResources(this.tabExport, "tabExport");
+            this.tabExport.Name = "tabExport";
+            this.tabExport.UseVisualStyleBackColor = true;
+            // 
+            // panelExport
+            // 
+            resources.ApplyResources(this.panelExport, "panelExport");
+            this.panelExport.Name = "panelExport";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -170,25 +169,23 @@
             this.Controls.Add(tabControl);
             this.Name = "MainForm";
             tabControl.ResumeLayout(false);
-            this.tabDashboard.ResumeLayout(false);
             this.tabPageScrape.ResumeLayout(false);
             this.tabVacancies.ResumeLayout(false);
             this.tabPageBlacklist.ResumeLayout(false);
             this.tabPageDone.ResumeLayout(false);
             this.tabCompanies.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);
+            this.tabExport.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabPage tabDashboard;
         private System.Windows.Forms.TabPage tabVacancies;
         private System.Windows.Forms.TabPage tabPageBlacklist;
         private System.Windows.Forms.TabPage tabCompanies;
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.TabPage tabPageDone;
-        private System.Windows.Forms.Panel panelDashboard;
         private System.Windows.Forms.Panel panelBlacklist;
         private System.Windows.Forms.TabPage tabPageScrape;
         private System.Windows.Forms.Panel panelScrape;
@@ -196,6 +193,8 @@
         private System.Windows.Forms.Panel panelDone;
         private System.Windows.Forms.Panel panelCompanies;
         private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.TabPage tabExport;
+        private System.Windows.Forms.Panel panelExport;
     }
 }
 

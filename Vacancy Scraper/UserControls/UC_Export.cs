@@ -8,24 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vacancy_Scraper.Forms;
+using Vacancy_Scraper.JsonManagers;
+using Vacancy_Scraper.Objects;
 
 namespace Vacancy_Scraper.UserControls
 {
-    public partial class UC_Dashboard : UserControl
+    public partial class UC_Export : UserControl
     {
-        private static UC_Dashboard _instance;
+        private static UC_Export _instance;
 
-        public static UC_Dashboard Instance
+        public static UC_Export Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new UC_Dashboard();
+                    _instance = new UC_Export();
                 return _instance;
             }
         }
 
-        public UC_Dashboard()
+        public UC_Export()
         {
             InitializeComponent();
         }
@@ -36,7 +38,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         public void NotifyTabChanged(MainForm.Tabs oldTab, MainForm.Tabs newTab)
         {
-            if (newTab == MainForm.Tabs.Dashboard)
+            if (newTab == MainForm.Tabs.Export)
             {
                 ReloadContent();
             }

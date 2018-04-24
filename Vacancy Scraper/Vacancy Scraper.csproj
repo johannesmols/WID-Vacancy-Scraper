@@ -98,12 +98,6 @@
     <Compile Include="UserControls\UC_Companies.Designer.cs">
       <DependentUpon>UC_Companies.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UC_Dashboard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UC_Dashboard.Designer.cs">
-      <DependentUpon>UC_Dashboard.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +111,12 @@
     </Compile>
     <Compile Include="UserControls\UC_Done.Designer.cs">
       <DependentUpon>UC_Done.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Export.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Export.Designer.cs">
+      <DependentUpon>UC_Export.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UC_Scrape.cs">
       <SubType>UserControl</SubType>
@@ -148,9 +148,6 @@
     <EmbeddedResource Include="UserControls\UC_Companies.resx">
       <DependentUpon>UC_Companies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UC_Dashboard.resx">
-      <DependentUpon>UC_Dashboard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +163,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\UC_Done.resx">
       <DependentUpon>UC_Done.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Export.resx">
+      <DependentUpon>UC_Export.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Scrape.resx">
       <DependentUpon>UC_Scrape.cs</DependentUpon>
