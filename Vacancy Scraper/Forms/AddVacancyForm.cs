@@ -16,12 +16,14 @@ namespace Vacancy_Scraper.Forms
     {
         public List<VacancyObject> ReturnVacancies { get; }
 
+        private JsonResourceManager<CompanyObject> _companyManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies); 
+
         public AddVacancyForm()
         {
             InitializeComponent();
             ReturnVacancies = new List<VacancyObject>();
 
-            JsonResourceManager<CompanyObject> companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
+            var companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
             foreach (var company in companiesManager.Resources)
             {
                 comboCompanies.Items.Add(company.Name);
@@ -35,7 +37,7 @@ namespace Vacancy_Scraper.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdAdd_Click(object sender, EventArgs e)
+        private void CmdAdd_Click(object sender, EventArgs e)
         {
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
@@ -166,6 +168,24 @@ namespace Vacancy_Scraper.Forms
         {
             txtVacancy.Text = string.Empty;
             txtUrl.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Update the CVR info box according to the selected company
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboCompanies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtCVR.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Cvr.ToString();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }

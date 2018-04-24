@@ -39,6 +39,8 @@
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdAdd = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCVR = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblCompany
@@ -53,6 +55,7 @@
             resources.ApplyResources(this.comboCompanies, "comboCompanies");
             this.comboCompanies.Name = "comboCompanies";
             this.comboCompanies.Sorted = true;
+            this.comboCompanies.SelectedIndexChanged += new System.EventHandler(this.ComboCompanies_SelectedIndexChanged);
             this.comboCompanies.Enter += new System.EventHandler(this.ControlFocusEnter);
             // 
             // lblVacancy
@@ -105,7 +108,18 @@
             resources.ApplyResources(this.cmdAdd, "cmdAdd");
             this.cmdAdd.Name = "cmdAdd";
             this.cmdAdd.UseVisualStyleBackColor = true;
-            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
+            this.cmdAdd.Click += new System.EventHandler(this.CmdAdd_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // txtCVR
+            // 
+            resources.ApplyResources(this.txtCVR, "txtCVR");
+            this.txtCVR.Name = "txtCVR";
+            this.txtCVR.ReadOnly = true;
             // 
             // AddVacancyForm
             // 
@@ -113,6 +127,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
+            this.Controls.Add(this.txtCVR);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdAdd);
@@ -147,5 +163,7 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.Button cmdAdd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtCVR;
     }
 }

@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCompany.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="comboCompanies.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 10</value>
@@ -165,7 +165,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboCompanies.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblVacancy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVacancy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 40</value>
+    <value>13, 66</value>
   </data>
   <data name="lblVacancy.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -196,10 +196,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVacancy.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="txtVacancy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 37</value>
+    <value>73, 63</value>
   </data>
   <data name="txtVacancy.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 20</value>
@@ -217,10 +217,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtVacancy.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="txtUrl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 63</value>
+    <value>73, 89</value>
   </data>
   <data name="txtUrl.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 20</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtUrl.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="lblUrl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUrl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 66</value>
+    <value>13, 92</value>
   </data>
   <data name="lblUrl.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -268,13 +268,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblUrl.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="checkAddMultiple.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkAddMultiple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 90</value>
+    <value>73, 115</value>
   </data>
   <data name="checkAddMultiple.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 17</value>
@@ -295,13 +295,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkAddMultiple.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cmdClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 113</value>
+    <value>165, 138</value>
   </data>
   <data name="cmdClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -322,13 +322,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdClose.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="cmdCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 113</value>
+    <value>73, 138</value>
   </data>
   <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 23</value>
@@ -349,13 +349,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cmdAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 113</value>
+    <value>286, 138</value>
   </data>
   <data name="cmdAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 23</value>
@@ -376,7 +376,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdAdd.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 40</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>CVR: </value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtCVR.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txtCVR.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 37</value>
+  </data>
+  <data name="txtCVR.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 20</value>
+  </data>
+  <data name="txtCVR.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;txtCVR.Name" xml:space="preserve">
+    <value>txtCVR</value>
+  </data>
+  <data name="&gt;&gt;txtCVR.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtCVR.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtCVR.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -385,7 +439,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>384, 146</value>
+    <value>384, 169</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
