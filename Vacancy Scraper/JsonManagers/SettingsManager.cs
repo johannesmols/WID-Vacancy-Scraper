@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", true));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -95,7 +95,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", true));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true));
             }
             else
             {
@@ -117,6 +117,12 @@ namespace Vacancy_Scraper.JsonManagers
                 if (fixedSettings.LogsFolderPath == null)
                 {
                     fixedSettings.LogsFolderPath = GetDefaultLogsDirectory();
+                    changed = true;
+                }
+
+                if (fixedSettings.ExportFolderPath == null)
+                {
+                    fixedSettings.ExportFolderPath = "";
                     changed = true;
                 }
 
@@ -176,6 +182,19 @@ namespace Vacancy_Scraper.JsonManagers
             if (!string.IsNullOrWhiteSpace(logsFolderPath))
             {
                 Settings.LogsFolderPath = logsFolderPath;
+                WriteSettings(Settings);
+            }
+        }
+
+        /// <summary>
+        /// Set the export folder path setting and write it to the settings file
+        /// </summary>
+        /// <param name="exportFolderPath"></param>
+        public void SetExportFolderPath(string exportFolderPath)
+        {
+            if (!string.IsNullOrWhiteSpace(exportFolderPath))
+            {
+                Settings.ExportFolderPath = exportFolderPath;
                 WriteSettings(Settings);
             }
         }

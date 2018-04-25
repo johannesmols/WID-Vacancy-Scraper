@@ -153,7 +153,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.gridVacancies.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridVacancies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridVacancies.Size = new System.Drawing.Size(676, 360);
+            this.gridVacancies.Size = new System.Drawing.Size(676, 385);
             this.gridVacancies.TabIndex = 2;
             this.gridVacancies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridVacancies_CellMouseClick);
             this.gridVacancies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridVacancies_CellValueChanged);
@@ -168,7 +168,7 @@
             this.Controls.Add(this.gridVacancies);
             this.Controls.Add(this.toolStrip);
             this.Name = "Vacancies";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Size = new System.Drawing.Size(676, 410);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVacancies)).EndInit();

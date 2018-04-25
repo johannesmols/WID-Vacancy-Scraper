@@ -427,13 +427,13 @@
     <value>83, 136</value>
   </data>
   <data name="lblConsultantsInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 13</value>
+    <value>194, 13</value>
   </data>
   <data name="lblConsultantsInfo.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="lblConsultantsInfo.Text" xml:space="preserve">
-    <value>Separate consultants by comma</value>
+    <value>Separate consultants by forward slash /</value>
   </data>
   <data name="&gt;&gt;lblConsultantsInfo.Name" xml:space="preserve">
     <value>lblConsultantsInfo</value>

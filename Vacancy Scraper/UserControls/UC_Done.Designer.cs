@@ -135,7 +135,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.gridDoneVacancies.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridDoneVacancies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridDoneVacancies.Size = new System.Drawing.Size(676, 360);
+            this.gridDoneVacancies.Size = new System.Drawing.Size(676, 385);
             this.gridDoneVacancies.TabIndex = 4;
             this.gridDoneVacancies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridDoneVacancies_CellMouseClick);
             this.gridDoneVacancies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDoneVacancies_CellValueChanged);
@@ -143,14 +143,14 @@
             this.gridDoneVacancies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridDoneVacancies_DataBindingComplete);
             this.gridDoneVacancies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridDoneVacancies_DataError);
             // 
-            // Done
+            // UC_Done
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridDoneVacancies);
             this.Controls.Add(this.toolStrip);
-            this.Name = "Done";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Name = "UC_Done";
+            this.Size = new System.Drawing.Size(676, 410);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDoneVacancies)).EndInit();

@@ -135,7 +135,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.gridBlacklistedVacancies.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridBlacklistedVacancies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridBlacklistedVacancies.Size = new System.Drawing.Size(676, 360);
+            this.gridBlacklistedVacancies.Size = new System.Drawing.Size(676, 385);
             this.gridBlacklistedVacancies.TabIndex = 3;
             this.gridBlacklistedVacancies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridBlacklistedVacancies_CellMouseClick);
             this.gridBlacklistedVacancies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridBlacklistedVacancies_CellValueChanged);
@@ -143,14 +143,14 @@
             this.gridBlacklistedVacancies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridBlacklistedVacancies_DataBindingComplete);
             this.gridBlacklistedVacancies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridBlacklistedVacancies_DataError);
             // 
-            // Blacklist
+            // UC_Blacklist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridBlacklistedVacancies);
             this.Controls.Add(this.toolStrip);
-            this.Name = "Blacklist";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Name = "UC_Blacklist";
+            this.Size = new System.Drawing.Size(676, 410);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBlacklistedVacancies)).EndInit();

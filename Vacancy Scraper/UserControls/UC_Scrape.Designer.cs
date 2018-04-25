@@ -136,8 +136,8 @@
             // 
             this.splitContainerScrape.Panel2.Controls.Add(this.txtScrapeLog);
             this.splitContainerScrape.Panel2MinSize = 50;
-            this.splitContainerScrape.Size = new System.Drawing.Size(676, 360);
-            this.splitContainerScrape.SplitterDistance = 227;
+            this.splitContainerScrape.Size = new System.Drawing.Size(676, 385);
+            this.splitContainerScrape.SplitterDistance = 242;
             this.splitContainerScrape.TabIndex = 6;
             // 
             // gridScrape
@@ -167,7 +167,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.gridScrape.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridScrape.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridScrape.Size = new System.Drawing.Size(674, 225);
+            this.gridScrape.Size = new System.Drawing.Size(674, 240);
             this.gridScrape.TabIndex = 3;
             this.gridScrape.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridScrape_CellContentClick);
             this.gridScrape.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridScrape_CellValueChanged);
@@ -182,18 +182,18 @@
             this.txtScrapeLog.Location = new System.Drawing.Point(0, 0);
             this.txtScrapeLog.Name = "txtScrapeLog";
             this.txtScrapeLog.ReadOnly = true;
-            this.txtScrapeLog.Size = new System.Drawing.Size(674, 127);
+            this.txtScrapeLog.Size = new System.Drawing.Size(674, 137);
             this.txtScrapeLog.TabIndex = 0;
             this.txtScrapeLog.Text = "";
             // 
-            // Scrape
+            // UC_Scrape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerScrape);
             this.Controls.Add(this.toolStrip);
-            this.Name = "Scrape";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Name = "UC_Scrape";
+            this.Size = new System.Drawing.Size(676, 410);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.splitContainerScrape.Panel1.ResumeLayout(false);

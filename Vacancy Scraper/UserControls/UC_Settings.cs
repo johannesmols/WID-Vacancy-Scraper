@@ -69,6 +69,7 @@ namespace Vacancy_Scraper.UserControls
             txtSettingsWebDriversPath.Text = _settingsManager.Settings.WebDriversPath;
             txtSettingsResourcesPath.Text = _settingsManager.Settings.ResourceFolderPath;
             txtSettingsLogsFolderPath.Text = _settingsManager.Settings.LogsFolderPath;
+            txtSettingsExportPath.Text = _settingsManager.Settings.ExportFolderPath;
             txtBannedKeywords.Text = _settingsManager.Settings.ScraperBannedKeywords;
             checkJobnet.Checked = _settingsManager.Settings.ScraperCheckJobnet;
 
@@ -163,6 +164,21 @@ namespace Vacancy_Scraper.UserControls
                 linkLblSettingsLogsPath.Visible = false;
             }
 
+            // Export Folder Path
+            if (Directory.Exists(txtSettingsExportPath.Text))
+            {
+                lblSettingsExportStatus.ForeColor = SystemColors.ControlText;
+                lblSettingsExportStatus.Text = @"Path valid";
+                linkLblSettingsExportPath.Visible = false;
+            }
+            else
+            {
+                allSettingsValid = false;
+                lblSettingsExportStatus.ForeColor = Color.Red;
+                lblSettingsExportStatus.Text = @"Path does not exist or is invalid";
+                linkLblSettingsExportPath.Visible = false;
+            }
+
             // Enable or disable the apply button based on if all changes are valid
             cmdSettingsApply.Enabled = allSettingsValid;
         }
@@ -207,16 +223,15 @@ namespace Vacancy_Scraper.UserControls
             if (txtSettingsWebDriversPath.Text.Equals(_settingsManager.Settings.WebDriversPath) &&
                 txtSettingsResourcesPath.Text.Equals(_settingsManager.Settings.ResourceFolderPath) &&
                 txtSettingsLogsFolderPath.Text.Equals(_settingsManager.Settings.LogsFolderPath) &&
+                txtSettingsExportPath.Text.Equals(_settingsManager.Settings.ExportFolderPath) &&
                 comboScraperWebDriver.Text.Equals(_settingsManager.Settings.ScraperWebDriver) &&
                 txtBannedKeywords.Text.Equals(_settingsManager.Settings.ScraperBannedKeywords) &&
                 checkJobnet.Checked == _settingsManager.Settings.ScraperCheckJobnet)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            
+            return true;
         }
 
         /// <summary>
@@ -238,6 +253,11 @@ namespace Vacancy_Scraper.UserControls
 
             if (Directory.Exists(txtSettingsLogsFolderPath.Text))
                 _settingsManager.SetLogsFolderPath(txtSettingsLogsFolderPath.Text.Trim());
+            else
+                errorsWhileSaving = true;
+
+            if (Directory.Exists(txtSettingsExportPath.Text))
+                _settingsManager.SetExportFolderPath(txtSettingsExportPath.Text.Trim());
             else
                 errorsWhileSaving = true;
 
@@ -334,6 +354,20 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
+        /// Browse for a path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdSettingsBrowseExportFolder_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                txtSettingsExportPath.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
+
+        /// <summary>
         /// Update the status when changing the path
         /// </summary>
         /// <param name="sender"></param>
@@ -359,6 +393,16 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TxtSettingsLogsFolderPath_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSettingsExportPath_TextChanged(object sender, EventArgs e)
         {
             SetStatus();
         }

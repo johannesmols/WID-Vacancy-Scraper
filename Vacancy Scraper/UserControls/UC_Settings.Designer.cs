@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.groupSettingsPaths = new System.Windows.Forms.GroupBox();
+            this.linkLblSettingsExportPath = new System.Windows.Forms.LinkLabel();
+            this.lblSettingsExportStatus = new System.Windows.Forms.Label();
+            this.cmdSettingsBrowseExportFolder = new System.Windows.Forms.Button();
+            this.txtSettingsExportPath = new System.Windows.Forms.TextBox();
+            this.lblExportPath = new System.Windows.Forms.Label();
             this.linkLblSettingsLogsPath = new System.Windows.Forms.LinkLabel();
             this.lblSettingsLogsStatus = new System.Windows.Forms.Label();
             this.cmdSettingsBrowseLogsFolder = new System.Windows.Forms.Button();
@@ -61,6 +66,11 @@
             // 
             // groupSettingsPaths
             // 
+            this.groupSettingsPaths.Controls.Add(this.linkLblSettingsExportPath);
+            this.groupSettingsPaths.Controls.Add(this.lblSettingsExportStatus);
+            this.groupSettingsPaths.Controls.Add(this.cmdSettingsBrowseExportFolder);
+            this.groupSettingsPaths.Controls.Add(this.txtSettingsExportPath);
+            this.groupSettingsPaths.Controls.Add(this.lblExportPath);
             this.groupSettingsPaths.Controls.Add(this.linkLblSettingsLogsPath);
             this.groupSettingsPaths.Controls.Add(this.lblSettingsLogsStatus);
             this.groupSettingsPaths.Controls.Add(this.cmdSettingsBrowseLogsFolder);
@@ -80,10 +90,63 @@
             this.groupSettingsPaths.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.groupSettingsPaths.Location = new System.Drawing.Point(0, 0);
             this.groupSettingsPaths.Name = "groupSettingsPaths";
-            this.groupSettingsPaths.Size = new System.Drawing.Size(676, 158);
+            this.groupSettingsPaths.Size = new System.Drawing.Size(676, 204);
             this.groupSettingsPaths.TabIndex = 3;
             this.groupSettingsPaths.TabStop = false;
             this.groupSettingsPaths.Text = "Paths";
+            // 
+            // linkLblSettingsExportPath
+            // 
+            this.linkLblSettingsExportPath.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.linkLblSettingsExportPath.AutoSize = true;
+            this.linkLblSettingsExportPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.linkLblSettingsExportPath.Location = new System.Drawing.Point(592, 186);
+            this.linkLblSettingsExportPath.Name = "linkLblSettingsExportPath";
+            this.linkLblSettingsExportPath.Size = new System.Drawing.Size(10, 13);
+            this.linkLblSettingsExportPath.TabIndex = 19;
+            this.linkLblSettingsExportPath.TabStop = true;
+            this.linkLblSettingsExportPath.Text = "-";
+            // 
+            // lblSettingsExportStatus
+            // 
+            this.lblSettingsExportStatus.AutoSize = true;
+            this.lblSettingsExportStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSettingsExportStatus.Location = new System.Drawing.Point(78, 185);
+            this.lblSettingsExportStatus.Name = "lblSettingsExportStatus";
+            this.lblSettingsExportStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblSettingsExportStatus.TabIndex = 18;
+            this.lblSettingsExportStatus.Text = "Status:";
+            // 
+            // cmdSettingsBrowseExportFolder
+            // 
+            this.cmdSettingsBrowseExportFolder.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cmdSettingsBrowseExportFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmdSettingsBrowseExportFolder.Location = new System.Drawing.Point(595, 160);
+            this.cmdSettingsBrowseExportFolder.Name = "cmdSettingsBrowseExportFolder";
+            this.cmdSettingsBrowseExportFolder.Size = new System.Drawing.Size(75, 23);
+            this.cmdSettingsBrowseExportFolder.TabIndex = 17;
+            this.cmdSettingsBrowseExportFolder.Text = "Browse...";
+            this.cmdSettingsBrowseExportFolder.UseVisualStyleBackColor = true;
+            this.cmdSettingsBrowseExportFolder.Click += new System.EventHandler(this.CmdSettingsBrowseExportFolder_Click);
+            // 
+            // txtSettingsExportPath
+            // 
+            this.txtSettingsExportPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSettingsExportPath.Location = new System.Drawing.Point(81, 162);
+            this.txtSettingsExportPath.Name = "txtSettingsExportPath";
+            this.txtSettingsExportPath.Size = new System.Drawing.Size(508, 20);
+            this.txtSettingsExportPath.TabIndex = 15;
+            this.txtSettingsExportPath.TextChanged += new System.EventHandler(this.txtSettingsExportPath_TextChanged);
+            // 
+            // lblExportPath
+            // 
+            this.lblExportPath.AutoSize = true;
+            this.lblExportPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblExportPath.Location = new System.Drawing.Point(6, 165);
+            this.lblExportPath.Name = "lblExportPath";
+            this.lblExportPath.Size = new System.Drawing.Size(40, 13);
+            this.lblExportPath.TabIndex = 16;
+            this.lblExportPath.Text = "Export:";
             // 
             // linkLblSettingsLogsPath
             // 
@@ -250,7 +313,7 @@
             // 
             this.cmdSettingsCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSettingsCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmdSettingsCancel.Location = new System.Drawing.Point(514, 357);
+            this.cmdSettingsCancel.Location = new System.Drawing.Point(514, 382);
             this.cmdSettingsCancel.Name = "cmdSettingsCancel";
             this.cmdSettingsCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdSettingsCancel.TabIndex = 5;
@@ -262,7 +325,7 @@
             // 
             this.cmdSettingsApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSettingsApply.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmdSettingsApply.Location = new System.Drawing.Point(595, 357);
+            this.cmdSettingsApply.Location = new System.Drawing.Point(595, 382);
             this.cmdSettingsApply.Name = "cmdSettingsApply";
             this.cmdSettingsApply.Size = new System.Drawing.Size(75, 23);
             this.cmdSettingsApply.TabIndex = 4;
@@ -274,7 +337,7 @@
             // 
             this.lblSavedStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSavedStatus.AutoSize = true;
-            this.lblSavedStatus.Location = new System.Drawing.Point(9, 366);
+            this.lblSavedStatus.Location = new System.Drawing.Point(9, 391);
             this.lblSavedStatus.Name = "lblSavedStatus";
             this.lblSavedStatus.Size = new System.Drawing.Size(37, 13);
             this.lblSavedStatus.TabIndex = 6;
@@ -290,7 +353,7 @@
             this.groupSettingsScraper.Controls.Add(this.comboScraperWebDriver);
             this.groupSettingsScraper.Controls.Add(this.lblScraperSettingsWebDriver);
             this.groupSettingsScraper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupSettingsScraper.Location = new System.Drawing.Point(0, 158);
+            this.groupSettingsScraper.Location = new System.Drawing.Point(0, 204);
             this.groupSettingsScraper.Name = "groupSettingsScraper";
             this.groupSettingsScraper.Size = new System.Drawing.Size(676, 133);
             this.groupSettingsScraper.TabIndex = 7;
@@ -365,7 +428,7 @@
             this.lblScraperSettingsWebDriver.TabIndex = 0;
             this.lblScraperSettingsWebDriver.Text = "Web Driver:";
             // 
-            // Settings
+            // UC_Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -374,8 +437,8 @@
             this.Controls.Add(this.groupSettingsPaths);
             this.Controls.Add(this.cmdSettingsCancel);
             this.Controls.Add(this.cmdSettingsApply);
-            this.Name = "Settings";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Name = "UC_Settings";
+            this.Size = new System.Drawing.Size(676, 410);
             this.groupSettingsPaths.ResumeLayout(false);
             this.groupSettingsPaths.PerformLayout();
             this.groupSettingsScraper.ResumeLayout(false);
@@ -414,5 +477,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkJobnet;
         private System.Windows.Forms.Label lblMore;
+        private System.Windows.Forms.LinkLabel linkLblSettingsExportPath;
+        private System.Windows.Forms.Label lblSettingsExportStatus;
+        private System.Windows.Forms.Button cmdSettingsBrowseExportFolder;
+        private System.Windows.Forms.TextBox txtSettingsExportPath;
+        private System.Windows.Forms.Label lblExportPath;
     }
 }

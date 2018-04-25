@@ -124,7 +124,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.gridCompanies.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridCompanies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCompanies.Size = new System.Drawing.Size(676, 360);
+            this.gridCompanies.Size = new System.Drawing.Size(676, 385);
             this.gridCompanies.TabIndex = 0;
             this.gridCompanies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridCompanies_CellMouseClick);
             this.gridCompanies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCompanies_CellValueChanged);
@@ -132,14 +132,14 @@
             this.gridCompanies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridCompanies_DataBindingComplete);
             this.gridCompanies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridCompanies_DataError);
             // 
-            // Companies
+            // UC_Companies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridCompanies);
             this.Controls.Add(this.toolStrip);
-            this.Name = "Companies";
-            this.Size = new System.Drawing.Size(676, 385);
+            this.Name = "UC_Companies";
+            this.Size = new System.Drawing.Size(676, 410);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCompanies)).EndInit();
