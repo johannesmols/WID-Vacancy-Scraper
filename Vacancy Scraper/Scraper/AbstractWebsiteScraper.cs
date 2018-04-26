@@ -34,8 +34,8 @@ namespace Vacancy_Scraper.Scraper
         {
             InitializeWebDriver();
 
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
         }
 
         /// <summary>

@@ -40,8 +40,8 @@ namespace Vacancy_Scraper.Objects
         {
             return obj != null 
                    && obj.Company.Equals(this.Company) 
-                   && obj.Title.Equals(this.Title) 
-                   && obj.Url.Equals(this.Url);
+                   && obj.Title.Equals(this.Title); 
+                   //&& obj.Url.Equals(this.Url);
         }
     }
 }

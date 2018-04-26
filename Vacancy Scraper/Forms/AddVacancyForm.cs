@@ -42,10 +42,29 @@ namespace Vacancy_Scraper.Forms
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
             {
+                string msg = null;
+                if (IsDuplicate(ResourceType.Vacancies) && msg == null)
+                    msg = @"Vacancy already exists in vacancies list. Do you still want to add it?";
+
+                if (IsDuplicate(ResourceType.Done) && msg == null)
+                    msg = @"Vacancy already exists in completed vacancies list. Do you still want to add it?";
+
+                if (IsDuplicate(ResourceType.Blacklist) && msg == null)
+                    msg = @"Vacancy already exists in blacklist. Do you still want to add it?";
+
+                if (msg != null)
+                {
+                    var dialogResult = MessageBox.Show(msg, @"Found duplicate", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
                 ReturnVacancies.Add(new VacancyObject(
                     comboCompanies.Text,
                     txtVacancy.Text,
-                    DateTime.Now, 
+                    DateTime.Now,
                     txtUrl.Text));
 
                 if (!checkAddMultiple.Checked)
@@ -186,6 +205,15 @@ namespace Vacancy_Scraper.Forms
                 Console.WriteLine(exception);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Check a new vacancy for local duplicates in all three vacancy lists
+        /// </summary>
+        /// <returns>if the vacancy already exists in a resource</returns>
+        private bool IsDuplicate(ResourceType type)
+        {
+            return new JsonResourceManager<VacancyObject>(type).Resources.Contains(new VacancyObject(comboCompanies.Text, txtVacancy.Text, DateTime.Now, string.Empty));
         }
     }
 }
