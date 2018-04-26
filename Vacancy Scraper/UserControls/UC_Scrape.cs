@@ -21,7 +21,7 @@ namespace Vacancy_Scraper.UserControls
 
         private JsonResourceManager<CompanyObject> _companiesManager;
         private BindingList<ScrapeGridObject> _bindingList;
-        private SettingsManager _settingsManager = new SettingsManager();
+        private readonly SettingsManager _settingsManager = new SettingsManager();
 
         private List<CompanyObject> _toBeScraped;
         private bool _scrapeRunning, _scrapePaused;
@@ -39,6 +39,7 @@ namespace Vacancy_Scraper.UserControls
         public UC_Scrape()
         {
             InitializeComponent();
+            ReloadContent();
         }
 
         /// <summary>
