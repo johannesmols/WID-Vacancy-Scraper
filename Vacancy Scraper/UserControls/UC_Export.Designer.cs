@@ -45,8 +45,17 @@
             this.comboDataSource = new System.Windows.Forms.ComboBox();
             this.lblDataSource = new System.Windows.Forms.Label();
             this.groupBoxImport = new System.Windows.Forms.GroupBox();
+            this.lblImportCompanies = new System.Windows.Forms.Label();
+            this.lblImportCompleted = new System.Windows.Forms.Label();
+            this.lblImportBlacklist = new System.Windows.Forms.Label();
+            this.lblImportVacancies = new System.Windows.Forms.Label();
+            this.cmdImportCompanies = new System.Windows.Forms.Button();
+            this.cmdImportCompleted = new System.Windows.Forms.Button();
+            this.cmdImportBlacklist = new System.Windows.Forms.Button();
+            this.cmdImportVacancies = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
+            this.groupBoxImport.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -227,6 +236,14 @@
             // 
             // groupBoxImport
             // 
+            this.groupBoxImport.Controls.Add(this.lblImportCompanies);
+            this.groupBoxImport.Controls.Add(this.lblImportCompleted);
+            this.groupBoxImport.Controls.Add(this.lblImportBlacklist);
+            this.groupBoxImport.Controls.Add(this.lblImportVacancies);
+            this.groupBoxImport.Controls.Add(this.cmdImportCompanies);
+            this.groupBoxImport.Controls.Add(this.cmdImportCompleted);
+            this.groupBoxImport.Controls.Add(this.cmdImportBlacklist);
+            this.groupBoxImport.Controls.Add(this.cmdImportVacancies);
             this.groupBoxImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxImport.Location = new System.Drawing.Point(341, 3);
             this.groupBoxImport.Name = "groupBoxImport";
@@ -234,6 +251,82 @@
             this.groupBoxImport.TabIndex = 1;
             this.groupBoxImport.TabStop = false;
             this.groupBoxImport.Text = "Import";
+            // 
+            // lblImportCompanies
+            // 
+            this.lblImportCompanies.AutoSize = true;
+            this.lblImportCompanies.Location = new System.Drawing.Point(136, 109);
+            this.lblImportCompanies.Name = "lblImportCompanies";
+            this.lblImportCompanies.Size = new System.Drawing.Size(62, 13);
+            this.lblImportCompanies.TabIndex = 8;
+            this.lblImportCompanies.Text = "Companies:";
+            // 
+            // lblImportCompleted
+            // 
+            this.lblImportCompleted.AutoSize = true;
+            this.lblImportCompleted.Location = new System.Drawing.Point(136, 80);
+            this.lblImportCompleted.Name = "lblImportCompleted";
+            this.lblImportCompleted.Size = new System.Drawing.Size(112, 13);
+            this.lblImportCompleted.TabIndex = 7;
+            this.lblImportCompleted.Text = "Vacancies completed:";
+            // 
+            // lblImportBlacklist
+            // 
+            this.lblImportBlacklist.AutoSize = true;
+            this.lblImportBlacklist.Location = new System.Drawing.Point(136, 51);
+            this.lblImportBlacklist.Name = "lblImportBlacklist";
+            this.lblImportBlacklist.Size = new System.Drawing.Size(112, 13);
+            this.lblImportBlacklist.TabIndex = 6;
+            this.lblImportBlacklist.Text = "Vacancies in blacklist:";
+            // 
+            // lblImportVacancies
+            // 
+            this.lblImportVacancies.AutoSize = true;
+            this.lblImportVacancies.Location = new System.Drawing.Point(136, 22);
+            this.lblImportVacancies.Name = "lblImportVacancies";
+            this.lblImportVacancies.Size = new System.Drawing.Size(104, 13);
+            this.lblImportVacancies.TabIndex = 5;
+            this.lblImportVacancies.Text = "Vacancies in queue:";
+            // 
+            // cmdImportCompanies
+            // 
+            this.cmdImportCompanies.Location = new System.Drawing.Point(6, 104);
+            this.cmdImportCompanies.Name = "cmdImportCompanies";
+            this.cmdImportCompanies.Size = new System.Drawing.Size(124, 23);
+            this.cmdImportCompanies.TabIndex = 3;
+            this.cmdImportCompanies.Text = "Import companies";
+            this.cmdImportCompanies.UseVisualStyleBackColor = true;
+            this.cmdImportCompanies.Click += new System.EventHandler(this.CmdImportCompanies_Click);
+            // 
+            // cmdImportCompleted
+            // 
+            this.cmdImportCompleted.Location = new System.Drawing.Point(6, 75);
+            this.cmdImportCompleted.Name = "cmdImportCompleted";
+            this.cmdImportCompleted.Size = new System.Drawing.Size(124, 23);
+            this.cmdImportCompleted.TabIndex = 2;
+            this.cmdImportCompleted.Text = "Import completed";
+            this.cmdImportCompleted.UseVisualStyleBackColor = true;
+            this.cmdImportCompleted.Click += new System.EventHandler(this.CmdImportCompleted_Click);
+            // 
+            // cmdImportBlacklist
+            // 
+            this.cmdImportBlacklist.Location = new System.Drawing.Point(6, 46);
+            this.cmdImportBlacklist.Name = "cmdImportBlacklist";
+            this.cmdImportBlacklist.Size = new System.Drawing.Size(124, 23);
+            this.cmdImportBlacklist.TabIndex = 1;
+            this.cmdImportBlacklist.Text = "Import blacklist";
+            this.cmdImportBlacklist.UseVisualStyleBackColor = true;
+            this.cmdImportBlacklist.Click += new System.EventHandler(this.CmdImportBlacklist_Click);
+            // 
+            // cmdImportVacancies
+            // 
+            this.cmdImportVacancies.Location = new System.Drawing.Point(6, 17);
+            this.cmdImportVacancies.Name = "cmdImportVacancies";
+            this.cmdImportVacancies.Size = new System.Drawing.Size(124, 23);
+            this.cmdImportVacancies.TabIndex = 0;
+            this.cmdImportVacancies.Text = "Import vacancies";
+            this.cmdImportVacancies.UseVisualStyleBackColor = true;
+            this.cmdImportVacancies.Click += new System.EventHandler(this.CmdImportVacancies_Click);
             // 
             // UC_Export
             // 
@@ -245,6 +338,8 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.groupBoxExport.ResumeLayout(false);
             this.groupBoxExport.PerformLayout();
+            this.groupBoxImport.ResumeLayout(false);
+            this.groupBoxImport.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -268,5 +363,13 @@
         private System.Windows.Forms.Label lblFileName;
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.CheckedListBox checkedListConsultants;
+        private System.Windows.Forms.Label lblImportCompanies;
+        private System.Windows.Forms.Label lblImportCompleted;
+        private System.Windows.Forms.Label lblImportBlacklist;
+        private System.Windows.Forms.Label lblImportVacancies;
+        private System.Windows.Forms.Button cmdImportCompanies;
+        private System.Windows.Forms.Button cmdImportCompleted;
+        private System.Windows.Forms.Button cmdImportBlacklist;
+        private System.Windows.Forms.Button cmdImportVacancies;
     }
 }

@@ -40,5 +40,27 @@ namespace Vacancy_Scraper.Objects
             Comment = comment;
             Url = url;
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as CompanyObject);
+        }
+
+        /// <summary>
+        /// Determines if two company objects are equal
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool Equals(CompanyObject obj)
+        {
+            return obj != null
+                && obj.Name.Equals(this.Name)
+                && obj.Cvr == this.Cvr
+                && obj.PNo == this.PNo
+                && obj.Telephone.Equals(this.Telephone)
+                && obj.Consultants.Equals(this.Consultants)
+                && obj.Comment.Equals(this.Comment)
+                && obj.Url.Equals(this.Url);
+        }
     }
 }
