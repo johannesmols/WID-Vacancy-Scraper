@@ -1,6 +1,6 @@
 ﻿namespace Vacancy_Scraper.UserControls
 {
-    partial class Vacancies
+    partial class UC_Vacancies
     {
         /// <summary> 
         /// Required designer variable.
@@ -71,7 +71,7 @@
             this.cmdAdd.Name = "cmdAdd";
             this.cmdAdd.Size = new System.Drawing.Size(49, 22);
             this.cmdAdd.Text = "Add";
-            this.cmdAdd.Click += new System.EventHandler(this.cmdAdd_Click);
+            this.cmdAdd.Click += new System.EventHandler(this.CmdAdd_Click);
             // 
             // toolStripSeparator1
             // 
@@ -87,7 +87,7 @@
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(60, 22);
             this.cmdDelete.Text = "Delete";
-            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
+            this.cmdDelete.Click += new System.EventHandler(this.CmdDelete_Click);
             // 
             // toolStripSeparator2
             // 
@@ -101,7 +101,7 @@
             this.cmdAddToBlacklist.Name = "cmdAddToBlacklist";
             this.cmdAddToBlacklist.Size = new System.Drawing.Size(109, 22);
             this.cmdAddToBlacklist.Text = "Add to blacklist";
-            this.cmdAddToBlacklist.Click += new System.EventHandler(this.cmdAddToBlacklist_Click);
+            this.cmdAddToBlacklist.Click += new System.EventHandler(this.CmdAddToBlacklist_Click);
             // 
             // toolStripSeparator3
             // 
@@ -115,7 +115,7 @@
             this.cmdMarkAsDone.Name = "cmdMarkAsDone";
             this.cmdMarkAsDone.Size = new System.Drawing.Size(98, 22);
             this.cmdMarkAsDone.Text = "Mark as done";
-            this.cmdMarkAsDone.Click += new System.EventHandler(this.cmdMarkAsDone_Click);
+            this.cmdMarkAsDone.Click += new System.EventHandler(this.CmdMarkAsDone_Click);
             // 
             // txtSearch
             // 
@@ -123,9 +123,9 @@
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(200, 25);
-            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
-            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.TxtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.TxtSearch_Leave);
+            this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
             // 
             // gridVacancies
             // 
@@ -155,11 +155,11 @@
             this.gridVacancies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridVacancies.Size = new System.Drawing.Size(676, 385);
             this.gridVacancies.TabIndex = 2;
-            this.gridVacancies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridVacancies_CellMouseClick);
-            this.gridVacancies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridVacancies_CellValueChanged);
-            this.gridVacancies.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridVacancies_ColumnHeaderMouseClick);
-            this.gridVacancies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridVacancies_DataBindingComplete);
-            this.gridVacancies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridVacancies_DataError);
+            this.gridVacancies.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridVacancies_CellMouseClick);
+            this.gridVacancies.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridVacancies_CellValueChanged);
+            this.gridVacancies.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridVacancies_ColumnHeaderMouseClick);
+            this.gridVacancies.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.GridVacancies_DataBindingComplete);
+            this.gridVacancies.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.GridVacancies_DataError);
             // 
             // Vacancies
             // 

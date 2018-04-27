@@ -130,11 +130,11 @@
     <Compile Include="UserControls\UC_Settings.Designer.cs">
       <DependentUpon>UC_Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Vacancies.cs">
+    <Compile Include="UserControls\UC_Vacancies.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Vacancies.Designer.cs">
-      <DependentUpon>Vacancies.cs</DependentUpon>
+    <Compile Include="UserControls\UC_Vacancies.Designer.cs">
+      <DependentUpon>UC_Vacancies.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\AddCompanyForm.resx">
       <DependentUpon>AddCompanyForm.cs</DependentUpon>
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="UserControls\UC_Settings.resx">
       <DependentUpon>UC_Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Vacancies.resx">
-      <DependentUpon>Vacancies.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\UC_Vacancies.resx">
+      <DependentUpon>UC_Vacancies.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -13,9 +13,9 @@ using Vacancy_Scraper.Objects;
 
 namespace Vacancy_Scraper.UserControls
 {
-    public partial class Vacancies : UserControl
+    public partial class UC_Vacancies : UserControl
     {
-        private static Vacancies _instance;
+        private static UC_Vacancies _instance;
 
         private JsonResourceManager<VacancyObject> _vacanciesManager;
         private BindingList<VacancyObject> _bindingList;
@@ -23,17 +23,17 @@ namespace Vacancy_Scraper.UserControls
         private bool _isSortedDescendingOrUnsorted = true;
         private bool _searchActive = false; // Indicates whether or not the user is searching, or otherwise the list would be filtered by the hint in the search box
 
-        public static Vacancies Instance
+        public static UC_Vacancies Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new Vacancies();
+                    _instance = new UC_Vacancies();
                 return _instance;
             }
         }
 
-        public Vacancies()
+        public UC_Vacancies()
         {
             InitializeComponent();
         }
@@ -100,7 +100,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridVacancies_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void GridVacancies_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             FormatUrls();
         }
@@ -132,7 +132,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridVacancies_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void GridVacancies_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
             {
@@ -149,7 +149,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtSearch_Enter(object sender, EventArgs e)
+        private void TxtSearch_Enter(object sender, EventArgs e)
         {
             _searchActive = true;
             if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text.Equals("Search..."))
@@ -164,7 +164,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtSearch_Leave(object sender, EventArgs e)
+        private void TxtSearch_Leave(object sender, EventArgs e)
         {
             _searchActive = false;
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
@@ -179,7 +179,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdAdd_Click(object sender, EventArgs e)
+        private void CmdAdd_Click(object sender, EventArgs e)
         {
             using (var form = new AddVacancyForm())
             {
@@ -223,7 +223,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdDelete_Click(object sender, EventArgs e)
+        private void CmdDelete_Click(object sender, EventArgs e)
         {
             if (gridVacancies.SelectedRows.Count <= 0) return;
 
@@ -247,24 +247,24 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdAddToBlacklist_Click(object sender, EventArgs e)
+        private void CmdAddToBlacklist_Click(object sender, EventArgs e)
         {
             if (gridVacancies.SelectedRows.Count <= 0) return;
 
-            var message = gridVacancies.SelectedRows.Count > 1
-                ? @"Add " + gridVacancies.SelectedRows.Count + @" vacancies to the blacklist?"
-                : @"Add this vacancy to the blacklist?";
+            //var message = gridVacancies.SelectedRows.Count > 1
+            //    ? @"Add " + gridVacancies.SelectedRows.Count + @" vacancies to the blacklist?"
+            //    : @"Add this vacancy to the blacklist?";
 
-            var result = MessageBox.Show(message, @"Add to blacklist", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                JsonResourceManager<VacancyObject> blacklistManager = new JsonResourceManager<VacancyObject>(ResourceType.Blacklist);
+            //var result = MessageBox.Show(message, @"Add to blacklist", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (result == DialogResult.Yes)
+            //{
+                var blacklistManager = new JsonResourceManager<VacancyObject>(ResourceType.Blacklist);
 
                 var rows = gridVacancies.SelectedRows;
-                for (int i = 0; i < rows.Count; i++)
+                for (var i = 0; i < rows.Count; i++)
                 {
                     // Add to blacklist
-                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    var currentObject = (VacancyObject) rows[i].DataBoundItem;
                     currentObject.Added = DateTime.Now;
                     blacklistManager.Resources.Add(currentObject);
 
@@ -274,7 +274,7 @@ namespace Vacancy_Scraper.UserControls
                 blacklistManager.SaveChangesToFile();
                 _vacanciesManager.SaveChangesToFile();
                 ReloadContent();
-            }
+            //}
         }
 
         /// <summary>
@@ -282,24 +282,24 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdMarkAsDone_Click(object sender, EventArgs e)
+        private void CmdMarkAsDone_Click(object sender, EventArgs e)
         {
             if (gridVacancies.SelectedRows.Count <= 0) return;
 
-            var message = gridVacancies.SelectedRows.Count > 1
-                ? @"Mark " + gridVacancies.SelectedRows.Count + @" vacancies as done?"
-                : @"Mark this vacancy as done?";
+            //var message = gridVacancies.SelectedRows.Count > 1
+            //    ? @"Mark " + gridVacancies.SelectedRows.Count + @" vacancies as done?"
+            //    : @"Mark this vacancy as done?";
 
-            var result = MessageBox.Show(message, @"Mark as done", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                JsonResourceManager<VacancyObject> doneManager = new JsonResourceManager<VacancyObject>(ResourceType.Done);
+            //var result = MessageBox.Show(message, @"Mark as done", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (result == DialogResult.Yes)
+            //{
+                var doneManager = new JsonResourceManager<VacancyObject>(ResourceType.Done);
 
                 var rows = gridVacancies.SelectedRows;
-                for (int i = 0; i < rows.Count; i++)
+                for (var i = 0; i < rows.Count; i++)
                 {
                     // Add to Done list
-                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    var currentObject = (VacancyObject) rows[i].DataBoundItem;
                     currentObject.Added = DateTime.Now;
                     doneManager.Resources.Add(currentObject);
 
@@ -309,7 +309,7 @@ namespace Vacancy_Scraper.UserControls
                 doneManager.SaveChangesToFile();
                 _vacanciesManager.SaveChangesToFile();
                 ReloadContent();
-            }
+            //}
         }
 
         /* --- Data Grid View Events --- */
@@ -319,7 +319,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridVacancies_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void GridVacancies_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show(@"This change cannot be made. Please only use the proper data type.", @"Error editing cell", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -329,7 +329,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridVacancies_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void GridVacancies_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             _vacanciesManager.SaveChangesToFile();
             FormatUrls();
@@ -340,7 +340,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridVacancies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void GridVacancies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (_isSortedDescendingOrUnsorted)
             {

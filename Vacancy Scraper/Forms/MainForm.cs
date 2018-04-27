@@ -87,15 +87,15 @@ namespace Vacancy_Scraper.Forms
                     }
                     break;
                 case Tabs.Vacancies:
-                    if (!panelVacancies.Controls.Contains(UserControls.Vacancies.Instance))
+                    if (!panelVacancies.Controls.Contains(UserControls.UC_Vacancies.Instance))
                     {
-                        panelVacancies.Controls.Add(UserControls.Vacancies.Instance);
-                        UserControls.Vacancies.Instance.Dock = DockStyle.Fill;
-                        UserControls.Vacancies.Instance.BringToFront();
+                        panelVacancies.Controls.Add(UserControls.UC_Vacancies.Instance);
+                        UserControls.UC_Vacancies.Instance.Dock = DockStyle.Fill;
+                        UserControls.UC_Vacancies.Instance.BringToFront();
                     }
                     else
                     {
-                        UserControls.Vacancies.Instance.BringToFront();
+                        UserControls.UC_Vacancies.Instance.BringToFront();
                     }
                     break;
                 case Tabs.Blacklist:
@@ -170,7 +170,7 @@ namespace Vacancy_Scraper.Forms
         private void NotifyTabChanged(Tabs newTab) 
         {
             UserControls.UC_Scrape.Instance.NotifyTabChanged(_currentTab, newTab);
-            UserControls.Vacancies.Instance.NotifyTabChanged(_currentTab, newTab);
+            UserControls.UC_Vacancies.Instance.NotifyTabChanged(_currentTab, newTab);
             UserControls.UC_Blacklist.Instance.NotifyTabChanged(_currentTab, newTab);
             UserControls.UC_Done.Instance.NotifyTabChanged(_currentTab, newTab);
             UserControls.UC_Companies.Instance.NotifyTabChanged(_currentTab, newTab);

@@ -345,6 +345,10 @@ namespace Vacancy_Scraper.UserControls
             ReloadContent();
         }
 
+        /// <summary>
+        /// Import a list of companies to the existing list
+        /// </summary>
+        /// <param name="manager"></param>
         private void ImportCompanyFile(JsonResourceManager<CompanyObject> manager)
         {
             var countBefore = manager.Resources.Count;
