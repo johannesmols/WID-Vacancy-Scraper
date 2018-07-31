@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
+using Vacancy_Scraper.Tools;
 
 namespace Vacancy_Scraper.UserControls
 {
@@ -189,7 +190,8 @@ namespace Vacancy_Scraper.UserControls
                 if (_searchActive)
                 {
                     string filter = txtSearch.Text.Trim().Replace("'", "''");
-                    gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(m => m.Title.Contains(filter)).ToList());
+                    gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(
+                        m => m.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList()); // using the StringExtensions.Compare method to search non case sensitively
                 }
             }
             catch (Exception ex)
@@ -311,7 +313,7 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private void gridDoneVacancies_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (_isSortedDescendingOrUnsorted)
+            if (_isSortedDescendingOrUnsorted) // sort ascending
             {
                 switch (e.ColumnIndex)
                 {
@@ -332,7 +334,7 @@ namespace Vacancy_Scraper.UserControls
                 gridDoneVacancies.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
                 _isSortedDescendingOrUnsorted = false;
             }
-            else
+            else // sort descending
             {
                 switch (e.ColumnIndex)
                 {

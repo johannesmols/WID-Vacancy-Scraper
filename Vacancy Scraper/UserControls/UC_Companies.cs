@@ -67,6 +67,8 @@ namespace Vacancy_Scraper.UserControls
             var source = new BindingSource(_bindingList, null);
             gridCompanies.DataSource = source;
             AdjustTableSettings();
+
+            gridCompanies.ClearSelection();
         }
 
         /// <summary>

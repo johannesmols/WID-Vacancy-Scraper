@@ -16,7 +16,10 @@ namespace Vacancy_Scraper.Forms
     {
         public List<VacancyObject> ReturnVacancies { get; }
 
-        private JsonResourceManager<CompanyObject> _companyManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies); 
+        private JsonResourceManager<CompanyObject> _companyManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
+
+        private bool _askToClose = true;
+        private bool _askedToClose = false;
 
         public AddVacancyForm()
         {
@@ -39,6 +42,8 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdAdd_Click(object sender, EventArgs e)
         {
+            _askToClose = false;
+
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
             {
@@ -99,6 +104,7 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCloseAndSave_Click(object sender, EventArgs e)
         {
+            _askToClose = false;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -110,6 +116,34 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCancel_Click(object sender, EventArgs e)
         {
+            _askToClose = true;
+            //doesn't assign anything
+            AskToClose();
+        }
+
+        /// <summary>
+        /// Check if the user really wants to close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddVacancyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_askToClose)
+            {
+                if (!_askedToClose)
+                {
+                    _askedToClose = true;
+                    e.Cancel = AskToClose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ask the user if he really wants to close the dialog without saving
+        /// </summary>
+        /// <returns>determines if the dialog should stay open</returns>
+        private bool AskToClose()
+        {
             if (ReturnVacancies.Count > 0)
             {
                 var result = MessageBox.Show(@"Are you sure?", @"Close without saving", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -117,12 +151,16 @@ namespace Vacancy_Scraper.Forms
                 {
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
+                    return false;
                 }
                 else if (result == DialogResult.No)
                 {
                     this.DialogResult = DialogResult.None;
+                    return true;
                 }
             }
+
+            return false;
         }
 
         /// <summary>
@@ -199,6 +237,7 @@ namespace Vacancy_Scraper.Forms
             try
             {
                 txtCVR.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Cvr.ToString();
+                txtTelephone.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Telephone;
             }
             catch (Exception exception)
             {
