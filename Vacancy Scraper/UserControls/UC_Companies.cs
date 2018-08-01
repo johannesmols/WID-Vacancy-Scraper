@@ -245,7 +245,8 @@ namespace Vacancy_Scraper.UserControls
             {
                 foreach (DataGridViewRow row in gridCompanies.SelectedRows)
                 {
-                    _bindingList.RemoveAt(row.Index);
+                    var currentObject = (CompanyObject) row.DataBoundItem;
+                    _companiesManager.Resources.Remove(currentObject);
                 }
                 _companiesManager.SaveChangesToFile();
                 ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting removed from the table when the grid view wasn't focused at the point of clicking the delete button

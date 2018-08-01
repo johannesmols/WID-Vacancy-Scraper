@@ -245,7 +245,7 @@ namespace Vacancy_Scraper.UserControls
                 for (int i = 0; i < rows.Count; i++)
                 {
                     // Add to vacancies list
-                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    var currentObject = (VacancyObject) rows[i].DataBoundItem;
                     currentObject.Added = DateTime.Now;
                     vacanciesManager.Resources.Add(currentObject);
 
@@ -276,7 +276,8 @@ namespace Vacancy_Scraper.UserControls
             {
                 foreach (DataGridViewRow row in gridDoneVacancies.SelectedRows)
                 {
-                    _bindingList.RemoveAt(row.Index);
+                    var currentObject = (VacancyObject) row.DataBoundItem;
+                    _doneManager.Resources.Remove(currentObject);
                 }
                 _doneManager.SaveChangesToFile();
                 ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting removed from the table when the grid view wasn't focused at the point of clicking the delete button
