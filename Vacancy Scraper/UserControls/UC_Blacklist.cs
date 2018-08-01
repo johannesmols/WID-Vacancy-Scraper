@@ -62,8 +62,7 @@ namespace Vacancy_Scraper.UserControls
             // Fill table
             _blacklistManager = new JsonResourceManager<VacancyObject>(ResourceType.Blacklist);
             _bindingList = new BindingList<VacancyObject>(_blacklistManager.Resources);
-            var source = new BindingSource(_bindingList, null);
-            gridBlacklistedVacancies.DataSource = source;
+            gridBlacklistedVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Added).ToList()); // sort by newest first
             AdjustTableSettings();
         }
 

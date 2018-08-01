@@ -65,8 +65,7 @@ namespace Vacancy_Scraper.UserControls
             // Fill table
             _companiesManager = new JsonResourceManager<CompanyObject>(ResourceType.Companies);
             _bindingList = new BindingList<CompanyObject>(_companiesManager.Resources);
-            var source = new BindingSource(_bindingList, null);
-            gridCompanies.DataSource = source;
+            gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.OrderBy(x => x.Consultants).ToList()); // sort by consultants, unsorted within one consultant group so that the newest added company is at the bottom
             AdjustTableSettings();
 
             gridCompanies.ClearSelection();

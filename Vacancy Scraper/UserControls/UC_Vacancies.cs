@@ -62,8 +62,7 @@ namespace Vacancy_Scraper.UserControls
             // Fill table
             _vacanciesManager = new JsonResourceManager<VacancyObject>(ResourceType.Vacancies);
             _bindingList = new BindingList<VacancyObject>(_vacanciesManager.Resources);
-            var source = new BindingSource(_bindingList, null);
-            gridVacancies.DataSource = source;
+            gridVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Added).ToList()); // sort by newest first
             AdjustTableSettings();
         }
 

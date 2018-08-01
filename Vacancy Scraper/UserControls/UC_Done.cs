@@ -62,8 +62,7 @@ namespace Vacancy_Scraper.UserControls
             // Fill table
             _doneManager = new JsonResourceManager<VacancyObject>(ResourceType.Done);
             _bindingList = new BindingList<VacancyObject>(_doneManager.Resources);
-            var source = new BindingSource(_bindingList, null);
-            gridDoneVacancies.DataSource = source;
+            gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Added).ToList()); // sort by newest first
             AdjustTableSettings();
         }
 
@@ -324,7 +323,7 @@ namespace Vacancy_Scraper.UserControls
                     case 1: // CVR
                         gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderBy(x => x.Title).ToList());
                         break;
-                    case 2: // P-No.
+                    case 2: // Added
                         gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderBy(x => x.Added).ToList());
                         break;
                     case 3: // Telephone
@@ -345,7 +344,7 @@ namespace Vacancy_Scraper.UserControls
                     case 1: // CVR
                         gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Title).ToList());
                         break;
-                    case 2: // P-No.
+                    case 2: // Added
                         gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Added).ToList());
                         break;
                     case 3: // Telephone
