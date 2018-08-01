@@ -37,6 +37,7 @@ namespace Vacancy_Scraper.Forms
         /// <summary>
         /// Try returning a Vacancy object list with the data and close the dialog.
         /// If the data is invalid, notify the user and leave the dialog open.
+        /// If the data already exists in a resource, ask the user if he still wants to add the duplicate.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -47,15 +48,21 @@ namespace Vacancy_Scraper.Forms
             var errors = GetInputFeedback();
             if (errors.Count == 0 && IsInputValid())
             {
+                var toCheck = new VacancyObject(comboCompanies.Text, txtVacancy.Text, DateTime.Now, string.Empty);
+
                 string msg = null;
-                if (IsDuplicate(ResourceType.Vacancies) && msg == null)
+                if (IsDuplicate(ResourceType.Vacancies, toCheck) && msg == null)
                     msg = @"Vacancy already exists in vacancies list. Do you still want to add it?";
 
-                if (IsDuplicate(ResourceType.Done) && msg == null)
+                if (IsDuplicate(ResourceType.Done, toCheck) && msg == null)
                     msg = @"Vacancy already exists in completed vacancies list. Do you still want to add it?";
 
-                if (IsDuplicate(ResourceType.Blacklist) && msg == null)
+                if (IsDuplicate(ResourceType.Blacklist, toCheck) && msg == null)
                     msg = @"Vacancy already exists in blacklist. Do you still want to add it?";
+
+                if (ReturnVacancies.Contains(toCheck) && msg == null) // check if vacancy was already entered before in this session
+                    msg = @"Vacancy already entered. Do you still want to add it?";
+
 
                 if (msg != null)
                 {
@@ -250,9 +257,9 @@ namespace Vacancy_Scraper.Forms
         /// Check a new vacancy for local duplicates in all three vacancy lists
         /// </summary>
         /// <returns>if the vacancy already exists in a resource</returns>
-        private bool IsDuplicate(ResourceType type)
+        private bool IsDuplicate(ResourceType type, VacancyObject vacancy)
         {
-            return new JsonResourceManager<VacancyObject>(type).Resources.Contains(new VacancyObject(comboCompanies.Text, txtVacancy.Text, DateTime.Now, string.Empty));
+            return new JsonResourceManager<VacancyObject>(type).Resources.Contains(vacancy);
         }
     }
 }
