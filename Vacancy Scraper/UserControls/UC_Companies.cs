@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
+using Vacancy_Scraper.Tools;
 
 namespace Vacancy_Scraper.UserControls
 {
@@ -196,7 +197,7 @@ namespace Vacancy_Scraper.UserControls
                 if (_searchActive)
                 {
                     string filter = txtSearch.Text.Trim().Replace("'", "''");
-                    gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.Where(m => m.Name.Contains(filter)).ToList());
+                    gridCompanies.DataSource = new BindingList<CompanyObject>(_bindingList.Where(m => m.Name.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList()); // using the StringExtensions.Compare method to search non case sensitively 
                 }
             }
             catch (Exception ex)
