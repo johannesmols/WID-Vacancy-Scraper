@@ -4,16 +4,19 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using Google.Apis.Drive.v3;
 using Newtonsoft.Json;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
+using Vacancy_Scraper.Tools;
 using UserControl = System.Windows.Forms.UserControl;
 
 namespace Vacancy_Scraper.UserControls
@@ -93,6 +96,9 @@ namespace Vacancy_Scraper.UserControls
             lblImportBlacklist.Text = @"Vacancies in blacklist: " + _blacklistManager.Resources.Count;
             lblImportCompleted.Text = @"Vacancies completed: " + _doneManager.Resources.Count;
             lblImportCompanies.Text = @"Companies: " + _companyManager.Resources.Count;
+
+            // Display last Google Drive Synchronization Date
+            UpdateLastDriveSyncLabel();
         }
 
         /// <summary>
@@ -404,6 +410,70 @@ namespace Vacancy_Scraper.UserControls
 
             var result = openFileDialog.ShowDialog();
             return result == DialogResult.OK ? openFileDialog.FileName : string.Empty;
+        }
+
+        /// <summary>
+        /// Synchronize files with Google Drive
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdDriveSynchronize_Click(object sender, EventArgs e)
+        {
+            var files = new[]
+            {
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "vacancies.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "blacklist.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "done.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "companies.json")
+            };
+
+            var driveManager = new GoogleDriveManager();
+            for (var i = 0; i < files.Length; i++)
+            {
+                Google.Apis.Drive.v3.Data.File responseFile;
+
+                // save response file id to settings to find the file later
+                switch (i)
+                {
+                    case 0:
+                        responseFile = driveManager.UploadFile(files[i], ResourceType.Vacancies);
+                        _settingsManager.SetGoogleDriveVacanciesFileId(responseFile.Id);
+                        break;
+                    case 1:
+                        responseFile = driveManager.UploadFile(files[i], ResourceType.Blacklist);
+                        _settingsManager.SetGoogleDriveBlacklistFileId(responseFile.Id);
+                        break;
+                    case 2:
+                        responseFile = driveManager.UploadFile(files[i], ResourceType.Done);
+                        _settingsManager.SetGoogleDriveDoneFileId(responseFile.Id);
+                        break;
+                    case 3:
+                        responseFile = driveManager.UploadFile(files[i], ResourceType.Companies);
+                        _settingsManager.SetGoogleDriveCompaniesFileId(responseFile.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            _settingsManager.SetLastDriveSynch(DateTime.Now);
+            UpdateLastDriveSyncLabel();
+        }
+
+        /// <summary>
+        /// Display last Google Drive Synchronization Date
+        /// </summary>
+        private void UpdateLastDriveSyncLabel()
+        {
+            var lastDriveSynch = _settingsManager.Settings.LastDriveSynch;
+            if (!lastDriveSynch.Equals(DateTime.MinValue))
+            {
+                lblDriveLastSynched.Text = @"Last synced: " + lastDriveSynch.ToString(CultureInfo.CurrentCulture);
+            }
+            else
+            {
+                lblDriveLastSynched.Text = @"Last synced: Never";
+            }
         }
     }
 }

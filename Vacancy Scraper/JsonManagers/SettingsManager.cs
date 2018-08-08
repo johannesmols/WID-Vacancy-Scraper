@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, "", "", "", ""));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -90,12 +90,13 @@ namespace Vacancy_Scraper.JsonManagers
 
         /// <summary>
         /// Verifies if the settings that were read from the file are valid and contain every property
+        /// Do not verify last drive synch date since that is hidden from the user and only changeable by the program itself
         /// </summary>
         private void VerifySettings()
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, "", "", "", ""));
             }
             else
             {
@@ -229,6 +230,56 @@ namespace Vacancy_Scraper.JsonManagers
         public void SetScraperCheckJobnet(bool checkJobnet)
         {
             Settings.ScraperCheckJobnet = checkJobnet;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the last synchronization with Google Drive to the settings file
+        /// </summary>
+        /// <param name="lastDriveSynch"></param>
+        public void SetLastDriveSynch(DateTime lastDriveSynch)
+        {
+            Settings.LastDriveSynch = lastDriveSynch;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the file ID of the vacancies file in the Google Drive to the settings file
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetGoogleDriveVacanciesFileId(string id)
+        {
+            Settings.GoogleDriveVacanciesFileId = id;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the file ID of the blacklist file in the Google Drive to the settings file
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetGoogleDriveBlacklistFileId(string id)
+        {
+            Settings.GoogleDriveBlacklistFileId = id;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the file ID of the done file in the Google Drive to the settings file
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetGoogleDriveDoneFileId(string id)
+        {
+            Settings.GoogleDriveDoneFileId = id;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the file ID of the companies file in the Google Drive to the settings file
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetGoogleDriveCompaniesFileId(string id)
+        {
+            Settings.GoogleDriveCompaniesFileId = id;
             WriteSettings(Settings);
         }
 

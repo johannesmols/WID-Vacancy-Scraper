@@ -12,7 +12,6 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Opera;
-using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Support.UI;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
@@ -187,16 +186,6 @@ namespace Vacancy_Scraper.Scraper
                         edgeDriverService.HideCommandPromptWindow = true;
 
                         Driver = new EdgeDriver(edgeDriverService);
-                    }
-                    break;
-                case "PhantomJS":
-                    var pathPhantomJs = Path.Combine(SettingsManager.Settings.WebDriversPath, "phantomjs.exe");
-                    if (File.Exists(pathPhantomJs))
-                    {
-                        var phantomJsDriverService = PhantomJSDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
-                        phantomJsDriverService.HideCommandPromptWindow = true;
-
-                        Driver = new PhantomJSDriver(phantomJsDriverService);
                     }
                     break;
                 case "Opera":

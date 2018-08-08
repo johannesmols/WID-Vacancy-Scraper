@@ -198,16 +198,14 @@ namespace Vacancy_Scraper.UserControls
                 bool ieexplorer = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "IEDriverServer.exe"));
                 bool firefox = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "geckodriver.exe"));
                 bool opera = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "operadriver.exe"));
-                bool phantomjs = File.Exists(Path.Combine(txtSettingsWebDriversPath.Text, "phantomjs.exe"));
 
-                if (firefox || chrome || opera || edge || phantomjs)
+                if (firefox || chrome || opera || edge)
                 {
                     if (chrome) { drivers.Add("Chrome"); drivers.Add("Headless Chrome"); }
                     if (edge) { drivers.Add("Edge"); }
                     if (ieexplorer) { drivers.Add("Internet Explorer"); }
                     if (firefox) { drivers.Add("Firefox"); }
                     if (opera) { drivers.Add("Opera"); }
-                    if (phantomjs) { drivers.Add("PhantomJS"); }
                 }
             }
 

@@ -53,9 +53,13 @@
             this.cmdImportCompleted = new System.Windows.Forms.Button();
             this.cmdImportBlacklist = new System.Windows.Forms.Button();
             this.cmdImportVacancies = new System.Windows.Forms.Button();
+            this.groupBoxSync = new System.Windows.Forms.GroupBox();
+            this.lblDriveLastSynched = new System.Windows.Forms.Label();
+            this.cmdDriveSynchronize = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
             this.groupBoxImport.SuspendLayout();
+            this.groupBoxSync.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -65,10 +69,12 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.Controls.Add(this.groupBoxExport, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.groupBoxImport, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.groupBoxSync, 1, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(676, 410);
             this.tableLayoutPanel.TabIndex = 0;
@@ -92,6 +98,7 @@
             this.groupBoxExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxExport.Location = new System.Drawing.Point(3, 3);
             this.groupBoxExport.Name = "groupBoxExport";
+            this.tableLayoutPanel.SetRowSpan(this.groupBoxExport, 2);
             this.groupBoxExport.Size = new System.Drawing.Size(332, 404);
             this.groupBoxExport.TabIndex = 0;
             this.groupBoxExport.TabStop = false;
@@ -247,7 +254,7 @@
             this.groupBoxImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxImport.Location = new System.Drawing.Point(341, 3);
             this.groupBoxImport.Name = "groupBoxImport";
-            this.groupBoxImport.Size = new System.Drawing.Size(332, 404);
+            this.groupBoxImport.Size = new System.Drawing.Size(332, 199);
             this.groupBoxImport.TabIndex = 1;
             this.groupBoxImport.TabStop = false;
             this.groupBoxImport.Text = "Import";
@@ -328,6 +335,37 @@
             this.cmdImportVacancies.UseVisualStyleBackColor = true;
             this.cmdImportVacancies.Click += new System.EventHandler(this.CmdImportVacancies_Click);
             // 
+            // groupBoxSync
+            // 
+            this.groupBoxSync.Controls.Add(this.lblDriveLastSynched);
+            this.groupBoxSync.Controls.Add(this.cmdDriveSynchronize);
+            this.groupBoxSync.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSync.Location = new System.Drawing.Point(341, 208);
+            this.groupBoxSync.Name = "groupBoxSync";
+            this.groupBoxSync.Size = new System.Drawing.Size(332, 199);
+            this.groupBoxSync.TabIndex = 2;
+            this.groupBoxSync.TabStop = false;
+            this.groupBoxSync.Text = "Synchronize with Google Drive";
+            // 
+            // lblDriveLastSynched
+            // 
+            this.lblDriveLastSynched.AutoSize = true;
+            this.lblDriveLastSynched.Location = new System.Drawing.Point(136, 25);
+            this.lblDriveLastSynched.Name = "lblDriveLastSynched";
+            this.lblDriveLastSynched.Size = new System.Drawing.Size(70, 13);
+            this.lblDriveLastSynched.TabIndex = 6;
+            this.lblDriveLastSynched.Text = "Last synced: ";
+            // 
+            // cmdDriveSynchronize
+            // 
+            this.cmdDriveSynchronize.Location = new System.Drawing.Point(7, 20);
+            this.cmdDriveSynchronize.Name = "cmdDriveSynchronize";
+            this.cmdDriveSynchronize.Size = new System.Drawing.Size(123, 23);
+            this.cmdDriveSynchronize.TabIndex = 0;
+            this.cmdDriveSynchronize.Text = "Synchronize";
+            this.cmdDriveSynchronize.UseVisualStyleBackColor = true;
+            this.cmdDriveSynchronize.Click += new System.EventHandler(this.CmdDriveSynchronize_Click);
+            // 
             // UC_Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,6 +378,8 @@
             this.groupBoxExport.PerformLayout();
             this.groupBoxImport.ResumeLayout(false);
             this.groupBoxImport.PerformLayout();
+            this.groupBoxSync.ResumeLayout(false);
+            this.groupBoxSync.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -371,5 +411,8 @@
         private System.Windows.Forms.Button cmdImportCompleted;
         private System.Windows.Forms.Button cmdImportBlacklist;
         private System.Windows.Forms.Button cmdImportVacancies;
+        private System.Windows.Forms.GroupBox groupBoxSync;
+        private System.Windows.Forms.Label lblDriveLastSynched;
+        private System.Windows.Forms.Button cmdDriveSynchronize;
     }
 }
