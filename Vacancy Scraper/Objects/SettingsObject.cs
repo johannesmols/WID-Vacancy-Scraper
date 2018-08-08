@@ -14,7 +14,8 @@ namespace Vacancy_Scraper.Objects
         public string ScraperWebDriver { get; set; }
         public string ScraperBannedKeywords { get; set; }
         public bool ScraperCheckJobnet { get; set; }
-        public DateTime LastDriveSynch { get; set; }
+        public DateTime LastDriveUpload { get; set; }
+        public DateTime LastDriveDownload { get; set; }
         public string GoogleDriveVacanciesFileId { get; set; }
         public string GoogleDriveBlacklistFileId { get; set; }
         public string GoogleDriveDoneFileId { get; set; }
@@ -27,7 +28,8 @@ namespace Vacancy_Scraper.Objects
             string scraperWebDriver, 
             string scraperBannedKeywords, 
             bool scraperCheckJobnet, 
-            DateTime lastDriveSynch,
+            DateTime lastDriveUpload,
+            DateTime lastDriveDownload,
             string googleDriveVacanciesFileId,
             string googleDriveBlacklistFileId,
             string googleDriveDoneFileId,
@@ -40,7 +42,8 @@ namespace Vacancy_Scraper.Objects
             ScraperWebDriver = scraperWebDriver;
             ScraperBannedKeywords = scraperBannedKeywords;
             ScraperCheckJobnet = scraperCheckJobnet;
-            LastDriveSynch = lastDriveSynch;
+            LastDriveUpload = lastDriveUpload;
+            LastDriveDownload = lastDriveDownload;
             GoogleDriveVacanciesFileId = googleDriveVacanciesFileId;
             GoogleDriveBlacklistFileId = googleDriveBlacklistFileId;
             GoogleDriveDoneFileId = googleDriveDoneFileId;

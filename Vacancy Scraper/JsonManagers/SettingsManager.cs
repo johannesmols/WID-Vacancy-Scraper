@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -96,7 +96,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
             }
             else
             {
@@ -234,12 +234,22 @@ namespace Vacancy_Scraper.JsonManagers
         }
 
         /// <summary>
-        /// Write the last synchronization with Google Drive to the settings file
+        /// Write the last upload with Google Drive to the settings file
         /// </summary>
-        /// <param name="lastDriveSynch"></param>
-        public void SetLastDriveSynch(DateTime lastDriveSynch)
+        /// <param name="lastDriveUpload"></param>
+        public void SetLastDriveUpload(DateTime lastDriveUpload)
         {
-            Settings.LastDriveSynch = lastDriveSynch;
+            Settings.LastDriveUpload = lastDriveUpload;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the last download with Google Drive to the settings file
+        /// </summary>
+        /// <param name="lastDriveDownload"></param>
+        public void SetLastDriveDownload(DateTime lastDriveDownload)
+        {
+            Settings.LastDriveDownload = lastDriveDownload;
             WriteSettings(Settings);
         }
 

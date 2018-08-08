@@ -54,8 +54,11 @@
             this.cmdImportBlacklist = new System.Windows.Forms.Button();
             this.cmdImportVacancies = new System.Windows.Forms.Button();
             this.groupBoxSync = new System.Windows.Forms.GroupBox();
-            this.lblDriveLastSynched = new System.Windows.Forms.Label();
-            this.cmdDriveSynchronize = new System.Windows.Forms.Button();
+            this.checkedListDownloadUploadFiles = new System.Windows.Forms.CheckedListBox();
+            this.cmdDownload = new System.Windows.Forms.Button();
+            this.lblDriveLastUploaded = new System.Windows.Forms.Label();
+            this.cmdDriveUpload = new System.Windows.Forms.Button();
+            this.lblDriveLastDownloaded = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
             this.groupBoxImport.SuspendLayout();
@@ -337,8 +340,11 @@
             // 
             // groupBoxSync
             // 
-            this.groupBoxSync.Controls.Add(this.lblDriveLastSynched);
-            this.groupBoxSync.Controls.Add(this.cmdDriveSynchronize);
+            this.groupBoxSync.Controls.Add(this.lblDriveLastDownloaded);
+            this.groupBoxSync.Controls.Add(this.checkedListDownloadUploadFiles);
+            this.groupBoxSync.Controls.Add(this.cmdDownload);
+            this.groupBoxSync.Controls.Add(this.lblDriveLastUploaded);
+            this.groupBoxSync.Controls.Add(this.cmdDriveUpload);
             this.groupBoxSync.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSync.Location = new System.Drawing.Point(341, 208);
             this.groupBoxSync.Name = "groupBoxSync";
@@ -347,24 +353,56 @@
             this.groupBoxSync.TabStop = false;
             this.groupBoxSync.Text = "Synchronize with Google Drive";
             // 
-            // lblDriveLastSynched
+            // checkedListDownloadUploadFiles
             // 
-            this.lblDriveLastSynched.AutoSize = true;
-            this.lblDriveLastSynched.Location = new System.Drawing.Point(136, 25);
-            this.lblDriveLastSynched.Name = "lblDriveLastSynched";
-            this.lblDriveLastSynched.Size = new System.Drawing.Size(70, 13);
-            this.lblDriveLastSynched.TabIndex = 6;
-            this.lblDriveLastSynched.Text = "Last synced: ";
+            this.checkedListDownloadUploadFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListDownloadUploadFiles.CheckOnClick = true;
+            this.checkedListDownloadUploadFiles.FormattingEnabled = true;
+            this.checkedListDownloadUploadFiles.Location = new System.Drawing.Point(6, 76);
+            this.checkedListDownloadUploadFiles.Name = "checkedListDownloadUploadFiles";
+            this.checkedListDownloadUploadFiles.Size = new System.Drawing.Size(319, 109);
+            this.checkedListDownloadUploadFiles.TabIndex = 16;
             // 
-            // cmdDriveSynchronize
+            // cmdDownload
             // 
-            this.cmdDriveSynchronize.Location = new System.Drawing.Point(7, 20);
-            this.cmdDriveSynchronize.Name = "cmdDriveSynchronize";
-            this.cmdDriveSynchronize.Size = new System.Drawing.Size(123, 23);
-            this.cmdDriveSynchronize.TabIndex = 0;
-            this.cmdDriveSynchronize.Text = "Synchronize";
-            this.cmdDriveSynchronize.UseVisualStyleBackColor = true;
-            this.cmdDriveSynchronize.Click += new System.EventHandler(this.CmdDriveSynchronize_Click);
+            this.cmdDownload.Location = new System.Drawing.Point(6, 47);
+            this.cmdDownload.Name = "cmdDownload";
+            this.cmdDownload.Size = new System.Drawing.Size(124, 23);
+            this.cmdDownload.TabIndex = 7;
+            this.cmdDownload.Text = "Download";
+            this.cmdDownload.UseVisualStyleBackColor = true;
+            this.cmdDownload.Click += new System.EventHandler(this.CmdDownload_Click);
+            // 
+            // lblDriveLastUploaded
+            // 
+            this.lblDriveLastUploaded.AutoSize = true;
+            this.lblDriveLastUploaded.Location = new System.Drawing.Point(135, 24);
+            this.lblDriveLastUploaded.Name = "lblDriveLastUploaded";
+            this.lblDriveLastUploaded.Size = new System.Drawing.Size(80, 13);
+            this.lblDriveLastUploaded.TabIndex = 6;
+            this.lblDriveLastUploaded.Text = "Last uploaded: ";
+            // 
+            // cmdDriveUpload
+            // 
+            this.cmdDriveUpload.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cmdDriveUpload.Location = new System.Drawing.Point(6, 19);
+            this.cmdDriveUpload.Name = "cmdDriveUpload";
+            this.cmdDriveUpload.Size = new System.Drawing.Size(123, 23);
+            this.cmdDriveUpload.TabIndex = 0;
+            this.cmdDriveUpload.Text = "Upload";
+            this.cmdDriveUpload.UseVisualStyleBackColor = true;
+            this.cmdDriveUpload.Click += new System.EventHandler(this.CmdDriveUpload_Click);
+            // 
+            // lblDriveLastDownloaded
+            // 
+            this.lblDriveLastDownloaded.AutoSize = true;
+            this.lblDriveLastDownloaded.Location = new System.Drawing.Point(135, 52);
+            this.lblDriveLastDownloaded.Name = "lblDriveLastDownloaded";
+            this.lblDriveLastDownloaded.Size = new System.Drawing.Size(94, 13);
+            this.lblDriveLastDownloaded.TabIndex = 17;
+            this.lblDriveLastDownloaded.Text = "Last downloaded: ";
             // 
             // UC_Export
             // 
@@ -412,7 +450,10 @@
         private System.Windows.Forms.Button cmdImportBlacklist;
         private System.Windows.Forms.Button cmdImportVacancies;
         private System.Windows.Forms.GroupBox groupBoxSync;
-        private System.Windows.Forms.Label lblDriveLastSynched;
-        private System.Windows.Forms.Button cmdDriveSynchronize;
+        private System.Windows.Forms.Label lblDriveLastUploaded;
+        private System.Windows.Forms.Button cmdDriveUpload;
+        private System.Windows.Forms.Button cmdDownload;
+        private System.Windows.Forms.CheckedListBox checkedListDownloadUploadFiles;
+        private System.Windows.Forms.Label lblDriveLastDownloaded;
     }
 }

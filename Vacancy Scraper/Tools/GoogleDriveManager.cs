@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Download;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
@@ -135,17 +136,69 @@ namespace Vacancy_Scraper.Tools
                     break;
             }
 
+            bool fileFound = false;
+
             try
             {
                 var file = fileListRequest?.Execute(); // null propagation
-                return file != null; // return true if the file is not null, therefore exists in the Drive
+                fileFound = file != null;
             }
             catch (Exception e) // the Google Drive API throws an error if the file can't be found. Catch this here and return false.
             {
                 Console.WriteLine(e);
                 Console.WriteLine(@"File does not exist in Google Drive");
-                return false;
+                fileFound = false;
             }
+
+            // If the file was found, then return true here
+            if (fileFound) return true;
+
+            var otherFiles = await GetFilesWithMatchingFileNames();
+
+            // check for matching file and update the file ID accordingly
+            switch (type)
+            {
+                case ResourceType.Vacancies:
+                    foreach (var file in otherFiles)
+                    {
+                        if (!file.Name.Equals("vacancies.json")) continue;
+                        _settingsManager.SetGoogleDriveVacanciesFileId(file.Id);
+                        Console.WriteLine(@"Found existing file in Drive, updated File ID.");
+                        return true;
+                    }
+                    break;
+                case ResourceType.Blacklist:
+                    foreach (var file in otherFiles)
+                    {
+                        if (!file.Name.Equals("blacklist.json")) continue;
+                        _settingsManager.SetGoogleDriveBlacklistFileId(file.Id);
+                        Console.WriteLine(@"Found existing file in Drive, updated File ID.");
+                        return true;
+                    }
+                    break;
+                case ResourceType.Done:
+                    foreach (var file in otherFiles)
+                    {
+                        if (!file.Name.Equals("done.json")) continue;
+                        _settingsManager.SetGoogleDriveDoneFileId(file.Id);
+                        Console.WriteLine(@"Found existing file in Drive, updated File ID.");
+                        return true;
+                    }
+                    break;
+                case ResourceType.Companies:
+                    foreach (var file in otherFiles)
+                    {
+                        if (!file.Name.Equals("companies.json")) continue;
+                        _settingsManager.SetGoogleDriveCompaniesFileId(file.Id);
+                        Console.WriteLine(@"Found existing file in Drive, updated File ID.");
+                        return true;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -211,6 +264,76 @@ namespace Vacancy_Scraper.Tools
                 }
 
                 return request.ResponseBody;
+            }
+        }
+
+        /// <summary>
+        /// Download a file from Google Drive and overwrite any exisiting local files
+        /// </summary>
+        /// <param name="type">the file type</param>
+        /// <returns></returns>
+        public async Task DownloadAndReplaceFile(ResourceType type)
+        {
+            await Initialize(); // Initialize Google Drive Service
+
+            var stream = new MemoryStream();
+
+            // Generate download request
+            FilesResource.GetRequest request;
+            switch (type)
+            {
+                case ResourceType.Vacancies:
+                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveVacanciesFileId);
+                    break;
+                case ResourceType.Blacklist:
+                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveBlacklistFileId);
+                    break;
+                case ResourceType.Done:
+                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveDoneFileId);
+                    break;
+                case ResourceType.Companies:
+                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveCompaniesFileId);
+                    break;
+                default:
+                    return;
+            }
+
+            // Progress listener
+            request.MediaDownloader.ProgressChanged += progress =>
+            {
+                switch (progress.Status)
+                {
+                    case DownloadStatus.Downloading:
+                    {
+                        Console.WriteLine(progress.BytesDownloaded);
+                        break;
+                    }
+                    case DownloadStatus.Completed:
+                    {
+                        Console.WriteLine(@"Download complete.");
+                        break;
+                    }
+                    case DownloadStatus.Failed:
+                    {
+                        Console.WriteLine(@"Download failed.");
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+            };
+
+            // Download
+            request.Download(stream);
+
+            // Save stream to file
+            using (var fileStream = new FileStream(
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, type.ToString().ToLower() + ".json"), 
+                FileMode.Create, 
+                FileAccess.Write))
+            {
+                stream.WriteTo(fileStream);
             }
         }
     }

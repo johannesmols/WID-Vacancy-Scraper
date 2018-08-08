@@ -99,7 +99,15 @@ namespace Vacancy_Scraper.UserControls
             lblImportCompanies.Text = @"Companies: " + _companyManager.Resources.Count;
 
             // Display last Google Drive Synchronization Date
-            UpdateLastDriveSyncLabel();
+            UpdateLastDriveUploadLabel();
+            UpdateLastDriveDownloadLabel();
+
+            // Add items in the file type checkbox list
+            checkedListDownloadUploadFiles.Items.Clear();
+            checkedListDownloadUploadFiles.Items.Add(ResourceType.Vacancies.ToString(), true);
+            checkedListDownloadUploadFiles.Items.Add(ResourceType.Blacklist.ToString(), true);
+            checkedListDownloadUploadFiles.Items.Add(ResourceType.Done.ToString(), true);
+            checkedListDownloadUploadFiles.Items.Add(ResourceType.Companies.ToString(), true);
         }
 
         /// <summary>
@@ -418,41 +426,42 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void CmdDriveSynchronize_Click(object sender, EventArgs e)
+        private async void CmdDriveUpload_Click(object sender, EventArgs e)
         {
-            // Change label to display that the sync is in progress
-            lblDriveLastSynched.Text = @"Sync in progres...";
+            // Change label to display that the upload is in progress
+            lblDriveLastUploaded.Text = @"Upload in progres...";
 
-            var files = new[]
+            var filesList = new List<string>();
+            foreach (var fileItem in checkedListDownloadUploadFiles.CheckedItems)
             {
-                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "vacancies.json"),
-                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "blacklist.json"),
-                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "done.json"),
-                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "companies.json")
-            };
+                filesList.Add(Path.Combine(_settingsManager.Settings.ResourceFolderPath, fileItem.ToString().ToLower() + ".json"));
+            }
 
             var driveManager = new GoogleDriveManager();
-            for (var i = 0; i < files.Length; i++)
+            for (var i = 0; i < filesList.Count; i++)
             {
+                // Update label
+                lblDriveLastUploaded.Text = @"Upload in progress... (" + (i + 1) + @"/" + filesList.Count + @")";  
+
                 Google.Apis.Drive.v3.Data.File responseFile;
 
                 // save response file id to settings to find the file later
                 switch (i)
                 {
                     case 0:
-                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Vacancies);
+                        responseFile = await driveManager.UploadFile(filesList[i], ResourceType.Vacancies);
                         _settingsManager.SetGoogleDriveVacanciesFileId(responseFile.Id);
                         break;
                     case 1:
-                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Blacklist);
+                        responseFile = await driveManager.UploadFile(filesList[i], ResourceType.Blacklist);
                         _settingsManager.SetGoogleDriveBlacklistFileId(responseFile.Id);
                         break;
                     case 2:
-                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Done);
+                        responseFile = await driveManager.UploadFile(filesList[i], ResourceType.Done);
                         _settingsManager.SetGoogleDriveDoneFileId(responseFile.Id);
                         break;
                     case 3:
-                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Companies);
+                        responseFile = await driveManager.UploadFile(filesList[i], ResourceType.Companies);
                         _settingsManager.SetGoogleDriveCompaniesFileId(responseFile.Id);
                         break;
                     default:
@@ -460,23 +469,81 @@ namespace Vacancy_Scraper.UserControls
                 }
             }
 
-            _settingsManager.SetLastDriveSynch(DateTime.Now);
-            UpdateLastDriveSyncLabel();
+            _settingsManager.SetLastDriveUpload(DateTime.Now);
+            UpdateLastDriveUploadLabel();
+        }
+
+        /// <summary>
+        /// Download files from Google Drive and replace them locally
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CmdDownload_Click(object sender, EventArgs e)
+        {
+            // Change label to display that the download is in progress
+            lblDriveLastDownloaded.Text = @"Download in progres...";
+
+            var driveManager = new GoogleDriveManager();
+
+            var cnt = 1;
+            foreach (var checkedItem in checkedListDownloadUploadFiles.CheckedItems)
+            {
+                // Update label
+                lblDriveLastDownloaded.Text = @"Download in progress... (" + cnt++ + @"/" +
+                                              checkedListDownloadUploadFiles.CheckedItems.Count + @")"; 
+
+                switch (checkedItem.ToString())
+                {
+                    case "Vacancies":
+                        await driveManager.DownloadAndReplaceFile(ResourceType.Vacancies);
+                        break;
+                    case "Blacklist":
+                        await driveManager.DownloadAndReplaceFile(ResourceType.Blacklist);
+                        break;
+                    case "Done":
+                        await driveManager.DownloadAndReplaceFile(ResourceType.Done);
+                        break;
+                    case "Companies":
+                        await driveManager.DownloadAndReplaceFile(ResourceType.Companies);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            _settingsManager.SetLastDriveDownload(DateTime.Now);
+            UpdateLastDriveDownloadLabel();
         }
 
         /// <summary>
         /// Display last Google Drive Synchronization Date
         /// </summary>
-        private void UpdateLastDriveSyncLabel()
+        private void UpdateLastDriveUploadLabel()
         {
-            var lastDriveSynch = _settingsManager.Settings.LastDriveSynch;
-            if (!lastDriveSynch.Equals(DateTime.MinValue))
+            var lastDriveUpload = _settingsManager.Settings.LastDriveUpload;
+            if (!lastDriveUpload.Equals(DateTime.MinValue))
             {
-                lblDriveLastSynched.Text = @"Last synced: " + lastDriveSynch.ToString(CultureInfo.CurrentCulture);
+                lblDriveLastUploaded.Text = @"Last uploaded: " + lastDriveUpload.ToString(CultureInfo.CurrentCulture);
             }
             else
             {
-                lblDriveLastSynched.Text = @"Last synced: Never";
+                lblDriveLastUploaded.Text = @"Last uploaded: Never";
+            }
+        }
+
+        /// <summary>
+        /// Display last Google Drive Synchronization Date
+        /// </summary>
+        private void UpdateLastDriveDownloadLabel()
+        {
+            var lastDriveDownload = _settingsManager.Settings.LastDriveDownload;
+            if (!lastDriveDownload.Equals(DateTime.MinValue))
+            {
+                lblDriveLastDownloaded.Text = @"Last downloaded: " + lastDriveDownload.ToString(CultureInfo.CurrentCulture);
+            }
+            else
+            {
+                lblDriveLastDownloaded.Text = @"Last downloaded: Never";
             }
         }
     }
