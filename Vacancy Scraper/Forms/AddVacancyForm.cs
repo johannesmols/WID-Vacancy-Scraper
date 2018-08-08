@@ -199,7 +199,7 @@ namespace Vacancy_Scraper.Forms
                 errors.Add("Please enter a vacancy title");
 
             if (string.IsNullOrWhiteSpace(txtUrl.Text))
-                errors.Add("Please enter an URL");
+                errors.Add("Please enter a URL");
 
             if (!Uri.IsWellFormedUriString(txtUrl.Text, UriKind.Absolute))
                 errors.Add("URL has invalid format");

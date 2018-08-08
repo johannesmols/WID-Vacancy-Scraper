@@ -420,6 +420,9 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private async void CmdDriveSynchronize_Click(object sender, EventArgs e)
         {
+            // Change label to display that the sync is in progress
+            lblDriveLastSynched.Text = @"Sync in progres...";
+
             var files = new[]
             {
                 Path.Combine(_settingsManager.Settings.ResourceFolderPath, "vacancies.json"),
