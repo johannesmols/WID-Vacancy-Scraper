@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Media;
 using Google.Apis.Drive.v3;
 using Newtonsoft.Json;
 using Vacancy_Scraper.Forms;
@@ -417,7 +418,7 @@ namespace Vacancy_Scraper.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CmdDriveSynchronize_Click(object sender, EventArgs e)
+        private async void CmdDriveSynchronize_Click(object sender, EventArgs e)
         {
             var files = new[]
             {
@@ -436,19 +437,19 @@ namespace Vacancy_Scraper.UserControls
                 switch (i)
                 {
                     case 0:
-                        responseFile = driveManager.UploadFile(files[i], ResourceType.Vacancies);
+                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Vacancies);
                         _settingsManager.SetGoogleDriveVacanciesFileId(responseFile.Id);
                         break;
                     case 1:
-                        responseFile = driveManager.UploadFile(files[i], ResourceType.Blacklist);
+                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Blacklist);
                         _settingsManager.SetGoogleDriveBlacklistFileId(responseFile.Id);
                         break;
                     case 2:
-                        responseFile = driveManager.UploadFile(files[i], ResourceType.Done);
+                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Done);
                         _settingsManager.SetGoogleDriveDoneFileId(responseFile.Id);
                         break;
                     case 3:
-                        responseFile = driveManager.UploadFile(files[i], ResourceType.Companies);
+                        responseFile = await driveManager.UploadFile(files[i], ResourceType.Companies);
                         _settingsManager.SetGoogleDriveCompaniesFileId(responseFile.Id);
                         break;
                     default:

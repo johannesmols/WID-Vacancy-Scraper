@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Vacancy_Scraper.Tools
 {
     class GoogleDriveManager
     {
+        private bool _initialized = false;
+
         // If modifying these scopes, delete the folder
         // at ~/token.json
         private static readonly string[] Scopes = { DriveService.Scope.Drive };
@@ -27,35 +30,42 @@ namespace Vacancy_Scraper.Tools
 
         private SettingsManager _settingsManager = new SettingsManager();
 
-        // Initialize authentication with the Google Drive API
-        public GoogleDriveManager()
+        // Initialize credentials and Google Drive service
+        private async Task Initialize()
         {
-            _credential = Authenticate();
-            _service = CreateDriveAPIService(_credential);
+            if (!_initialized)
+            {
+                _credential = await Authenticate();
+                _service = await CreateDriveAPIService(_credential);
+                _initialized = true;
+            }
         }
 
         // Authenticate with Google Drive
-        private UserCredential Authenticate()
+        private async Task<UserCredential> Authenticate()
         {
-            UserCredential credential;
-
-            using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+            UserCredential credential = null;
+            await Task.Run(() =>
             {
-                const string credPath = "token.json";
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine(@"Credential file saved to: " + credPath);
-            }
+                using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                {
+                    const string credPath = "token.json";
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                    Console.WriteLine(@"Credential file saved to: " + credPath);
+                }
+            });
 
             return credential;
+            //return null; // if unsuccessful
         }
 
         // Create the Google Drive API Service
-        private DriveService CreateDriveAPIService(UserCredential credential)
+        private async Task<DriveService> CreateDriveAPIService(UserCredential credential)
         {
             var service = new DriveService(new BaseClientService.Initializer()
             {
@@ -66,8 +76,10 @@ namespace Vacancy_Scraper.Tools
         }
 
         // Get all JSON files that are relevant for the application from the Google Drive
-        public IList<Google.Apis.Drive.v3.Data.File> GetFilesWithMatchingFileNames()
+        public async Task<IList<Google.Apis.Drive.v3.Data.File>> GetFilesWithMatchingFileNames()
         {
+            await Initialize(); // Initialize Google Drive Service
+
             // define parameters of request
             var fileListRequest = _service.Files.List();
             fileListRequest.PageSize = 1000;
@@ -80,9 +92,9 @@ namespace Vacancy_Scraper.Tools
             var foundFiles = new List<File>();
             if (files != null && files.Count > 0)
             {
-                foundFiles.AddRange(files.Where(file => file.Name.Equals("vacancies.json") || 
-                                                        file.Name.Equals("blacklist.json") || 
-                                                        file.Name.Equals("done.json") || 
+                foundFiles.AddRange(files.Where(file => file.Name.Equals("vacancies.json") ||
+                                                        file.Name.Equals("blacklist.json") ||
+                                                        file.Name.Equals("done.json") ||
                                                         file.Name.Equals("companies.json")));
             }
 
@@ -94,8 +106,10 @@ namespace Vacancy_Scraper.Tools
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool DoesFileExistInDrive(ResourceType type)
+        public async Task<bool> DoesFileExistInDrive(ResourceType type)
         {
+            await Initialize(); // Initialize Google Drive Service
+
             FilesResource.GetRequest fileListRequest;
 
             switch (type)
@@ -136,16 +150,18 @@ namespace Vacancy_Scraper.Tools
         /// <param name="file">the path to the file</param>
         /// <param name="type">the type of the file</param>
         /// <returns></returns>
-        public File UploadFile(string file, ResourceType type)
+        public async Task<File> UploadFile(string file, ResourceType type)
         {
-            var fileMetaData = new Google.Apis.Drive.v3.Data.File
+            await Initialize(); // Initialize Google Drive Service
+
+            var fileMetaData = new File
             {
                 Name = Path.GetFileName(file),
                 MimeType = MimeTypeDictionary.GetMimeType(Path.GetExtension(file)),
                 Description = @"Uploaded by the Vacancy Scraper application"
             };
 
-            if (DoesFileExistInDrive(type)) // update the already existing file
+            if (await DoesFileExistInDrive(type)) // update the already existing file
             {
                 using (var stream = new FileStream(file, FileMode.Open))
                 {
@@ -171,7 +187,7 @@ namespace Vacancy_Scraper.Tools
                     if (request == null) return null;
 
                     request.Fields = "id";
-                    request.Upload(); // TODO: make asynchronously
+                    await request.UploadAsync();
 
                     Console.WriteLine(@"Updated " + fileMetaData.Name);
 
@@ -185,7 +201,7 @@ namespace Vacancy_Scraper.Tools
                 {
                     request = _service.Files.Create(fileMetaData, stream, fileMetaData.MimeType);
                     request.Fields = "id";
-                    request.Upload(); // TODO: make asynchronously
+                    await request.UploadAsync();
 
                     Console.WriteLine(@"Uploaded " + fileMetaData.Name);
                 }
