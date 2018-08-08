@@ -480,6 +480,11 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="e"></param>
         private async void CmdDownload_Click(object sender, EventArgs e)
         {
+            // Warn user about overwriting files
+            var dialogResult = MessageBox.Show(@"Are you sure? This will overwrite all your local resource files. It is irreversible.", @"Confirm overwrite",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Cancel) return;
+
             // Change label to display that the download is in progress
             lblDriveLastDownloaded.Text = @"Download in progres...";
 
