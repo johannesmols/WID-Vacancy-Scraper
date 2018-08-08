@@ -61,17 +61,21 @@ namespace Vacancy_Scraper.Tools
             });
 
             return credential;
-            //return null; // if unsuccessful
         }
 
         // Create the Google Drive API Service
         private async Task<DriveService> CreateDriveAPIService(UserCredential credential)
         {
-            var service = new DriveService(new BaseClientService.Initializer()
+            DriveService service = null;
+            await Task.Run(() =>
             {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName
+                service = new DriveService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName
+                });
             });
+            
             return service;
         }
 
