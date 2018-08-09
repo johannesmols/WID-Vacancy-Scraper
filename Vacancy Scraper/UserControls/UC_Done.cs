@@ -190,7 +190,7 @@ namespace Vacancy_Scraper.UserControls
                 {
                     string filter = txtSearch.Text.Trim().Replace("'", "''");
                     gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(
-                        m => m.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList()); // using the StringExtensions.Compare method to search non case sensitively
+                        m => m.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).OrderByDescending(x => x.Added).ToList()); // using the StringExtensions.Compare method to search non case sensitively
                 }
             }
             catch (Exception ex)
