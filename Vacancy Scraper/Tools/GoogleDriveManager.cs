@@ -80,38 +80,13 @@ namespace Vacancy_Scraper.Tools
             return service;
         }
 
-        // Get all JSON files that are relevant for the application from the Google Drive
-        public async Task<IList<Google.Apis.Drive.v3.Data.File>> GetFilesWithMatchingFileNames()
-        {
-            await Initialize(); // Initialize Google Drive Service
-
-            // define parameters of request
-            var fileListRequest = _service.Files.List();
-            fileListRequest.PageSize = 1000;
-            fileListRequest.OrderBy = "modifiedTime desc";
-            fileListRequest.Q = "mimeType = 'application/json'";
-            fileListRequest.Fields = "nextPageToken, files(id, name, size, version, createdTime)";
-
-            // execute request
-            var files = fileListRequest.Execute().Files;
-            var foundFiles = new List<File>();
-            if (files != null && files.Count > 0)
-            {
-                foundFiles.AddRange(files.Where(file => file.Name.Equals("vacancies.json") ||
-                                                        file.Name.Equals("blacklist.json") ||
-                                                        file.Name.Equals("done.json") ||
-                                                        file.Name.Equals("companies.json")));
-            }
-
-            return foundFiles;
-        }
-
         /// <summary>
         /// Checks Google Drive, if a certain file exists
+        /// If it doesn't exist, the method will try to find a matching file and update the file ID accordingly
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public async Task<bool> DoesFileExistInDrive(ResourceType type)
+        public async Task<bool> DoesFileExistInDriveAndFindFilesIfNot(ResourceType type)
         {
             await Initialize(); // Initialize Google Drive Service
 
@@ -153,6 +128,16 @@ namespace Vacancy_Scraper.Tools
             // If the file was found, then return true here
             if (fileFound) return true;
 
+            return await FindFilesAndUpdateId(type);
+        }
+
+        /// <summary>
+        /// Find matching files in the Drive and update the file ID locally
+        /// </summary>
+        /// <param name="type">the file type to search for</param>
+        /// <returns></returns>
+        private async Task<bool> FindFilesAndUpdateId(ResourceType type)
+        {
             var otherFiles = await GetFilesWithMatchingFileNames();
 
             // check for matching file and update the file ID accordingly
@@ -201,6 +186,32 @@ namespace Vacancy_Scraper.Tools
             return false;
         }
 
+        // Get all JSON files that are relevant for the application from the Google Drive
+        private async Task<IList<File>> GetFilesWithMatchingFileNames()
+        {
+            await Initialize(); // Initialize Google Drive Service
+
+            // define parameters of request
+            var fileListRequest = _service.Files.List();
+            fileListRequest.PageSize = 1000;
+            fileListRequest.OrderBy = "modifiedTime desc";
+            fileListRequest.Q = "mimeType = 'application/json'";
+            fileListRequest.Fields = "nextPageToken, files(id, name, size, version, createdTime)";
+
+            // execute request
+            var files = fileListRequest.Execute().Files;
+            var foundFiles = new List<File>();
+            if (files != null && files.Count > 0)
+            {
+                foundFiles.AddRange(files.Where(file => file.Name.Equals("vacancies.json") ||
+                                                        file.Name.Equals("blacklist.json") ||
+                                                        file.Name.Equals("done.json") ||
+                                                        file.Name.Equals("companies.json")));
+            }
+
+            return foundFiles;
+        }
+
         /// <summary>
         /// Upload or update a file to Google Drive
         /// </summary>
@@ -218,7 +229,7 @@ namespace Vacancy_Scraper.Tools
                 Description = @"Uploaded by the Vacancy Scraper application"
             };
 
-            if (await DoesFileExistInDrive(type)) // update the already existing file
+            if (await DoesFileExistInDriveAndFindFilesIfNot(type)) // update the already existing file
             {
                 using (var stream = new FileStream(file, FileMode.Open))
                 {
@@ -279,61 +290,64 @@ namespace Vacancy_Scraper.Tools
             var stream = new MemoryStream();
 
             // Generate download request
-            FilesResource.GetRequest request;
-            switch (type)
+            if (await DoesFileExistInDriveAndFindFilesIfNot(type))
             {
-                case ResourceType.Vacancies:
-                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveVacanciesFileId);
-                    break;
-                case ResourceType.Blacklist:
-                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveBlacklistFileId);
-                    break;
-                case ResourceType.Done:
-                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveDoneFileId);
-                    break;
-                case ResourceType.Companies:
-                    request = _service.Files.Get(_settingsManager.Settings.GoogleDriveCompaniesFileId);
-                    break;
-                default:
-                    return;
-            }
-
-            // Progress listener
-            request.MediaDownloader.ProgressChanged += progress =>
-            {
-                switch (progress.Status)
+                FilesResource.GetRequest request;
+                switch (type)
                 {
-                    case DownloadStatus.Downloading:
-                    {
-                        Console.WriteLine(progress.BytesDownloaded);
+                    case ResourceType.Vacancies:
+                        request = _service.Files.Get(_settingsManager.Settings.GoogleDriveVacanciesFileId);
                         break;
-                    }
-                    case DownloadStatus.Completed:
-                    {
-                        Console.WriteLine(@"Download complete.");
+                    case ResourceType.Blacklist:
+                        request = _service.Files.Get(_settingsManager.Settings.GoogleDriveBlacklistFileId);
                         break;
-                    }
-                    case DownloadStatus.Failed:
-                    {
-                        Console.WriteLine(@"Download failed.");
+                    case ResourceType.Done:
+                        request = _service.Files.Get(_settingsManager.Settings.GoogleDriveDoneFileId);
                         break;
-                    }
+                    case ResourceType.Companies:
+                        request = _service.Files.Get(_settingsManager.Settings.GoogleDriveCompaniesFileId);
+                        break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        return;
                 }
 
-            };
+                // Progress listener
+                request.MediaDownloader.ProgressChanged += progress =>
+                {
+                    switch (progress.Status)
+                    {
+                        case DownloadStatus.Downloading:
+                        {
+                            Console.WriteLine(progress.BytesDownloaded);
+                            break;
+                        }
+                        case DownloadStatus.Completed:
+                        {
+                            Console.WriteLine(@"Download complete.");
+                            break;
+                        }
+                        case DownloadStatus.Failed:
+                        {
+                            Console.WriteLine(@"Download failed.");
+                            break;
+                        }
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
 
-            // Download
-            request.Download(stream);
+                };
 
-            // Save stream to file
-            using (var fileStream = new FileStream(
-                Path.Combine(_settingsManager.Settings.ResourceFolderPath, type.ToString().ToLower() + ".json"), 
-                FileMode.Create, 
-                FileAccess.Write))
-            {
-                stream.WriteTo(fileStream);
+                // Download
+                request.Download(stream);
+
+                // Save stream to file
+                using (var fileStream = new FileStream(
+                    Path.Combine(_settingsManager.Settings.ResourceFolderPath, type.ToString().ToLower() + ".json"),
+                    FileMode.Create,
+                    FileAccess.Write))
+                {
+                    stream.WriteTo(fileStream);
+                }
             }
         }
     }
