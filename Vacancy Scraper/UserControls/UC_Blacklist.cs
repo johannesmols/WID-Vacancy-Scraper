@@ -243,13 +243,14 @@ namespace Vacancy_Scraper.UserControls
                 for (int i = 0; i < rows.Count; i++)
                 {
                     // Add to vacancies list
-                    VacancyObject currentObject = (VacancyObject)rows[i].DataBoundItem;
+                    var currentObject = (VacancyObject) rows[i].DataBoundItem;
                     currentObject.Added = DateTime.Now;
                     vacanciesManager.Resources.Add(currentObject);
 
                     // Remove from blacklist
-                    _bindingList.RemoveAt(rows[i].Index);
+                    _blacklistManager.Resources.Remove((VacancyObject) rows[i].DataBoundItem);
                 }
+
                 vacanciesManager.SaveChangesToFile();
                 _blacklistManager.SaveChangesToFile();
                 ReloadContent();
@@ -274,8 +275,7 @@ namespace Vacancy_Scraper.UserControls
             {
                 foreach (DataGridViewRow row in gridBlacklistedVacancies.SelectedRows)
                 {
-                    var currentObject = (VacancyObject) row.DataBoundItem;
-                    _blacklistManager.Resources.Remove(currentObject);
+                    _blacklistManager.Resources.Remove((VacancyObject) row.DataBoundItem);
                 }
                 _blacklistManager.SaveChangesToFile();
                 ReloadContent(); // refresh the page to avoid a bug that the row isn't visually getting removed from the table when the grid view wasn't focused at the point of clicking the delete button
