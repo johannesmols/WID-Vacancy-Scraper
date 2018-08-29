@@ -186,11 +186,36 @@ namespace Vacancy_Scraper.UserControls
         {
             try
             {
-                if (_searchActive)
+                if (!_searchActive) return;
+
+                // search for all companies if there is no @ at the start
+                if (!txtSearch.Text.StartsWith("@"))
                 {
-                    string filter = txtSearch.Text.Trim().Replace("'", "''");
+                    var filter = txtSearch.Text.Trim().Replace("'", "''");
                     gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(
                         m => m.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).OrderByDescending(x => x.Added).ToList()); // using the StringExtensions.Compare method to search non case sensitively
+                }
+                // filter search by company if there is a @ at the start
+                else
+                {
+                    // get the company name from the search string, remove search query for specific jobs if search term available
+                    var companyFilter = txtSearch.Text.Contains("&") ? txtSearch.Text.Remove(txtSearch.Text.IndexOf("&", StringComparison.Ordinal)).Replace("'", "''").Replace("@", "") : txtSearch.Text.Trim().Replace("'", "''").Replace("@", "");
+
+                    // search for vacancy title too, if the search string contains a &
+                    if (txtSearch.Text.Contains("&"))
+                    {
+                        var titleFilter = txtSearch.Text.Trim().Substring(txtSearch.Text.Trim().LastIndexOf("&", StringComparison.Ordinal) + 1).Trim().Replace("'", "''");
+                        gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(
+                                m => m.Company.Contains(companyFilter, StringComparison.OrdinalIgnoreCase) &&
+                                     m.Title.Contains(titleFilter, StringComparison.OrdinalIgnoreCase))
+                            .OrderByDescending(x => x.Added).ToList());
+                    }
+                    // display all vacancies of the company without filtering
+                    else
+                    {
+                        gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.Where(
+                            m => m.Company.Contains(companyFilter, StringComparison.OrdinalIgnoreCase)).OrderByDescending(x => x.Added).ToList());
+                    }
                 }
             }
             catch (Exception ex)
