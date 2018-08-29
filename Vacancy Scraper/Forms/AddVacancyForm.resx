@@ -121,6 +121,10 @@
   <data name="lblCompany.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblCompany.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblCompany.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 13</value>
@@ -144,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCompany.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="comboCompanies.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 10</value>
@@ -165,12 +169,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboCompanies.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="lblVacancy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblVacancy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -196,7 +199,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVacancy.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="txtVacancy.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 115</value>
@@ -217,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtVacancy.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="txtUrl.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 141</value>
@@ -238,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtUrl.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="lblUrl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -268,10 +271,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblUrl.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="checkAddMultiple.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="checkAddMultiple.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="checkAddMultiple.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 167</value>
@@ -295,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkAddMultiple.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="cmdClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -322,7 +328,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdClose.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="cmdCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -349,7 +355,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdCancel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cmdAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -376,7 +382,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdAdd.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="lblCVR.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCVR.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="txtCVR.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -415,7 +421,7 @@
     <value>73, 37</value>
   </data>
   <data name="txtCVR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>299, 20</value>
+    <value>268, 20</value>
   </data>
   <data name="txtCVR.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -430,7 +436,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtCVR.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="txtTelephone.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -439,7 +445,7 @@
     <value>73, 63</value>
   </data>
   <data name="txtTelephone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>299, 20</value>
+    <value>268, 20</value>
   </data>
   <data name="txtTelephone.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -454,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtTelephone.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblTelephone.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -484,7 +490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTelephone.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="txtComment.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -493,7 +499,7 @@
     <value>73, 89</value>
   </data>
   <data name="txtComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>299, 20</value>
+    <value>268, 20</value>
   </data>
   <data name="txtComment.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -508,7 +514,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtComment.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="lblComment.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,7 +544,88 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblComment.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmdCopyCVR.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdCopyCVR.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCopyCVR.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 37</value>
+  </data>
+  <data name="cmdCopyCVR.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="cmdCopyCVR.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyCVR.Name" xml:space="preserve">
+    <value>cmdCopyCVR</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyCVR.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyCVR.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyCVR.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdCopyTelephone.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdCopyTelephone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCopyTelephone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 63</value>
+  </data>
+  <data name="cmdCopyTelephone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="cmdCopyTelephone.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyTelephone.Name" xml:space="preserve">
+    <value>cmdCopyTelephone</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyTelephone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyTelephone.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyTelephone.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="cmdCopyComment.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdCopyComment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCopyComment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 89</value>
+  </data>
+  <data name="cmdCopyComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="cmdCopyComment.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyComment.Name" xml:space="preserve">
+    <value>cmdCopyComment</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyComment.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCopyComment.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -275,5 +275,35 @@ namespace Vacancy_Scraper.Forms
         {
             return new JsonResourceManager<VacancyObject>(type).Resources.Find(v => Equals(v, vacancy));
         }
+
+        /// <summary>
+        /// Copy CVR of current company to clipboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdCopyCVR_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtCVR.Text);
+        }
+
+        /// <summary>
+        /// Copy telephone number of current company to clipboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdCopyTelephone_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtTelephone.Text);
+        }
+
+        /// <summary>
+        /// Copy comment of current company to clipboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmdCopyComment_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtComment.Text);
+        }
     }
 }

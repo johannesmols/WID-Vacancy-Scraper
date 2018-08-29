@@ -45,6 +45,9 @@
             this.lblTelephone = new System.Windows.Forms.Label();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.lblComment = new System.Windows.Forms.Label();
+            this.cmdCopyCVR = new System.Windows.Forms.Button();
+            this.cmdCopyTelephone = new System.Windows.Forms.Button();
+            this.cmdCopyComment = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblCompany
@@ -147,12 +150,39 @@
             resources.ApplyResources(this.lblComment, "lblComment");
             this.lblComment.Name = "lblComment";
             // 
+            // cmdCopyCVR
+            // 
+            this.cmdCopyCVR.BackgroundImage = global::Vacancy_Scraper.Properties.Resources.copy;
+            resources.ApplyResources(this.cmdCopyCVR, "cmdCopyCVR");
+            this.cmdCopyCVR.Name = "cmdCopyCVR";
+            this.cmdCopyCVR.UseVisualStyleBackColor = true;
+            this.cmdCopyCVR.Click += new System.EventHandler(this.CmdCopyCVR_Click);
+            // 
+            // cmdCopyTelephone
+            // 
+            this.cmdCopyTelephone.BackgroundImage = global::Vacancy_Scraper.Properties.Resources.copy;
+            resources.ApplyResources(this.cmdCopyTelephone, "cmdCopyTelephone");
+            this.cmdCopyTelephone.Name = "cmdCopyTelephone";
+            this.cmdCopyTelephone.UseVisualStyleBackColor = true;
+            this.cmdCopyTelephone.Click += new System.EventHandler(this.CmdCopyTelephone_Click);
+            // 
+            // cmdCopyComment
+            // 
+            this.cmdCopyComment.BackgroundImage = global::Vacancy_Scraper.Properties.Resources.copy;
+            resources.ApplyResources(this.cmdCopyComment, "cmdCopyComment");
+            this.cmdCopyComment.Name = "cmdCopyComment";
+            this.cmdCopyComment.UseVisualStyleBackColor = true;
+            this.cmdCopyComment.Click += new System.EventHandler(this.CmdCopyComment_Click);
+            // 
             // AddVacancyForm
             // 
             this.AcceptButton = this.cmdAdd;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
+            this.Controls.Add(this.cmdCopyComment);
+            this.Controls.Add(this.cmdCopyTelephone);
+            this.Controls.Add(this.cmdCopyCVR);
             this.Controls.Add(this.txtComment);
             this.Controls.Add(this.lblComment);
             this.Controls.Add(this.txtTelephone);
@@ -200,5 +230,8 @@
         private System.Windows.Forms.Label lblTelephone;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label lblComment;
+        private System.Windows.Forms.Button cmdCopyCVR;
+        private System.Windows.Forms.Button cmdCopyTelephone;
+        private System.Windows.Forms.Button cmdCopyComment;
     }
 }
