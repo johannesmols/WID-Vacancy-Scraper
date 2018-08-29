@@ -52,13 +52,13 @@ namespace Vacancy_Scraper.Forms
 
                 string msg = null;
                 if (IsDuplicate(ResourceType.Vacancies, toCheck) && msg == null)
-                    msg = @"Vacancy already exists in vacancies list. Do you still want to add it?";
+                    msg = @"Vacancy already exists in vacancies list. Do you still want to add it? (Duplicate: " + GetDuplicate(ResourceType.Vacancies, toCheck).Added + @")";
 
                 if (IsDuplicate(ResourceType.Done, toCheck) && msg == null)
-                    msg = @"Vacancy already exists in completed vacancies list. Do you still want to add it?";
+                    msg = @"Vacancy already exists in completed vacancies list. Do you still want to add it? (Duplicate: " + GetDuplicate(ResourceType.Done, toCheck).Added + @")";
 
                 if (IsDuplicate(ResourceType.Blacklist, toCheck) && msg == null)
-                    msg = @"Vacancy already exists in blacklist. Do you still want to add it?";
+                    msg = @"Vacancy already exists in blacklist. Do you still want to add it? (Duplicate: " + GetDuplicate(ResourceType.Blacklist, toCheck).Added + @")";
 
                 if (ReturnVacancies.Contains(toCheck) && msg == null) // check if vacancy was already entered before in this session
                     msg = @"Vacancy already entered. Do you still want to add it?";
@@ -254,12 +254,25 @@ namespace Vacancy_Scraper.Forms
         }
 
         /// <summary>
-        /// Check a new vacancy for local duplicates in all three vacancy lists
+        /// Check a new vacancy for local duplicates in all three vacancy lists (only company and title are considered in the comparison)
+        /// <param name="type">the object type</param>
+        /// <param name="vacancy">the object to find a duplicate of</param>
         /// </summary>
         /// <returns>if the vacancy already exists in a resource</returns>
         private bool IsDuplicate(ResourceType type, VacancyObject vacancy)
         {
             return new JsonResourceManager<VacancyObject>(type).Resources.Contains(vacancy);
+        }
+
+        /// <summary>
+        /// Find a duplicate in the resource and return it (only company and title are considered in the comparison)
+        /// </summary>
+        /// <param name="type">the object type</param>
+        /// <param name="vacancy">the object to find a duplicate of</param>
+        /// <returns></returns>
+        private VacancyObject GetDuplicate(ResourceType type, VacancyObject vacancy)
+        {
+            return new JsonResourceManager<VacancyObject>(type).Resources.Find(v => Equals(v, vacancy));
         }
     }
 }

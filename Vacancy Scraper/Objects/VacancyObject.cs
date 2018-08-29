@@ -32,7 +32,7 @@ namespace Vacancy_Scraper.Objects
         }
 
         /// <summary>
-        /// Determines if two vacancy objects are equal
+        /// Determines if two vacancy objects are equal by only considering Company and Title
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
