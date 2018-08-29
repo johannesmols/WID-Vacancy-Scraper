@@ -118,7 +118,8 @@ namespace Vacancy_Scraper.Forms
             if (string.IsNullOrWhiteSpace(txtName.Text)) return false;
             if (numCVR.Value < 0 || numCVR.Value > 99999999) return false;
             if (numPNo.Value < 0 || numPNo.Value > 9999999999) return false;
-            if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text)) return false;
+            // phone number shouldn't be validated because it can also contain text like "none"
+            // if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text)) return false;
             if (string.IsNullOrWhiteSpace(txtConsultants.Text)) return false;
             if (txtConsultants.Text.Split(',').Length == 0) return false;
             if (string.IsNullOrWhiteSpace(txtCareerPage.Text)) return false;
@@ -144,8 +145,9 @@ namespace Vacancy_Scraper.Forms
             if (numPNo.Value < 0 || numPNo.Value > 9999999999)
                 errors.Add("Invalid P number");
 
-            if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text))
-                errors.Add("Invalid phone number");
+            // phone number shouldn't be validated because it can also contain text like "none"
+            //if (string.IsNullOrWhiteSpace(txtTelephone.Text) || !_telephoneRegex.IsMatch(txtTelephone.Text))
+            //    errors.Add("Invalid phone number");
 
             if (string.IsNullOrWhiteSpace(txtConsultants.Text) || txtConsultants.Text.Split(',').Length == 0)
                 errors.Add("Please add at least one consultant");
