@@ -245,6 +245,7 @@ namespace Vacancy_Scraper.Forms
             {
                 txtCVR.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Cvr.ToString();
                 txtTelephone.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Telephone;
+                txtComment.Text = _companyManager.Resources.First(i => i.Name == comboCompanies.Text).Comment;
             }
             catch (Exception exception)
             {

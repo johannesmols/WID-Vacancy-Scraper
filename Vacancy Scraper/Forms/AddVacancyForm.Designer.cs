@@ -43,6 +43,8 @@
             this.txtCVR = new System.Windows.Forms.TextBox();
             this.txtTelephone = new System.Windows.Forms.TextBox();
             this.lblTelephone = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.lblComment = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCompany
@@ -134,12 +136,25 @@
             resources.ApplyResources(this.lblTelephone, "lblTelephone");
             this.lblTelephone.Name = "lblTelephone";
             // 
+            // txtComment
+            // 
+            resources.ApplyResources(this.txtComment, "txtComment");
+            this.txtComment.Name = "txtComment";
+            this.txtComment.ReadOnly = true;
+            // 
+            // lblComment
+            // 
+            resources.ApplyResources(this.lblComment, "lblComment");
+            this.lblComment.Name = "lblComment";
+            // 
             // AddVacancyForm
             // 
             this.AcceptButton = this.cmdAdd;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
+            this.Controls.Add(this.txtComment);
+            this.Controls.Add(this.lblComment);
             this.Controls.Add(this.txtTelephone);
             this.Controls.Add(this.lblTelephone);
             this.Controls.Add(this.txtCVR);
@@ -183,5 +198,7 @@
         private System.Windows.Forms.TextBox txtCVR;
         private System.Windows.Forms.TextBox txtTelephone;
         private System.Windows.Forms.Label lblTelephone;
+        private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Label lblComment;
     }
 }
