@@ -283,7 +283,10 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCopyCVR_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtCVR.Text);
+            if (!string.IsNullOrEmpty(txtCVR.Text))
+            {
+                Clipboard.SetText(txtCVR.Text);
+            }
         }
 
         /// <summary>
@@ -293,7 +296,10 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCopyTelephone_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtTelephone.Text);
+            if (!string.IsNullOrEmpty(txtTelephone.Text))
+            {
+                Clipboard.SetText(txtTelephone.Text);
+            }
         }
 
         /// <summary>
@@ -303,7 +309,10 @@ namespace Vacancy_Scraper.Forms
         /// <param name="e"></param>
         private void CmdCopyComment_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtComment.Text);
+            if (!string.IsNullOrEmpty(txtComment.Text))
+            {
+                Clipboard.SetText(txtComment.Text);
+            }
         }
     }
 }
