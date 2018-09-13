@@ -128,7 +128,7 @@ namespace Vacancy_Scraper.Scraper
                     var pathChrome = Path.Combine(SettingsManager.Settings.WebDriversPath, "chromedriver.exe");
                     if (File.Exists(pathChrome))
                     {
-                        Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome);
+                        // Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome);
 
                         var chromeDriverService = ChromeDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
                         chromeDriverService.HideCommandPromptWindow = true;
@@ -143,7 +143,7 @@ namespace Vacancy_Scraper.Scraper
                     var pathChrome2 = Path.Combine(SettingsManager.Settings.WebDriversPath, "chromedriver.exe");
                     if (File.Exists(pathChrome2))
                     {
-                        Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome2);
+                        // Environment.SetEnvironmentVariable("webdriver.chrome.driver", pathChrome2);
 
                         var chromeDriverService = ChromeDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
                         chromeDriverService.HideCommandPromptWindow = true;
@@ -159,7 +159,7 @@ namespace Vacancy_Scraper.Scraper
                     var pathFirefox = Path.Combine(SettingsManager.Settings.WebDriversPath, "geckodriver.exe");
                     if (File.Exists(pathFirefox))
                     {
-                        Environment.SetEnvironmentVariable("webdriver.gecko.driver", pathFirefox);
+                        // Environment.SetEnvironmentVariable("webdriver.gecko.driver", pathFirefox);
 
                         var firefoxDriverService = FirefoxDriverService.CreateDefaultService(SettingsManager.Settings.WebDriversPath);
                         firefoxDriverService.HideCommandPromptWindow = true;
@@ -200,6 +200,8 @@ namespace Vacancy_Scraper.Scraper
 
                         Driver = new OperaDriver(operaDriverService, operaOptions);
                     }
+                    break;
+                default:
                     break;
             }
         }
