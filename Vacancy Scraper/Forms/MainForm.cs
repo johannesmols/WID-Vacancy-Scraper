@@ -21,6 +21,8 @@ namespace Vacancy_Scraper.Forms
         {
             InitializeComponent();
             LoadTabContent();
+
+            Text = @"Vacancy Scraper by Johannes Mols [v0.9.0]";
         }
 
         /// <summary>
