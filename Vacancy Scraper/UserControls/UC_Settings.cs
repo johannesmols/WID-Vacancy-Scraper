@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Windows.Documents;
+using Microsoft.Win32;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 
@@ -79,6 +80,14 @@ namespace Vacancy_Scraper.UserControls
                 comboScraperWebDriver.Items.Add(webDriver);
             }
             comboScraperWebDriver.SelectedItem = _settingsManager.Settings.ScraperWebDriver;
+
+            comboBrowser.Items.Clear();
+            comboBrowser.Items.Add(@"Standard Browser");
+            foreach (var browser in InstalledWebBrowsers())
+            {
+                comboBrowser.Items.Add(browser);
+            }
+            comboBrowser.SelectedItem = _settingsManager.Settings.Browser;
 
             SetStatus();
         }
@@ -213,6 +222,17 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
+        /// Get a list of all installed web browser on the computer
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private List<string> InstalledWebBrowsers()
+        {
+            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\StartMenuInternet");
+            return key != null ? new List<string>(key.GetSubKeyNames()) : null;
+        }
+
+        /// <summary>
         /// Assert whether any of the settings were changed by the user
         /// </summary>
         /// <returns></returns>
@@ -223,6 +243,7 @@ namespace Vacancy_Scraper.UserControls
                 txtSettingsLogsFolderPath.Text.Equals(_settingsManager.Settings.LogsFolderPath) &&
                 txtSettingsExportPath.Text.Equals(_settingsManager.Settings.ExportFolderPath) &&
                 comboScraperWebDriver.Text.Equals(_settingsManager.Settings.ScraperWebDriver) &&
+                comboBrowser.Text.Equals(_settingsManager.Settings.Browser) &&
                 txtBannedKeywords.Text.Equals(_settingsManager.Settings.ScraperBannedKeywords) &&
                 checkJobnet.Checked == _settingsManager.Settings.ScraperCheckJobnet)
             {
@@ -259,6 +280,7 @@ namespace Vacancy_Scraper.UserControls
             else
                 errorsWhileSaving = true;
 
+            _settingsManager.SetBrowser(comboBrowser.Text);
             _settingsManager.SetScraperWebDriver(comboScraperWebDriver.Text);
             _settingsManager.SetScraperBannedKeywords(txtBannedKeywords.Text);
             _settingsManager.SetScraperCheckJobnet(checkJobnet.Checked);
@@ -411,6 +433,16 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void comboScraperWebDriver_TextChanged(object sender, EventArgs e)
+        {
+            SetStatus();
+        }
+
+        /// <summary>
+        /// Update the status when changing the web browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBrowser_TextChanged(object sender, EventArgs e)
         {
             SetStatus();
         }

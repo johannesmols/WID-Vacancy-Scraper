@@ -33,7 +33,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "Standard Browser", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -96,7 +96,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "Standard Browser", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
             }
             else
             {
@@ -118,6 +118,12 @@ namespace Vacancy_Scraper.JsonManagers
                 if (fixedSettings.LogsFolderPath == null)
                 {
                     fixedSettings.LogsFolderPath = GetDefaultLogsDirectory();
+                    changed = true;
+                }
+
+                if (fixedSettings.Browser == null)
+                {
+                    fixedSettings.Browser = "Standard Browser";
                     changed = true;
                 }
 
@@ -196,6 +202,19 @@ namespace Vacancy_Scraper.JsonManagers
             if (!string.IsNullOrWhiteSpace(exportFolderPath))
             {
                 Settings.ExportFolderPath = exportFolderPath;
+                WriteSettings(Settings);
+            }
+        }
+
+        /// <summary>
+        /// Set the browser setting and write it to the settings file
+        /// </summary>
+        /// <param name="browser"></param>
+        public void SetBrowser(string browser)
+        {
+            if (!string.IsNullOrWhiteSpace(browser))
+            {
+                Settings.Browser = browser;
                 WriteSettings(Settings);
             }
         }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Vacancy_Scraper.Forms;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
@@ -18,6 +20,7 @@ namespace Vacancy_Scraper.UserControls
     {
         private static UC_Done _instance;
 
+        private SettingsManager _settingsManager = new SettingsManager();
         private JsonResourceManager<VacancyObject> _doneManager;
         private BindingList<VacancyObject> _bindingList;
 
@@ -60,6 +63,7 @@ namespace Vacancy_Scraper.UserControls
             txtSearch.ForeColor = SystemColors.GrayText;
 
             // Fill table
+            _settingsManager = new SettingsManager();
             _doneManager = new JsonResourceManager<VacancyObject>(ResourceType.Done);
             _bindingList = new BindingList<VacancyObject>(_doneManager.Resources);
             gridDoneVacancies.DataSource = new BindingList<VacancyObject>(_bindingList.OrderByDescending(x => x.Added).ToList()); // sort by newest first
@@ -140,9 +144,37 @@ namespace Vacancy_Scraper.UserControls
             if (e.Button == MouseButtons.Left && Control.ModifierKeys == Keys.Control)
             {
                 var cell = gridDoneVacancies.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (System.Uri.IsWellFormedUriString(cell.Value.ToString(), UriKind.Absolute))
+                if (Uri.IsWellFormedUriString(cell.Value.ToString(), UriKind.Absolute))
                 {
-                    System.Diagnostics.Process.Start(cell.Value.ToString());
+                    try
+                    {
+                        if (_settingsManager.Settings.Browser.Contains("chrome", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Process.Start("chrome.exe", cell.Value.ToString());
+                        }
+                        else if (_settingsManager.Settings.Browser.Contains("firefox", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Process.Start("firefox.exe", cell.Value.ToString());
+                        }
+                        else if (_settingsManager.Settings.Browser.Contains("ie", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Process.Start("iexplore.exe", cell.Value.ToString());
+                        }
+                        else if (_settingsManager.Settings.Browser.Contains("opera", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Process.Start("opera.exe", cell.Value.ToString());
+                        }
+                        else // Open in standard browser
+                        {
+                            Process.Start(cell.Value.ToString());
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                        MessageBox.Show(@"Couldn't find browser executable, opening in standard browser", @"Error",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Process.Start(cell.Value.ToString());
+                    }
                 }
             }
         }

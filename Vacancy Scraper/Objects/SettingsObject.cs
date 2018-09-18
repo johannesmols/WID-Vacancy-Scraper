@@ -11,6 +11,7 @@ namespace Vacancy_Scraper.Objects
         public string ResourceFolderPath { get; set; }
         public string LogsFolderPath { get; set; }
         public string ExportFolderPath { get; set; }
+        public string Browser { get; set; }
         public string ScraperWebDriver { get; set; }
         public string ScraperBannedKeywords { get; set; }
         public bool ScraperCheckJobnet { get; set; }
@@ -25,6 +26,7 @@ namespace Vacancy_Scraper.Objects
             string resourceFolderPath, 
             string logsFolderPath, 
             string exportFolderPath, 
+            string browser,
             string scraperWebDriver, 
             string scraperBannedKeywords, 
             bool scraperCheckJobnet, 
@@ -39,6 +41,7 @@ namespace Vacancy_Scraper.Objects
             ResourceFolderPath = resourceFolderPath;
             LogsFolderPath = logsFolderPath;
             ExportFolderPath = exportFolderPath;
+            Browser = browser;
             ScraperWebDriver = scraperWebDriver;
             ScraperBannedKeywords = scraperBannedKeywords;
             ScraperCheckJobnet = scraperCheckJobnet;
