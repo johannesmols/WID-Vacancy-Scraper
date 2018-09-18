@@ -19,7 +19,7 @@ namespace Vacancy_Scraper.Objects
         public string Telephone { get; set; }
         [DisplayName("Consultants")]
         public string Consultants { get; set; }
-        [DisplayName("Enabled")]
+        [DisplayName("Scraping")]
         public bool Enabled { get; set; }
         [DisplayName("Selected"), Browsable(false)] // Browsable determines if the property should be displayed in a DataGridView
         public bool Selected { get; set; }
