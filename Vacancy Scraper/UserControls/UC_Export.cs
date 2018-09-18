@@ -321,43 +321,55 @@ namespace Vacancy_Scraper.UserControls
         /// <param name="manager"></param>
         private void ImportVacancyFile(JsonResourceManager<VacancyObject> manager)
         {
-            var countBefore = manager.Resources.Count;
-
-            var filePath = BrowseForJsonFile();
-            if (string.IsNullOrEmpty(filePath)) return;
-
-            var file = File.ReadAllText(filePath);
-            var imported = JsonConvert.DeserializeObject<IList<VacancyObject>>(file);
-
-            if (imported.Any(vacancy => vacancy.Company == null || vacancy.Title == null || vacancy.Url == null))
+            try
             {
-                MessageBox.Show(@"Error while processing file. Please make sure the file contains only vacancies.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                var countBefore = manager.Resources.Count;
 
-            var vacanciesWaitingForConfirmation = new List<VacancyObject>();
-            foreach (var vacancy in imported)
-            {
-                if (manager.Resources.Any(o => o.Equals(vacancy)))
-                    vacanciesWaitingForConfirmation.Add(vacancy);
-                else
-                    manager.Resources.Add(vacancy);
-            }
+                var filePath = BrowseForJsonFile();
+                if (string.IsNullOrEmpty(filePath)) return;
 
-            if (vacanciesWaitingForConfirmation.Count > 0)
-            {
-                var result = MessageBox.Show(@"Found " + vacanciesWaitingForConfirmation.Count + @" duplicates. Skip those?", @"Found duplicates", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.No)
+                var file = File.ReadAllText(filePath);
+                var imported = JsonConvert.DeserializeObject<IList<VacancyObject>>(file);
+
+                if (imported.Any(vacancy => vacancy.Company == null || vacancy.Title == null || vacancy.Url == null))
                 {
-                    manager.Resources.AddRange(vacanciesWaitingForConfirmation);
+                    MessageBox.Show(@"Error while processing file. Please make sure the file contains only vacancies.",
+                        @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                var vacanciesWaitingForConfirmation = new List<VacancyObject>();
+                foreach (var vacancy in imported)
+                {
+                    if (manager.Resources.Any(o => o.Equals(vacancy)))
+                        vacanciesWaitingForConfirmation.Add(vacancy);
+                    else
+                        manager.Resources.Add(vacancy);
+                }
+
+                if (vacanciesWaitingForConfirmation.Count > 0)
+                {
+                    var result =
+                        MessageBox.Show(@"Found " + vacanciesWaitingForConfirmation.Count + @" duplicates. Skip those?",
+                            @"Found duplicates", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        manager.Resources.AddRange(vacanciesWaitingForConfirmation);
+                    }
+                }
+
+                manager.SaveChangesToFile();
+                if (manager.Resources.Count - countBefore > 0)
+                    MessageBox.Show(@"Added " + (manager.Resources.Count - countBefore) + @" vacancies!");
+
+                ReloadContent();
             }
-
-            manager.SaveChangesToFile();
-            if (manager.Resources.Count - countBefore > 0)
-                MessageBox.Show(@"Added " + (manager.Resources.Count - countBefore) + @" vacancies!");
-
-            ReloadContent();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                MessageBox.Show(@"The specified file is not valid for this application", @"Invalid file",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
