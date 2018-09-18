@@ -208,7 +208,7 @@ namespace Vacancy_Scraper.UserControls
             {
                 // Go through each company and find the matching vacancies
                 var exportVacancies = new List<VacancyObject>();
-                foreach (var company in _companyManager.Resources)
+                foreach (var company in _companyManager.Resources.OrderBy(o => o.Consultants))
                 {
                     // Only export companies that have the consultants selected
                     if (checkedListConsultants.CheckedItems.Contains(company.Consultants))
