@@ -12,7 +12,7 @@ namespace Vacancy_Scraper.Scraper.WebsiteScrapers
     /// <summary>
     /// Scraper implementation for Novozymes
     /// </summary>
-    internal class ScrapeCMCBiologics : AbstractWebsiteScraper
+    internal class ScrapeAgcBiologics : AbstractWebsiteScraper
     {
         public override Dictionary<string, object> Run(CompanyObject company)
         {
