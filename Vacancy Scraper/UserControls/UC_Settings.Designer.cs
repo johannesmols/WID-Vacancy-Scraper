@@ -406,12 +406,7 @@
             // 
             this.numIgnoreDuplicatesValue.Location = new System.Drawing.Point(175, 120);
             this.numIgnoreDuplicatesValue.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numIgnoreDuplicatesValue.Minimum = new decimal(new int[] {
-            1,
+            1000,
             0,
             0,
             0});
