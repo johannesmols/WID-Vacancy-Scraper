@@ -25,6 +25,8 @@ namespace Vacancy_Scraper.JsonManagers
             ReadSettings();
         }
 
+        private readonly SettingsObject _defaultSettings = new SettingsObject("", "", GetDefaultLogsDirectory(), "", "Standard Browser", "", "", true, true, 3, "Months", DateTime.MinValue, DateTime.MinValue, "", "", "", "");
+
         /// <summary>
         /// Read the settings from the JSON file into the local copy as an object
         /// If the file does not exist, a new one will be created
@@ -33,7 +35,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (!File.Exists(GetSettingsFilePath()))
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "Standard Browser", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(_defaultSettings);
             }
 
             string fileContent = File.ReadAllText(GetSettingsFilePath());
@@ -65,7 +67,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// Get the file path of the settings file, which is located in the local user's documents folder
         /// </summary>
         /// <returns>the file path as a string</returns>
-        private string GetSettingsFilePath()
+        private static string GetSettingsFilePath()
         {
             return Path.Combine(GetSettingsDirectory(), "settings.json");
         }
@@ -74,7 +76,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// Get the directory path of the settings file, which is located in the local user's documents folder
         /// </summary>
         /// <returns>the file path as a string</returns>
-        private string GetSettingsDirectory()
+        private static string GetSettingsDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Vacancy Scraper");
         }
@@ -83,7 +85,7 @@ namespace Vacancy_Scraper.JsonManagers
         /// Get the default directory of the logs folder
         /// </summary>
         /// <returns></returns>
-        private string GetDefaultLogsDirectory()
+        private static string GetDefaultLogsDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Vacancy Scraper", "logs");
         }
@@ -96,7 +98,7 @@ namespace Vacancy_Scraper.JsonManagers
         {
             if (Settings == null)
             {
-                WriteSettings(new SettingsObject("", "", GetDefaultLogsDirectory(), "", "Standard Browser", "", "", true, DateTime.MinValue, DateTime.MinValue, "", "", "", ""));
+                WriteSettings(_defaultSettings);
             }
             else
             {
@@ -142,6 +144,12 @@ namespace Vacancy_Scraper.JsonManagers
                 if (fixedSettings.ScraperBannedKeywords == null)
                 {
                     fixedSettings.ScraperBannedKeywords = "";
+                    changed = true;
+                }
+
+                if (fixedSettings.ScraperIgnoreDuplicatesTimeMode == null)
+                {
+                    fixedSettings.ScraperIgnoreDuplicatesTimeMode = "Months";
                     changed = true;
                 }
 
@@ -249,6 +257,36 @@ namespace Vacancy_Scraper.JsonManagers
         public void SetScraperCheckJobnet(bool checkJobnet)
         {
             Settings.ScraperCheckJobnet = checkJobnet;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write to the settings file if the scraper should ignore duplicate posts that are older than a certain age
+        /// </summary>
+        /// <param name="scraperIgnoreDuplicatesOlderThan"></param>
+        public void SetScraperIgnoreDuplicatesOlderThan(bool scraperIgnoreDuplicatesOlderThan)
+        {
+            Settings.ScraperIgnoreDuplicatesOlderThan = scraperIgnoreDuplicatesOlderThan;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write the value of the age where duplicates should be ignored to the settings file
+        /// </summary>
+        /// <param name="scraperIgnoreDuplicatesValue"></param>
+        public void SetScraperIgnoreDuplicatesValue(long scraperIgnoreDuplicatesValue)
+        {
+            Settings.ScraperIgnoreDuplicatesValue = scraperIgnoreDuplicatesValue;
+            WriteSettings(Settings);
+        }
+
+        /// <summary>
+        /// Write to the settings file what time mode should be used for ignoring old duplicates (days, weeks, months, years)
+        /// </summary>
+        /// <param name="scraperIgnoreDuplicatesTimeMode"></param>
+        public void SetScraperIgnoreDuplicatesTimeMode(string scraperIgnoreDuplicatesTimeMode)
+        {
+            Settings.ScraperIgnoreDuplicatesTimeMode = scraperIgnoreDuplicatesTimeMode;
             WriteSettings(Settings);
         }
 

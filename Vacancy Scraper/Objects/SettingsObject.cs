@@ -15,6 +15,9 @@ namespace Vacancy_Scraper.Objects
         public string ScraperWebDriver { get; set; }
         public string ScraperBannedKeywords { get; set; }
         public bool ScraperCheckJobnet { get; set; }
+        public bool ScraperIgnoreDuplicatesOlderThan { get; set; }
+        public long ScraperIgnoreDuplicatesValue { get; set; }
+        public string ScraperIgnoreDuplicatesTimeMode { get; set; }
         public DateTime LastDriveUpload { get; set; }
         public DateTime LastDriveDownload { get; set; }
         public string GoogleDriveVacanciesFileId { get; set; }
@@ -29,7 +32,10 @@ namespace Vacancy_Scraper.Objects
             string browser,
             string scraperWebDriver, 
             string scraperBannedKeywords, 
-            bool scraperCheckJobnet, 
+            bool scraperCheckJobnet,
+            bool scraperIgnoreDuplicatesOlderThan,
+            long scraperIgnoreDuplicatesValue,
+            string scraperIgnoreDuplicatesTimeMode,
             DateTime lastDriveUpload,
             DateTime lastDriveDownload,
             string googleDriveVacanciesFileId,
@@ -45,6 +51,9 @@ namespace Vacancy_Scraper.Objects
             ScraperWebDriver = scraperWebDriver;
             ScraperBannedKeywords = scraperBannedKeywords;
             ScraperCheckJobnet = scraperCheckJobnet;
+            ScraperIgnoreDuplicatesOlderThan = scraperIgnoreDuplicatesOlderThan;
+            ScraperIgnoreDuplicatesValue = scraperIgnoreDuplicatesValue;
+            ScraperIgnoreDuplicatesTimeMode = scraperIgnoreDuplicatesTimeMode;
             LastDriveUpload = lastDriveUpload;
             LastDriveDownload = lastDriveDownload;
             GoogleDriveVacanciesFileId = googleDriveVacanciesFileId;

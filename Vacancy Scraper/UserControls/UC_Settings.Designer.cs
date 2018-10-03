@@ -62,8 +62,12 @@
             this.lblSettingsBannedKeywords = new System.Windows.Forms.Label();
             this.comboScraperWebDriver = new System.Windows.Forms.ComboBox();
             this.lblScraperSettingsWebDriver = new System.Windows.Forms.Label();
+            this.checkScraperIgnoreDuplicatesOlderThan = new System.Windows.Forms.CheckBox();
+            this.numIgnoreDuplicatesValue = new System.Windows.Forms.NumericUpDown();
+            this.comboIgnoreDuplicatesTimeMode = new System.Windows.Forms.ComboBox();
             this.groupSettingsPaths.SuspendLayout();
             this.groupSettingsScraper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numIgnoreDuplicatesValue)).BeginInit();
             this.SuspendLayout();
             // 
             // groupSettingsPaths
@@ -108,7 +112,7 @@
             this.comboBrowser.Name = "comboBrowser";
             this.comboBrowser.Size = new System.Drawing.Size(687, 21);
             this.comboBrowser.TabIndex = 9;
-            this.comboBrowser.TextChanged += new System.EventHandler(this.comboBrowser_TextChanged);
+            this.comboBrowser.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblBrowser
             // 
@@ -161,7 +165,7 @@
             this.txtSettingsExportPath.Name = "txtSettingsExportPath";
             this.txtSettingsExportPath.Size = new System.Drawing.Size(606, 20);
             this.txtSettingsExportPath.TabIndex = 15;
-            this.txtSettingsExportPath.TextChanged += new System.EventHandler(this.txtSettingsExportPath_TextChanged);
+            this.txtSettingsExportPath.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblExportPath
             // 
@@ -214,7 +218,7 @@
             this.txtSettingsLogsFolderPath.Name = "txtSettingsLogsFolderPath";
             this.txtSettingsLogsFolderPath.Size = new System.Drawing.Size(606, 20);
             this.txtSettingsLogsFolderPath.TabIndex = 2;
-            this.txtSettingsLogsFolderPath.TextChanged += new System.EventHandler(this.TxtSettingsLogsFolderPath_TextChanged);
+            this.txtSettingsLogsFolderPath.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblSettingsLogs
             // 
@@ -268,7 +272,7 @@
             this.txtSettingsResourcesPath.Name = "txtSettingsResourcesPath";
             this.txtSettingsResourcesPath.Size = new System.Drawing.Size(606, 20);
             this.txtSettingsResourcesPath.TabIndex = 1;
-            this.txtSettingsResourcesPath.TextChanged += new System.EventHandler(this.TxtSettingsResourcesPath_TextChanged);
+            this.txtSettingsResourcesPath.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblSettingsResources
             // 
@@ -322,7 +326,7 @@
             this.txtSettingsWebDriversPath.Name = "txtSettingsWebDriversPath";
             this.txtSettingsWebDriversPath.Size = new System.Drawing.Size(606, 20);
             this.txtSettingsWebDriversPath.TabIndex = 0;
-            this.txtSettingsWebDriversPath.TextChanged += new System.EventHandler(this.TxtSettingsWebDriversPath_TextChanged);
+            this.txtSettingsWebDriversPath.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblSettingsWebDrivers
             // 
@@ -370,6 +374,9 @@
             // 
             // groupSettingsScraper
             // 
+            this.groupSettingsScraper.Controls.Add(this.comboIgnoreDuplicatesTimeMode);
+            this.groupSettingsScraper.Controls.Add(this.numIgnoreDuplicatesValue);
+            this.groupSettingsScraper.Controls.Add(this.checkScraperIgnoreDuplicatesOlderThan);
             this.groupSettingsScraper.Controls.Add(this.lblMore);
             this.groupSettingsScraper.Controls.Add(this.checkJobnet);
             this.groupSettingsScraper.Controls.Add(this.label1);
@@ -380,7 +387,7 @@
             this.groupSettingsScraper.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupSettingsScraper.Location = new System.Drawing.Point(0, 239);
             this.groupSettingsScraper.Name = "groupSettingsScraper";
-            this.groupSettingsScraper.Size = new System.Drawing.Size(774, 121);
+            this.groupSettingsScraper.Size = new System.Drawing.Size(774, 151);
             this.groupSettingsScraper.TabIndex = 7;
             this.groupSettingsScraper.TabStop = false;
             this.groupSettingsScraper.Text = "Scraper";
@@ -404,7 +411,7 @@
             this.checkJobnet.TabIndex = 7;
             this.checkJobnet.Text = "Additionally check jobnet.dk for possible duplicates";
             this.checkJobnet.UseVisualStyleBackColor = true;
-            this.checkJobnet.CheckedChanged += new System.EventHandler(this.checkJobnet_CheckedChanged);
+            this.checkJobnet.CheckedChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // label1
             // 
@@ -422,7 +429,7 @@
             this.txtBannedKeywords.Name = "txtBannedKeywords";
             this.txtBannedKeywords.Size = new System.Drawing.Size(661, 20);
             this.txtBannedKeywords.TabIndex = 5;
-            this.txtBannedKeywords.TextChanged += new System.EventHandler(this.TxtBannedKeywords_TextChanged);
+            this.txtBannedKeywords.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblSettingsBannedKeywords
             // 
@@ -442,7 +449,7 @@
             this.comboScraperWebDriver.Name = "comboScraperWebDriver";
             this.comboScraperWebDriver.Size = new System.Drawing.Size(661, 21);
             this.comboScraperWebDriver.TabIndex = 3;
-            this.comboScraperWebDriver.TextChanged += new System.EventHandler(this.comboScraperWebDriver_TextChanged);
+            this.comboScraperWebDriver.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // lblScraperSettingsWebDriver
             // 
@@ -452,6 +459,50 @@
             this.lblScraperSettingsWebDriver.Size = new System.Drawing.Size(64, 13);
             this.lblScraperSettingsWebDriver.TabIndex = 0;
             this.lblScraperSettingsWebDriver.Text = "Web Driver:";
+            // 
+            // checkScraperIgnoreDuplicatesOlderThan
+            // 
+            this.checkScraperIgnoreDuplicatesOlderThan.AutoSize = true;
+            this.checkScraperIgnoreDuplicatesOlderThan.Location = new System.Drawing.Point(9, 123);
+            this.checkScraperIgnoreDuplicatesOlderThan.Name = "checkScraperIgnoreDuplicatesOlderThan";
+            this.checkScraperIgnoreDuplicatesOlderThan.Size = new System.Drawing.Size(160, 17);
+            this.checkScraperIgnoreDuplicatesOlderThan.TabIndex = 9;
+            this.checkScraperIgnoreDuplicatesOlderThan.Text = "Ignore duplicates older than:";
+            this.checkScraperIgnoreDuplicatesOlderThan.UseVisualStyleBackColor = true;
+            this.checkScraperIgnoreDuplicatesOlderThan.CheckedChanged += new System.EventHandler(this.ChangeDetected);
+            // 
+            // numIgnoreDuplicatesValue
+            // 
+            this.numIgnoreDuplicatesValue.Location = new System.Drawing.Point(175, 120);
+            this.numIgnoreDuplicatesValue.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.Name = "numIgnoreDuplicatesValue";
+            this.numIgnoreDuplicatesValue.Size = new System.Drawing.Size(100, 20);
+            this.numIgnoreDuplicatesValue.TabIndex = 10;
+            this.numIgnoreDuplicatesValue.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.ValueChanged += new System.EventHandler(this.ChangeDetected);
+            // 
+            // comboIgnoreDuplicatesTimeMode
+            // 
+            this.comboIgnoreDuplicatesTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboIgnoreDuplicatesTimeMode.FormattingEnabled = true;
+            this.comboIgnoreDuplicatesTimeMode.Location = new System.Drawing.Point(281, 119);
+            this.comboIgnoreDuplicatesTimeMode.Name = "comboIgnoreDuplicatesTimeMode";
+            this.comboIgnoreDuplicatesTimeMode.Size = new System.Drawing.Size(100, 21);
+            this.comboIgnoreDuplicatesTimeMode.TabIndex = 11;
+            this.comboIgnoreDuplicatesTimeMode.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // UC_Settings
             // 
@@ -468,6 +519,7 @@
             this.groupSettingsPaths.PerformLayout();
             this.groupSettingsScraper.ResumeLayout(false);
             this.groupSettingsScraper.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numIgnoreDuplicatesValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,5 +561,8 @@
         private System.Windows.Forms.Label lblExportPath;
         private System.Windows.Forms.Label lblBrowser;
         private System.Windows.Forms.ComboBox comboBrowser;
+        private System.Windows.Forms.ComboBox comboIgnoreDuplicatesTimeMode;
+        private System.Windows.Forms.NumericUpDown numIgnoreDuplicatesValue;
+        private System.Windows.Forms.CheckBox checkScraperIgnoreDuplicatesOlderThan;
     }
 }

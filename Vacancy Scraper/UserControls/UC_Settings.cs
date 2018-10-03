@@ -89,6 +89,17 @@ namespace Vacancy_Scraper.UserControls
             }
             comboBrowser.SelectedItem = _settingsManager.Settings.Browser;
 
+            checkScraperIgnoreDuplicatesOlderThan.Checked = _settingsManager.Settings.ScraperIgnoreDuplicatesOlderThan;
+            numIgnoreDuplicatesValue.Value = _settingsManager.Settings.ScraperIgnoreDuplicatesValue;
+            comboIgnoreDuplicatesTimeMode.Items.Clear();
+            comboIgnoreDuplicatesTimeMode.Items.Add(@"Days");
+            comboIgnoreDuplicatesTimeMode.Items.Add(@"Weeks");
+            comboIgnoreDuplicatesTimeMode.Items.Add(@"Months");
+            comboIgnoreDuplicatesTimeMode.Items.Add(@"Years");
+            comboIgnoreDuplicatesTimeMode.SelectedItem =
+                comboIgnoreDuplicatesTimeMode.Items.Contains(_settingsManager.Settings.ScraperIgnoreDuplicatesTimeMode) ?
+                    _settingsManager.Settings.ScraperIgnoreDuplicatesTimeMode : "Months";
+
             SetStatus();
         }
 
@@ -245,7 +256,10 @@ namespace Vacancy_Scraper.UserControls
                 comboScraperWebDriver.Text.Equals(_settingsManager.Settings.ScraperWebDriver) &&
                 comboBrowser.Text.Equals(_settingsManager.Settings.Browser) &&
                 txtBannedKeywords.Text.Equals(_settingsManager.Settings.ScraperBannedKeywords) &&
-                checkJobnet.Checked == _settingsManager.Settings.ScraperCheckJobnet)
+                checkJobnet.Checked == _settingsManager.Settings.ScraperCheckJobnet &&
+                checkScraperIgnoreDuplicatesOlderThan.Checked == _settingsManager.Settings.ScraperIgnoreDuplicatesOlderThan &&
+                (long) numIgnoreDuplicatesValue.Value == _settingsManager.Settings.ScraperIgnoreDuplicatesValue &&
+                comboIgnoreDuplicatesTimeMode.Text.Equals(_settingsManager.Settings.ScraperIgnoreDuplicatesTimeMode))
             {
                 return false;
             }
@@ -284,6 +298,9 @@ namespace Vacancy_Scraper.UserControls
             _settingsManager.SetScraperWebDriver(comboScraperWebDriver.Text);
             _settingsManager.SetScraperBannedKeywords(txtBannedKeywords.Text);
             _settingsManager.SetScraperCheckJobnet(checkJobnet.Checked);
+            _settingsManager.SetScraperIgnoreDuplicatesOlderThan(checkScraperIgnoreDuplicatesOlderThan.Checked);
+            _settingsManager.SetScraperIgnoreDuplicatesValue((long) numIgnoreDuplicatesValue.Value);
+            _settingsManager.SetScraperIgnoreDuplicatesTimeMode(comboIgnoreDuplicatesTimeMode.Text);
 
             // This should never show, because the "Apply" button is disabled if there are invalid changes
             if (errorsWhileSaving)
@@ -388,81 +405,11 @@ namespace Vacancy_Scraper.UserControls
         }
 
         /// <summary>
-        /// Update the status when changing the path
+        /// Change the status when some value changes in the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TxtSettingsWebDriversPath_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the path
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TxtSettingsResourcesPath_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the path
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TxtSettingsLogsFolderPath_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the path
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtSettingsExportPath_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the web driver
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboScraperWebDriver_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the web browser
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBrowser_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the banned keywords
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TxtBannedKeywords_TextChanged(object sender, EventArgs e)
-        {
-            SetStatus();
-        }
-
-        /// <summary>
-        /// Update the status when changing the jobnet checkbox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkJobnet_CheckedChanged(object sender, EventArgs e)
+        private void ChangeDetected(object sender, EventArgs e)
         {
             SetStatus();
         }
