@@ -120,20 +120,116 @@
   <metadata name="tabControl.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="&gt;&gt;tabPageScrape.Name" xml:space="preserve">
+    <value>tabPageScrape</value>
+  </data>
+  <data name="&gt;&gt;tabPageScrape.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageScrape.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPageScrape.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabVacancies.Name" xml:space="preserve">
+    <value>tabVacancies</value>
+  </data>
+  <data name="&gt;&gt;tabVacancies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabVacancies.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabVacancies.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabPageBlacklist.Name" xml:space="preserve">
+    <value>tabPageBlacklist</value>
+  </data>
+  <data name="&gt;&gt;tabPageBlacklist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageBlacklist.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPageBlacklist.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tabPageDone.Name" xml:space="preserve">
+    <value>tabPageDone</value>
+  </data>
+  <data name="&gt;&gt;tabPageDone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDone.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPageDone.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tabCompanies.Name" xml:space="preserve">
+    <value>tabCompanies</value>
+  </data>
+  <data name="&gt;&gt;tabCompanies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabCompanies.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabCompanies.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tabExport.Name" xml:space="preserve">
+    <value>tabExport</value>
+  </data>
+  <data name="&gt;&gt;tabExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabExport.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabExport.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Name" xml:space="preserve">
+    <value>tabSettings</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panelScrape.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panelScrape.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelScrape.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>784, 561</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panelScrape.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;panelScrape.Name" xml:space="preserve">
     <value>panelScrape</value>
@@ -151,7 +247,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPageScrape.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabPageScrape.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -171,16 +267,28 @@
   <data name="&gt;&gt;tabPageScrape.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelVacancies.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelScrape.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelVacancies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="panelScrape.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelVacancies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 408</value>
+  <data name="panelScrape.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 535</value>
   </data>
-  <data name="panelVacancies.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelScrape.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelScrape.Name" xml:space="preserve">
+    <value>panelScrape</value>
+  </data>
+  <data name="&gt;&gt;panelScrape.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelScrape.Parent" xml:space="preserve">
+    <value>tabPageScrape</value>
+  </data>
+  <data name="&gt;&gt;panelScrape.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelVacancies.Name" xml:space="preserve">
@@ -199,7 +307,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabVacancies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabVacancies.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -219,16 +327,28 @@
   <data name="&gt;&gt;tabVacancies.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panelBlacklist.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelVacancies.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelBlacklist.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="panelVacancies.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelBlacklist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 408</value>
+  <data name="panelVacancies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>774, 533</value>
   </data>
-  <data name="panelBlacklist.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelVacancies.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelVacancies.Name" xml:space="preserve">
+    <value>panelVacancies</value>
+  </data>
+  <data name="&gt;&gt;panelVacancies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelVacancies.Parent" xml:space="preserve">
+    <value>tabVacancies</value>
+  </data>
+  <data name="&gt;&gt;panelVacancies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelBlacklist.Name" xml:space="preserve">
@@ -247,7 +367,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPageBlacklist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabPageBlacklist.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -267,16 +387,28 @@
   <data name="&gt;&gt;tabPageBlacklist.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="panelDone.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelBlacklist.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelDone.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="panelBlacklist.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelDone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 408</value>
+  <data name="panelBlacklist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>774, 533</value>
   </data>
-  <data name="panelDone.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelBlacklist.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelBlacklist.Name" xml:space="preserve">
+    <value>panelBlacklist</value>
+  </data>
+  <data name="&gt;&gt;panelBlacklist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelBlacklist.Parent" xml:space="preserve">
+    <value>tabPageBlacklist</value>
+  </data>
+  <data name="&gt;&gt;panelBlacklist.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelDone.Name" xml:space="preserve">
@@ -295,7 +427,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPageDone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabPageDone.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -315,16 +447,28 @@
   <data name="&gt;&gt;tabPageDone.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="panelCompanies.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelDone.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelCompanies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="panelDone.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelCompanies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 408</value>
+  <data name="panelDone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>774, 533</value>
   </data>
-  <data name="panelCompanies.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelDone.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelDone.Name" xml:space="preserve">
+    <value>panelDone</value>
+  </data>
+  <data name="&gt;&gt;panelDone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDone.Parent" xml:space="preserve">
+    <value>tabPageDone</value>
+  </data>
+  <data name="&gt;&gt;panelDone.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelCompanies.Name" xml:space="preserve">
@@ -343,7 +487,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompanies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabCompanies.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -363,16 +507,28 @@
   <data name="&gt;&gt;tabCompanies.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="panelExport.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelCompanies.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelExport.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="panelCompanies.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panelExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+  <data name="panelCompanies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>774, 533</value>
   </data>
-  <data name="panelExport.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelCompanies.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelCompanies.Name" xml:space="preserve">
+    <value>panelCompanies</value>
+  </data>
+  <data name="&gt;&gt;panelCompanies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelCompanies.Parent" xml:space="preserve">
+    <value>tabCompanies</value>
+  </data>
+  <data name="&gt;&gt;panelCompanies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelExport.Name" xml:space="preserve">
@@ -391,7 +547,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabExport.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -411,16 +567,28 @@
   <data name="&gt;&gt;tabExport.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="panelSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelExport.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+  <data name="panelExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="panelSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>664, 398</value>
+  <data name="panelExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 535</value>
   </data>
-  <data name="panelSettings.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelExport.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelExport.Name" xml:space="preserve">
+    <value>panelExport</value>
+  </data>
+  <data name="&gt;&gt;panelExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelExport.Parent" xml:space="preserve">
+    <value>tabExport</value>
+  </data>
+  <data name="&gt;&gt;panelExport.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;panelSettings.Name" xml:space="preserve">
@@ -442,7 +610,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="tabSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 410</value>
+    <value>776, 535</value>
   </data>
   <data name="tabSettings.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -462,28 +630,28 @@
   <data name="&gt;&gt;tabSettings.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="tabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="panelSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="panelSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
   </data>
-  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 436</value>
+  <data name="panelSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>764, 523</value>
   </data>
-  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelSettings.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
-    <value>tabControl</value>
+  <data name="&gt;&gt;panelSettings.Name" xml:space="preserve">
+    <value>panelSettings</value>
   </data>
-  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panelSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;panelSettings.Parent" xml:space="preserve">
+    <value>tabSettings</value>
   </data>
-  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelSettings.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -493,7 +661,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>684, 436</value>
+    <value>784, 561</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1014,7 +1182,7 @@
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>700, 475</value>
+    <value>800, 600</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

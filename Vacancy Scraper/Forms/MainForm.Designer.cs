@@ -40,10 +40,10 @@
             this.panelDone = new System.Windows.Forms.Panel();
             this.tabCompanies = new System.Windows.Forms.TabPage();
             this.panelCompanies = new System.Windows.Forms.Panel();
-            this.tabSettings = new System.Windows.Forms.TabPage();
-            this.panelSettings = new System.Windows.Forms.Panel();
             this.tabExport = new System.Windows.Forms.TabPage();
             this.panelExport = new System.Windows.Forms.Panel();
+            this.tabSettings = new System.Windows.Forms.TabPage();
+            this.panelSettings = new System.Windows.Forms.Panel();
             tabControl = new System.Windows.Forms.TabControl();
             tabControl.SuspendLayout();
             this.tabPageScrape.SuspendLayout();
@@ -51,8 +51,8 @@
             this.tabPageBlacklist.SuspendLayout();
             this.tabPageDone.SuspendLayout();
             this.tabCompanies.SuspendLayout();
-            this.tabSettings.SuspendLayout();
             this.tabExport.SuspendLayout();
+            this.tabSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -137,6 +137,18 @@
             resources.ApplyResources(this.panelCompanies, "panelCompanies");
             this.panelCompanies.Name = "panelCompanies";
             // 
+            // tabExport
+            // 
+            this.tabExport.Controls.Add(this.panelExport);
+            resources.ApplyResources(this.tabExport, "tabExport");
+            this.tabExport.Name = "tabExport";
+            this.tabExport.UseVisualStyleBackColor = true;
+            // 
+            // panelExport
+            // 
+            resources.ApplyResources(this.panelExport, "panelExport");
+            this.panelExport.Name = "panelExport";
+            // 
             // tabSettings
             // 
             this.tabSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -150,18 +162,6 @@
             resources.ApplyResources(this.panelSettings, "panelSettings");
             this.panelSettings.Name = "panelSettings";
             // 
-            // tabExport
-            // 
-            this.tabExport.Controls.Add(this.panelExport);
-            resources.ApplyResources(this.tabExport, "tabExport");
-            this.tabExport.Name = "tabExport";
-            this.tabExport.UseVisualStyleBackColor = true;
-            // 
-            // panelExport
-            // 
-            resources.ApplyResources(this.panelExport, "panelExport");
-            this.panelExport.Name = "panelExport";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -174,8 +174,8 @@
             this.tabPageBlacklist.ResumeLayout(false);
             this.tabPageDone.ResumeLayout(false);
             this.tabCompanies.ResumeLayout(false);
-            this.tabSettings.ResumeLayout(false);
             this.tabExport.ResumeLayout(false);
+            this.tabSettings.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
