@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using Vacancy_Scraper.JsonManagers;
 using Vacancy_Scraper.Objects;
 using Vacancy_Scraper.Scraper.WebsiteScrapers;
+using Vacancy_Scraper.Tools;
 
 namespace Vacancy_Scraper.Scraper
 {
@@ -107,7 +108,6 @@ namespace Vacancy_Scraper.Scraper
                 if (_vacancyManager.Resources.Contains(foundVacancies[i]))
                 {
                     log.Append("Found vacancy, removed by duplicate in 'vacancies' : " + foundVacancies[i].Title + Environment.NewLine);
-
                     foundVacancies.RemoveAt(i);
                 }
             }
@@ -118,7 +118,6 @@ namespace Vacancy_Scraper.Scraper
                 if (_blacklistManager.Resources.Contains(foundVacancies[i]))
                 {
                     log.Append("Found vacancy, removed by duplicate in 'blacklist' : " + foundVacancies[i].Title + Environment.NewLine);
-
                     foundVacancies.RemoveAt(i);
                 }
             }
@@ -126,11 +125,14 @@ namespace Vacancy_Scraper.Scraper
             // Check for items in the done list
             for (var i = foundVacancies.Count - 1; i >= 0; i--)
             {
-                if (_doneManager.Resources.Contains(foundVacancies[i]))
+                var found = _doneManager.Resources.Find(o => Equals(o, foundVacancies[i]));
+                if (found != null)
                 {
-                    log.Append("Found vacancy, removed by duplicate in 'done' : " + foundVacancies[i].Title + Environment.NewLine);
-
-                    foundVacancies.RemoveAt(i);
+                    if (found.Added > ConstructDateTime.GetDateToIgnoreDuplicatesBefore()) // Added recently, mark as duplicate
+                    {
+                        log.Append("Found vacancy, removed by duplicate in 'done' : " + foundVacancies[i].Title + Environment.NewLine);
+                        foundVacancies.RemoveAt(i);
+                    }
                 }
             }
 

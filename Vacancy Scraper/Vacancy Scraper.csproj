@@ -133,6 +133,7 @@
     <Compile Include="Scraper\WebsiteScrapers\ScrapeDTU.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovoNordisk.cs" />
     <Compile Include="Scraper\WebsiteScrapers\ScrapeNovozymes.cs" />
+    <Compile Include="Tools\ConstructDateTime.cs" />
     <Compile Include="Tools\GoogleDriveManager.cs" />
     <Compile Include="Tools\MimeTypeDictionary.cs" />
     <Compile Include="Tools\StringExtensions.cs" />
