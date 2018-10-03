@@ -38,16 +38,16 @@ namespace Vacancy_Scraper.Tools
                     default:
                         break;
                 }
+
+                return result;
             }
             catch (ArgumentOutOfRangeException e)
             {
                 MessageBox.Show(
                     @"Setting to ignore duplicates before a certain time is too far back. Please consider a date after Jesus was born.",
                     @"Invalid Date Range", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
+                return DateTime.MinValue;
             }
-
-            return result;
         }
     }
 }

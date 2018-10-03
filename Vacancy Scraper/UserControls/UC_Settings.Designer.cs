@@ -55,6 +55,9 @@
             this.cmdSettingsApply = new System.Windows.Forms.Button();
             this.lblSavedStatus = new System.Windows.Forms.Label();
             this.groupSettingsScraper = new System.Windows.Forms.GroupBox();
+            this.comboIgnoreDuplicatesTimeMode = new System.Windows.Forms.ComboBox();
+            this.numIgnoreDuplicatesValue = new System.Windows.Forms.NumericUpDown();
+            this.checkScraperIgnoreDuplicatesOlderThan = new System.Windows.Forms.CheckBox();
             this.lblMore = new System.Windows.Forms.Label();
             this.checkJobnet = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,9 +65,6 @@
             this.lblSettingsBannedKeywords = new System.Windows.Forms.Label();
             this.comboScraperWebDriver = new System.Windows.Forms.ComboBox();
             this.lblScraperSettingsWebDriver = new System.Windows.Forms.Label();
-            this.checkScraperIgnoreDuplicatesOlderThan = new System.Windows.Forms.CheckBox();
-            this.numIgnoreDuplicatesValue = new System.Windows.Forms.NumericUpDown();
-            this.comboIgnoreDuplicatesTimeMode = new System.Windows.Forms.ComboBox();
             this.groupSettingsPaths.SuspendLayout();
             this.groupSettingsScraper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numIgnoreDuplicatesValue)).BeginInit();
@@ -392,6 +392,50 @@
             this.groupSettingsScraper.TabStop = false;
             this.groupSettingsScraper.Text = "Scraper";
             // 
+            // comboIgnoreDuplicatesTimeMode
+            // 
+            this.comboIgnoreDuplicatesTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboIgnoreDuplicatesTimeMode.FormattingEnabled = true;
+            this.comboIgnoreDuplicatesTimeMode.Location = new System.Drawing.Point(281, 119);
+            this.comboIgnoreDuplicatesTimeMode.Name = "comboIgnoreDuplicatesTimeMode";
+            this.comboIgnoreDuplicatesTimeMode.Size = new System.Drawing.Size(100, 21);
+            this.comboIgnoreDuplicatesTimeMode.TabIndex = 11;
+            this.comboIgnoreDuplicatesTimeMode.TextChanged += new System.EventHandler(this.ChangeDetected);
+            // 
+            // numIgnoreDuplicatesValue
+            // 
+            this.numIgnoreDuplicatesValue.Location = new System.Drawing.Point(175, 120);
+            this.numIgnoreDuplicatesValue.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.Name = "numIgnoreDuplicatesValue";
+            this.numIgnoreDuplicatesValue.Size = new System.Drawing.Size(100, 20);
+            this.numIgnoreDuplicatesValue.TabIndex = 10;
+            this.numIgnoreDuplicatesValue.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numIgnoreDuplicatesValue.ValueChanged += new System.EventHandler(this.ChangeDetected);
+            // 
+            // checkScraperIgnoreDuplicatesOlderThan
+            // 
+            this.checkScraperIgnoreDuplicatesOlderThan.AutoSize = true;
+            this.checkScraperIgnoreDuplicatesOlderThan.Location = new System.Drawing.Point(9, 123);
+            this.checkScraperIgnoreDuplicatesOlderThan.Name = "checkScraperIgnoreDuplicatesOlderThan";
+            this.checkScraperIgnoreDuplicatesOlderThan.Size = new System.Drawing.Size(160, 17);
+            this.checkScraperIgnoreDuplicatesOlderThan.TabIndex = 9;
+            this.checkScraperIgnoreDuplicatesOlderThan.Text = "Ignore duplicates older than:";
+            this.checkScraperIgnoreDuplicatesOlderThan.UseVisualStyleBackColor = true;
+            this.checkScraperIgnoreDuplicatesOlderThan.CheckedChanged += new System.EventHandler(this.ChangeDetected);
+            // 
             // lblMore
             // 
             this.lblMore.AutoSize = true;
@@ -459,50 +503,6 @@
             this.lblScraperSettingsWebDriver.Size = new System.Drawing.Size(64, 13);
             this.lblScraperSettingsWebDriver.TabIndex = 0;
             this.lblScraperSettingsWebDriver.Text = "Web Driver:";
-            // 
-            // checkScraperIgnoreDuplicatesOlderThan
-            // 
-            this.checkScraperIgnoreDuplicatesOlderThan.AutoSize = true;
-            this.checkScraperIgnoreDuplicatesOlderThan.Location = new System.Drawing.Point(9, 123);
-            this.checkScraperIgnoreDuplicatesOlderThan.Name = "checkScraperIgnoreDuplicatesOlderThan";
-            this.checkScraperIgnoreDuplicatesOlderThan.Size = new System.Drawing.Size(160, 17);
-            this.checkScraperIgnoreDuplicatesOlderThan.TabIndex = 9;
-            this.checkScraperIgnoreDuplicatesOlderThan.Text = "Ignore duplicates older than:";
-            this.checkScraperIgnoreDuplicatesOlderThan.UseVisualStyleBackColor = true;
-            this.checkScraperIgnoreDuplicatesOlderThan.CheckedChanged += new System.EventHandler(this.ChangeDetected);
-            // 
-            // numIgnoreDuplicatesValue
-            // 
-            this.numIgnoreDuplicatesValue.Location = new System.Drawing.Point(175, 120);
-            this.numIgnoreDuplicatesValue.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numIgnoreDuplicatesValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numIgnoreDuplicatesValue.Name = "numIgnoreDuplicatesValue";
-            this.numIgnoreDuplicatesValue.Size = new System.Drawing.Size(100, 20);
-            this.numIgnoreDuplicatesValue.TabIndex = 10;
-            this.numIgnoreDuplicatesValue.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numIgnoreDuplicatesValue.ValueChanged += new System.EventHandler(this.ChangeDetected);
-            // 
-            // comboIgnoreDuplicatesTimeMode
-            // 
-            this.comboIgnoreDuplicatesTimeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboIgnoreDuplicatesTimeMode.FormattingEnabled = true;
-            this.comboIgnoreDuplicatesTimeMode.Location = new System.Drawing.Point(281, 119);
-            this.comboIgnoreDuplicatesTimeMode.Name = "comboIgnoreDuplicatesTimeMode";
-            this.comboIgnoreDuplicatesTimeMode.Size = new System.Drawing.Size(100, 21);
-            this.comboIgnoreDuplicatesTimeMode.TabIndex = 11;
-            this.comboIgnoreDuplicatesTimeMode.TextChanged += new System.EventHandler(this.ChangeDetected);
             // 
             // UC_Settings
             // 

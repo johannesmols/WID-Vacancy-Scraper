@@ -123,12 +123,13 @@ namespace Vacancy_Scraper.Scraper
             }
 
             // Check for items in the done list
+            var ignoreDuplicatesBeforeThisDate = ConstructDateTime.GetDateToIgnoreDuplicatesBefore();
             for (var i = foundVacancies.Count - 1; i >= 0; i--)
             {
                 var found = _doneManager.Resources.Find(o => Equals(o, foundVacancies[i]));
                 if (found != null)
                 {
-                    if (found.Added > ConstructDateTime.GetDateToIgnoreDuplicatesBefore()) // Added recently, mark as duplicate
+                    if (found.Added > ignoreDuplicatesBeforeThisDate) // Added recently, mark as duplicate
                     {
                         log.Append("Found vacancy, removed by duplicate in 'done' : " + foundVacancies[i].Title + Environment.NewLine);
                         foundVacancies.RemoveAt(i);
