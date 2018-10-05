@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -201,7 +201,7 @@ namespace Vacancy_Scraper.Scraper
                 return @"Error (Check logs for more info)";
             }
 
-            return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies addded)";
+            return @"Complete (" + foundVacancies.Count + " of " + totalVacanciesFound + " vacancies added)";
         }
     }
 }
