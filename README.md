@@ -2,7 +2,7 @@
 
 Vacancy Scraper is an application that can organise job postings and the related companies. It is possible to save posted jobs together with their URL to the posting, and then export them in an organised format considering the consultants to the company and the time of the posting. Besides that, the application is able to scrape the company's websites and extract the job titles that are currently online and check if they have already been posted or not.
 
-There is a [manual](https://raw.githubusercontent.com/johannesmols/WID-Vacancy-Scraper/bc4415dfa0054e72a5aabc71a86ad238f6a29748/screenshots/Vacancy_Scraper_Manual.pdf).
+There is a [manual](https://github.com/johannesmols/WID-Vacancy-Scraper/blob/master/screenshots/Vacancy_Scraper_Manual.pdf).
 
 ![](https://raw.githubusercontent.com/johannesmols/WID-Vacancy-Scraper/master/screenshots/scrape_b.png)
 ![](https://raw.githubusercontent.com/johannesmols/WID-Vacancy-Scraper/master/screenshots/done_b.png)
