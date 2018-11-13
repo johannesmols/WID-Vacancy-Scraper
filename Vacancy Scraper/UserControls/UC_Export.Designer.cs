@@ -54,11 +54,11 @@
             this.cmdImportBlacklist = new System.Windows.Forms.Button();
             this.cmdImportVacancies = new System.Windows.Forms.Button();
             this.groupBoxSync = new System.Windows.Forms.GroupBox();
+            this.lblDriveLastDownloaded = new System.Windows.Forms.Label();
             this.checkedListDownloadUploadFiles = new System.Windows.Forms.CheckedListBox();
             this.cmdDownload = new System.Windows.Forms.Button();
             this.lblDriveLastUploaded = new System.Windows.Forms.Label();
             this.cmdDriveUpload = new System.Windows.Forms.Button();
-            this.lblDriveLastDownloaded = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
             this.groupBoxImport.SuspendLayout();
@@ -353,6 +353,15 @@
             this.groupBoxSync.TabStop = false;
             this.groupBoxSync.Text = "Synchronize with Google Drive";
             // 
+            // lblDriveLastDownloaded
+            // 
+            this.lblDriveLastDownloaded.AutoSize = true;
+            this.lblDriveLastDownloaded.Location = new System.Drawing.Point(135, 52);
+            this.lblDriveLastDownloaded.Name = "lblDriveLastDownloaded";
+            this.lblDriveLastDownloaded.Size = new System.Drawing.Size(94, 13);
+            this.lblDriveLastDownloaded.TabIndex = 17;
+            this.lblDriveLastDownloaded.Text = "Last downloaded: ";
+            // 
             // checkedListDownloadUploadFiles
             // 
             this.checkedListDownloadUploadFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -394,15 +403,6 @@
             this.cmdDriveUpload.Text = "Upload";
             this.cmdDriveUpload.UseVisualStyleBackColor = true;
             this.cmdDriveUpload.Click += new System.EventHandler(this.CmdDriveUpload_Click);
-            // 
-            // lblDriveLastDownloaded
-            // 
-            this.lblDriveLastDownloaded.AutoSize = true;
-            this.lblDriveLastDownloaded.Location = new System.Drawing.Point(135, 52);
-            this.lblDriveLastDownloaded.Name = "lblDriveLastDownloaded";
-            this.lblDriveLastDownloaded.Size = new System.Drawing.Size(94, 13);
-            this.lblDriveLastDownloaded.TabIndex = 17;
-            this.lblDriveLastDownloaded.Text = "Last downloaded: ";
             // 
             // UC_Export
             // 

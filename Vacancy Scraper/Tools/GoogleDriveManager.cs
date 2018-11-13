@@ -213,6 +213,50 @@ namespace Vacancy_Scraper.Tools
         }
 
         /// <summary>
+        /// Upload all resource files in the background
+        /// </summary>
+        /// <returns></returns>
+        public async void UploadAllFiles()
+        {
+            var filesToUpload = new List<string>
+            {
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "vacancies.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "blacklist.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "done.json"),
+                Path.Combine(_settingsManager.Settings.ResourceFolderPath, "companies.json")
+            };
+
+            for (var i = 0; i < filesToUpload.Count; i++)
+            {
+                Google.Apis.Drive.v3.Data.File responseFile;
+
+                switch (i)
+                {
+                    case 0:
+                        responseFile = await this.UploadFile(filesToUpload[i], ResourceType.Vacancies);
+                        _settingsManager.SetGoogleDriveVacanciesFileId(responseFile.Id);
+                        break;
+                    case 1:
+                        responseFile = await this.UploadFile(filesToUpload[i], ResourceType.Blacklist);
+                        _settingsManager.SetGoogleDriveBlacklistFileId(responseFile.Id);
+                        break;
+                    case 2:
+                        responseFile = await this.UploadFile(filesToUpload[i], ResourceType.Done);
+                        _settingsManager.SetGoogleDriveDoneFileId(responseFile.Id);
+                        break;
+                    case 3:
+                        responseFile = await this.UploadFile(filesToUpload[i], ResourceType.Companies);
+                        _settingsManager.SetGoogleDriveCompaniesFileId(responseFile.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            _settingsManager.SetLastDriveUpload(DateTime.Now);
+        }
+
+        /// <summary>
         /// Upload or update a file to Google Drive
         /// </summary>
         /// <param name="file">the path to the file</param>
@@ -231,7 +275,7 @@ namespace Vacancy_Scraper.Tools
 
             if (await DoesFileExistInDriveAndFindFilesIfNot(type)) // update the already existing file
             {
-                using (var stream = new FileStream(file, FileMode.Open))
+                using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     FilesResource.UpdateMediaUpload request = null;
                     switch (type)

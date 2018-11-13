@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Vacancy_Scraper.Tools;
 
 namespace Vacancy_Scraper.Forms
 {
@@ -23,6 +24,9 @@ namespace Vacancy_Scraper.Forms
             LoadTabContent();
 
             Text = @"Vacancy Scraper by Johannes Mols [v0.9.1]";
+
+            var driveManager = new GoogleDriveManager();
+            driveManager.UploadAllFiles();
         }
 
         /// <summary>
